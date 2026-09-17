@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kumar Gems | Astrology, Kundli and Gemstones in Bhagalpur, Bihar</title>
+<meta name="description" content="Kumar Gems offers astrology guidance, kundli reading, panchang, numerology and authentic gemstone advice from Bhagalpur, Bihar. Talk to us on WhatsApp.">
+<link rel="canonical" href="https://kumargems.in/en/">
+<meta property="og:title" content="Kumar Gems | Astrology and Gemstones, Bhagalpur">
+<meta property="og:description" content="Astrology guidance, kundli, panchang, numerology and gemstone advice rooted in traditional Vedic practice.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Hindi:ital@0;1&family=Mukta:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FAF7F0;color:#15162B;overflow-x:hidden}
+  a{color:#8A6A12;text-decoration:none}
+  a:hover{color:#B8901F}
+  :focus-visible{outline:2px solid #D4AF37;outline-offset:3px}
+  @keyframes kgTwinkle{0%,100%{opacity:.25}50%{opacity:.9}}
+  @keyframes kgRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}[data-searchbtn]{display:grid !important}}
+  @media (max-width:860px){
+    [data-brandsub]{display:none !important}
+    [data-logo]{width:38px !important;height:38px !important}
+    [data-brandname]{font-size:17px !important}
+    [data-langbtn]{padding:7px 10px !important;font-size:11.5px !important}
+    [data-consultbtn]{padding:9px 12px !important;font-size:12px !important}
+    [data-headinner]{padding-left:14px !important;padding-right:14px !important;gap:10px !important}
+  }
+  @media (max-width:430px){
+    [data-brandname]{font-size:15px !important}
+    [data-logo]{width:34px !important;height:34px !important}
+    [data-langbtn]{padding:6px 8px !important;font-size:10.5px !important;letter-spacing:0 !important}
+    [data-consultbtn]{padding:8px 11px !important;font-size:11px !important}
+    [data-headinner]{gap:8px !important}
+  }
+</style>
+</helmet>
+
+<div style="font-family:Outfit,system-ui,sans-serif;font-weight:300;line-height:1.65;color:#15162B;background:#FAF7F0;min-height:100vh;overflow-x:hidden">
+
+  <header style="position:sticky;top:0;z-index:60;background:#0A1633;border-bottom:1px solid rgba(212,175,55,.28)">
+    <div style="max-width:1280px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap" data-headinner="1">
+      <a href="{{ homeHref }}" style="display:flex;align-items:center;gap:11px;flex-shrink:0">
+        <img src="uploads/kumar%20Gems%20logo.png" alt="Kumar Gems logo, a gold zodiac wheel with gemstones" width="46" height="46" style="width:46px;height:46px;border-radius:50%;display:block" data-logo="1">
+        <span style="display:flex;flex-direction:column;line-height:1.05">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#F3E3B0;letter-spacing:.02em" data-brandname="1">Kumar Gems</span>
+          <span style="font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,227,176,.6)" data-brandsub="1">Bhagalpur, Bihar</span>
+        </span>
+      </a>
+
+      <nav aria-label="Primary" style="display:none;gap:2px;flex:1 1 auto;justify-content:center;align-items:center" data-desknav="1">
+        <sc-for list="{{ t.nav }}" as="n" hint-placeholder-count="9">
+          <a href="{{ n.href }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
+        </sc-for>
+        <div style="position:relative">
+          <button type="button" onClick="{{ toggleMore }}" aria-haspopup="true" aria-expanded="{{ moreOpenStr }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;background:none;border:0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:300;display:flex;align-items:center;gap:5px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ t.more }} <span style="font-size:9px;opacity:.7">▼</span></button>
+          <sc-if value="{{ moreOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:calc(100% + 8px);right:0;background:#0F1E42;border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:8px;min-width:210px;box-shadow:0 22px 50px rgba(4,10,26,.5);display:grid;gap:1px">
+              <sc-for list="{{ t.moreLinks }}" as="m" hint-placeholder-count="8">
+                <a href="{{ m.href }}" style="padding:9px 12px;font-size:13.5px;color:#DCDCE6;border-radius:8px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ m.label }}</a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto" data-deskonly="1">
+        <a href="{{ t.searchHref }}" aria-label="{{ t.searchLabel }}" data-searchbtn="1" style="display:none;width:36px;height:36px;place-items:center;border:1px solid rgba(212,175,55,.34);border-radius:50%;color:#F3E3B0;font-size:14px" style-hover="background:rgba(212,175,55,.16)">⌕</a>
+        <button type="button" onClick="{{ toggleLang }}" data-langbtn="1" style="display:flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid rgba(212,175,55,.34);background:none;border-radius:999px;color:#F3E3B0;font-family:inherit;font-size:12.5px;font-weight:400;cursor:pointer;letter-spacing:.04em;white-space:nowrap" style-hover="background:rgba(212,175,55,.16)">{{ langLabel }}</button>
+        <button type="button" data-consultbtn="1" onClick="{{ openConsult }}" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.07)">✦ {{ t.consultCta }}</button>
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="{{ t.menuLabel }}" aria-expanded="{{ menuOpenStr }}" data-burger="1" style="width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(212,175,55,.34);background:none;border-radius:10px;color:#F3E3B0;cursor:pointer;font-size:16px">☰</button>
+      </div>
+    </div>
+
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid rgba(212,175,55,.22);background:#08122A;max-height:70vh;overflow-y:auto;padding:14px 20px 22px">
+        <div style="display:grid;gap:2px;max-width:1280px;margin:0 auto">
+          <sc-for list="{{ t.allLinks }}" as="m" hint-placeholder-count="10">
+            <a href="{{ m.href }}" style="padding:12px 10px;font-size:15px;color:#DCDCE6;border-bottom:1px solid rgba(255,255,255,.06)">{{ m.label }}</a>
+          </sc-for>
+          <button type="button" onClick="{{ openConsult }}" style="margin-top:14px;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:12px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer">✦ {{ t.consultCta }}</button>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <main id="top">
+
+    <section style="position:relative;background:radial-gradient(120% 90% at 82% 6%,#1B2C5C 0%,#0A1633 46%,#060E20 100%);color:#F4F2EA;overflow:hidden">
+      <div aria-hidden="true" style="position:absolute;inset:0;background-image:radial-gradient(1.6px 1.6px at 12% 22%,rgba(255,255,255,.7) 50%,transparent 51%),radial-gradient(1.4px 1.4px at 28% 68%,rgba(255,255,255,.5) 50%,transparent 51%),radial-gradient(1.8px 1.8px at 62% 18%,rgba(243,227,176,.8) 50%,transparent 51%),radial-gradient(1.3px 1.3px at 78% 54%,rgba(255,255,255,.5) 50%,transparent 51%),radial-gradient(1.5px 1.5px at 44% 86%,rgba(243,227,176,.6) 50%,transparent 51%),radial-gradient(1.2px 1.2px at 90% 30%,rgba(255,255,255,.45) 50%,transparent 51%);animation:kgTwinkle 6s ease-in-out infinite"></div>
+      <div style="position:relative;max-width:1280px;margin:0 auto;padding:clamp(52px,8vw,104px) 20px clamp(58px,8vw,100px);display:grid;gap:clamp(36px,5vw,64px);grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));align-items:center">
+        <div style="animation:kgRise .7s ease both">
+          <div style="display:inline-flex;align-items:flex-start;gap:9px;padding:8px 18px;border:1px solid rgba(212,175,55,.42);border-radius:22px;font-size:11.5px;line-height:1.7;letter-spacing:.2em;text-transform:uppercase;color:#E8D391;margin-bottom:26px;max-width:100%">✦ {{ t.heroKicker }}</div>
+          <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(38px,5.6vw,66px);line-height:1.08;margin:0 0 20px;color:#FBF7EA;letter-spacing:-.01em;text-wrap:pretty">{{ t.heroTitle }}</h1>
+          <p style="font-size:clamp(15px,1.6vw,18px);line-height:1.75;color:rgba(232,232,240,.82);max-width:54ch;margin:0 0 34px;text-wrap:pretty">{{ t.heroSub }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:13px">
+            <a href="{{ t.horoscopeHref }}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 28px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border-radius:999px;font-size:15px;font-weight:600" style-hover="filter:brightness(1.07)">{{ t.ctaPrimary }} <span style="font-size:13px">→</span></a>
+            <a href="https://wa.me/919097190900" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:14px 26px;background:#25D366;color:#06210F;border-radius:999px;font-size:15px;font-weight:500" style-hover="background:#1FBE59">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.6 8.6 0 0 1-2.5-1.6 9.4 9.4 0 0 1-1.7-2.2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6L8.9 6.4c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.6 13.6 0 0 0 5.2 4.6c2.2.9 2.6.8 3.1.7a2.9 2.9 0 0 0 1.9-1.4 2.4 2.4 0 0 0 .2-1.3c-.1-.2-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22.5l5.4-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+              {{ t.ctaSecondary }}
+            </a>
+          </div>
+        </div>
+        <div style="display:grid;place-items:center;animation:kgRise .9s ease both">
+          <div style="position:relative;width:min(100%,380px);aspect-ratio:1;display:grid;place-items:center">
+            <div aria-hidden="true" style="position:absolute;inset:0;border:1px solid rgba(212,175,55,.3);border-radius:50%"></div>
+            <div aria-hidden="true" style="position:absolute;inset:9%;border:1px solid rgba(212,175,55,.2);border-radius:50%"></div>
+            <div aria-hidden="true" style="position:absolute;inset:-6%;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.22),transparent 62%)"></div>
+            <img src="uploads/kumar%20Gems%20logo.png" alt="Kumar Gems emblem showing the twelve zodiac signs encircling gemstones" loading="eager" style="width:78%;height:auto;display:block;filter:drop-shadow(0 22px 48px rgba(0,0,0,.55))">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Career consultation" style="max-width:1280px;margin:clamp(40px,5vw,64px) auto 0;padding:0 20px">
+      <div style="position:relative;overflow:hidden;border-radius:20px;background:{{ banner1.bg }};border:1px solid #E4D8C2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center;min-height:210px">
+        <div style="padding:clamp(28px,4vw,46px);z-index:1">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:700;margin:0 0 10px;color:#4A3312;line-height:1.2;text-wrap:pretty">{{ banner1.title }}</h2>
+          <p style="margin:0 0 22px;font-size:clamp(14px,1.5vw,17px);color:#6B5230;line-height:1.6;max-width:46ch">{{ banner1.sub }}</p>
+          <a href="{{ banner1.href }}" style="display:inline-flex;align-items:center;gap:8px;padding:12px 30px;background:#6B4A1C;color:#FBF3E2;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:#523713">{{ banner1.cta }}</a>
+        </div>
+        <div style="align-self:stretch;min-height:190px;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.55) 0 10px,rgba(255,255,255,.25) 10px 20px);display:grid;place-items:center;border-left:1px solid rgba(180,150,100,.18)">
+          <sc-if value="{{ banner1.img }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ banner1.img }}" alt="{{ banner1.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+          </sc-if>
+          <sc-if value="{{ banner1.noImg }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:#8A7550;text-align:center;padding:0 16px">{{ banner1.photo }}</span>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="tools-h" style="max-width:1280px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
+      <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.toolsKicker }}</p>
+      <h2 id="tools-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;margin:0 0 30px;color:#0A1633">{{ t.toolsTitle }}</h2>
+      <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))">
+        <sc-for list="{{ t.tools }}" as="c" hint-placeholder-count="6">
+          <a href="{{ c.href }}" style="display:block;padding:24px;background:#fff;border:1px solid #EAE2CE;border-radius:16px;box-shadow:0 2px 10px rgba(10,22,51,.05);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease" style-hover="transform:translateY(-4px);box-shadow:0 16px 36px rgba(10,22,51,.12);border-color:#D4AF37">
+            <div style="width:42px;height:42px;display:grid;place-items:center;border-radius:11px;background:linear-gradient(135deg,#0F1E42,#1B2C5C);color:#F3E3B0;font-size:19px;margin-bottom:15px">{{ c.icon }}</div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin:0 0 6px;color:#0A1633">{{ c.title }}</h3>
+            <p style="margin:0;font-size:14px;color:#5A5C6E;line-height:1.6">{{ c.desc }}</p>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-label="Marriage consultation" style="max-width:1280px;margin:clamp(40px,5vw,64px) auto 0;padding:0 20px">
+      <div style="position:relative;overflow:hidden;border-radius:20px;background:{{ banner2.bg }};border:1px solid #E4D3C8;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center;min-height:210px">
+        <div style="padding:clamp(28px,4vw,46px);z-index:1">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:700;margin:0 0 10px;color:#4A2A1E;line-height:1.2;text-wrap:pretty">{{ banner2.title }}</h2>
+          <p style="margin:0 0 22px;font-size:clamp(14px,1.5vw,17px);color:#6B4436;line-height:1.6;max-width:46ch">{{ banner2.sub }}</p>
+          <a href="{{ banner2.href }}" style="display:inline-flex;align-items:center;gap:8px;padding:12px 30px;background:#6B3A28;color:#FBF3E2;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:#52291B">{{ banner2.cta }}</a>
+        </div>
+        <div style="align-self:stretch;min-height:190px;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.55) 0 10px,rgba(255,255,255,.25) 10px 20px);display:grid;place-items:center;border-left:1px solid rgba(180,130,110,.18)">
+          <sc-if value="{{ banner2.img }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ banner2.img }}" alt="{{ banner2.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+          </sc-if>
+          <sc-if value="{{ banner2.noImg }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:#8A6250;text-align:center;padding:0 16px">{{ banner2.photo }}</span>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="zodiac-h" style="max-width:1280px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px">
+        <div>
+          <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.zodiacKicker }}</p>
+          <h2 id="zodiac-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;margin:0;color:#0A1633">{{ t.zodiacTitle }}</h2>
+        </div>
+        <a href="{{ t.horoscopeHref }}" style="font-size:14px;font-weight:500">{{ t.viewAll }} →</a>
+      </div>
+      <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,168px),1fr))">
+        <sc-for list="{{ t.zodiac }}" as="z" hint-placeholder-count="12">
+          <a href="{{ z.href }}" style="display:flex;align-items:center;gap:14px;padding:16px;background:#fff;border:1px solid #EAE2CE;border-radius:14px;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:#D4AF37;transform:translateY(-3px)">
+            <span aria-hidden="true" style="width:40px;height:40px;flex-shrink:0;display:grid;place-items:center;border-radius:50%;background:#0A1633;color:#F3E3B0;font-size:19px">{{ z.sym }}</span>
+            <span style="display:flex;flex-direction:column;min-width:0">
+              <span style="font-size:15px;font-weight:500;color:#0A1633">{{ z.name }}</span>
+              <span style="font-size:11.5px;color:#7A7C8A;white-space:nowrap">{{ z.dates }}</span>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="kundli-h" style="max-width:1280px;margin:clamp(52px,7vw,88px) auto 0;padding:0 20px">
+      <div style="background:linear-gradient(135deg,#0A1633 0%,#16264F 100%);border-radius:24px;padding:clamp(32px,5vw,58px);color:#F4F2EA;display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center">
+        <div>
+          <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#E8D391;margin:0 0 12px">{{ t.kundliKicker }}</p>
+          <h2 id="kundli-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(27px,3.4vw,40px);font-weight:600;margin:0 0 16px;color:#FBF7EA">{{ t.kundliTitle }}</h2>
+          <p style="font-size:15.5px;line-height:1.75;color:rgba(232,232,240,.8);margin:0 0 26px;max-width:52ch;text-wrap:pretty">{{ t.kundliBody }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px">
+            <sc-for list="{{ t.kundliTags }}" as="k" hint-placeholder-count="5">
+              <a href="{{ k.href }}" style="padding:7px 14px;border:1px solid rgba(212,175,55,.38);border-radius:999px;font-size:13px;color:#E8D391" style-hover="background:rgba(212,175,55,.16)">{{ k.label }}</a>
+            </sc-for>
+          </div>
+          <a href="{{ t.kundliHref }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border-radius:999px;font-size:15px;font-weight:600" style-hover="filter:brightness(1.07)">{{ t.kundliCta }} <span style="font-size:13px">→</span></a>
+        </div>
+        <div style="display:grid;place-items:center">
+          <div aria-hidden="true" style="width:min(100%,300px);aspect-ratio:1;position:relative;transform:rotate(45deg);border:1px solid rgba(212,175,55,.38);border-radius:8px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr">
+            <div style="border-right:1px solid rgba(212,175,55,.28);border-bottom:1px solid rgba(212,175,55,.28)"></div>
+            <div style="border-bottom:1px solid rgba(212,175,55,.28)"></div>
+            <div style="border-right:1px solid rgba(212,175,55,.28)"></div>
+            <div></div>
+            <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:70.7%;height:70.7%;border:1px solid rgba(212,175,55,.3);transform:rotate(45deg)"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="gem-h" style="background:linear-gradient(180deg,#FAF7F0,#F3EDE0);margin-top:clamp(52px,7vw,88px);padding:clamp(52px,7vw,90px) 0">
+      <div style="max-width:1280px;margin:0 auto;padding:0 20px">
+        <div style="text-align:center;max-width:62ch;margin:0 auto 40px">
+          <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.gemKicker }}</p>
+          <h2 id="gem-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.2vw,50px);font-weight:600;margin:0 0 14px;color:#0A1633">{{ t.gemTitle }}</h2>
+          <p style="font-size:16px;color:#5A5C6E;margin:0;line-height:1.75;text-wrap:pretty">{{ t.gemBody }}</p>
+        </div>
+        <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))">
+          <sc-for list="{{ gems }}" as="g" hint-placeholder-count="9">
+            <a href="{{ g.href }}" style="display:block;background:#fff;border:1px solid #EAE2CE;border-radius:18px;overflow:hidden;transition:transform .24s ease,box-shadow .24s ease" style-hover="transform:translateY(-6px);box-shadow:0 22px 46px rgba(10,22,51,.14)">
+              <div style="height:168px;background:{{ g.bg }};position:relative;overflow:hidden">
+                <sc-if value="{{ g.img }}" hint-placeholder-val="{{ true }}">
+                  <img src="{{ g.img }}" alt="{{ g.name }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:normal">
+                </sc-if>
+                <sc-if value="{{ g.noImg }}" hint-placeholder-val="{{ false }}">
+                  <div aria-label="{{ g.name }}" style="width:100%;height:100%;background:{{ g.gem }};display:grid;place-items:center">
+                    <span aria-hidden="true" style="width:82px;height:82px;border-radius:44% 56% 48% 52%;background:{{ g.gem }};box-shadow:inset 12px 10px 18px rgba(255,255,255,.42),inset -14px -16px 22px rgba(0,0,0,.3),0 14px 24px rgba(0,0,0,.24);transform:rotate(-12deg)"></span>
+                  </div>
+                </sc-if>
+              </div>
+              <div style="padding:20px 22px 24px">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:7px">
+                  <h3 style="font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;margin:0;color:#0A1633">{{ g.name }}</h3>
+                  <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#A8871E;white-space:nowrap">{{ g.planet }}</span>
+                </div>
+                <p style="margin:0;font-size:14px;color:#5A5C6E;line-height:1.65">{{ g.desc }}</p>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+        <div style="text-align:center;margin-top:36px">
+          <a href="{{ t.gemHref }}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 30px;background:#0A1633;color:#F3E3B0;border-radius:999px;font-size:15px;font-weight:500" style-hover="background:#16264F">{{ t.gemCta }} <span style="font-size:13px">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="svc-h" style="max-width:1280px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
+      <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.svcKicker }}</p>
+      <h2 id="svc-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;margin:0 0 30px;color:#0A1633">{{ t.svcTitle }}</h2>
+      <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+        <sc-for list="{{ t.services }}" as="s" hint-placeholder-count="5">
+          <a href="{{ s.href }}" style="display:block;padding:26px 24px;border:1px solid #EAE2CE;border-radius:16px;background:#fff;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:#D4AF37;transform:translateY(-4px)">
+            <div style="font-size:24px;color:#B8901F;margin-bottom:14px">{{ s.icon }}</div>
+            <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin:0 0 7px;color:#0A1633">{{ s.title }}</h3>
+            <p style="margin:0;font-size:14px;color:#5A5C6E;line-height:1.65">{{ s.desc }}</p>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="pan-h" style="max-width:1280px;margin:clamp(52px,7vw,88px) auto 0;padding:0 20px">
+      <div style="background:#0A1633;border-radius:24px;padding:clamp(30px,4.5vw,50px);color:#F4F2EA">
+        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:28px">
+          <div>
+            <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#E8D391;margin:0 0 10px">{{ t.panKicker }}</p>
+            <h2 id="pan-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.4vw,38px);font-weight:600;margin:0;color:#FBF7EA">{{ t.panTitle }}</h2>
+          </div>
+          <a href="{{ t.panHref }}" style="font-size:14px;color:#E8D391;font-weight:500">{{ t.viewAll }} →</a>
+        </div>
+        <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr))">
+          <sc-for list="{{ t.panchang }}" as="p" hint-placeholder-count="6">
+            <div style="padding:18px;background:rgba(255,255,255,.05);border:1px solid rgba(212,175,55,.2);border-radius:13px">
+              <p style="margin:0 0 6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,211,145,.8)">{{ p.label }}</p>
+              <p style="margin:0;font-size:17px;font-weight:400;color:#FBF7EA">{{ p.value }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <p style="margin:20px 0 0;font-size:12.5px;color:rgba(232,232,240,.55);line-height:1.6">{{ t.panNote }}</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="rem-h" style="max-width:1280px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
+      <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.remKicker }}</p>
+      <h2 id="rem-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;margin:0 0 30px;color:#0A1633">{{ t.remTitle }}</h2>
+      <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr))">
+        <sc-for list="{{ t.remedies }}" as="r" hint-placeholder-count="6">
+          <a href="{{ r.href }}" style="display:flex;flex-direction:column;gap:9px;padding:22px;background:linear-gradient(160deg,#fff,#FBF6E9);border:1px solid #EAE2CE;border-radius:15px;transition:border-color .2s ease" style-hover="border-color:#D4AF37">
+            <span style="font-size:22px;color:#B8901F">{{ r.icon }}</span>
+            <span style="font-size:16px;font-weight:500;color:#0A1633">{{ r.title }}</span>
+            <span style="font-size:13.5px;color:#5A5C6E;line-height:1.6">{{ r.desc }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="art-h" style="max-width:1280px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px">
+        <div>
+          <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.artKicker }}</p>
+          <h2 id="art-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;margin:0;color:#0A1633">{{ t.artTitle }}</h2>
+        </div>
+        <a href="{{ t.blogHref }}" style="font-size:14px;font-weight:500">{{ t.viewAll }} →</a>
+      </div>
+      <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))">
+        <sc-for list="{{ articles }}" as="a" hint-placeholder-count="6">
+          <a href="{{ a.href }}" style="display:flex;flex-direction:column;background:#fff;border:1px solid #EAE2CE;border-radius:16px;overflow:hidden;transition:transform .22s ease,box-shadow .22s ease" style-hover="transform:translateY(-4px);box-shadow:0 18px 38px rgba(10,22,51,.1)">
+            <div style="height:150px;background:#E9E2D2;border-bottom:1px solid #EAE2CE;overflow:hidden">
+              <img src="{{ a.img }}" alt="{{ a.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <div style="padding:20px 22px 24px;display:flex;flex-direction:column;gap:8px;flex:1">
+              <span style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#A8871E">{{ a.cat }}</span>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin:0;color:#0A1633;line-height:1.25;text-wrap:pretty">{{ a.title }}</h3>
+              <p style="margin:0;font-size:14px;color:#5A5C6E;line-height:1.6">{{ a.excerpt }}</p>
+            </div>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="fest-h" style="max-width:1280px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
+      <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.festKicker }}</p>
+      <h2 id="fest-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;margin:0 0 28px;color:#0A1633">{{ t.festTitle }}</h2>
+      <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))">
+        <sc-for list="{{ t.festivals }}" as="f" hint-placeholder-count="6">
+          <a href="{{ f.href }}" style="display:block;padding:20px 22px;border:1px solid #EAE2CE;border-left:3px solid #D4AF37;border-radius:13px;background:#fff" style-hover="background:#FBF6E9">
+            <p style="margin:0 0 5px;font-size:17px;font-weight:500;color:#0A1633">{{ f.name }}</p>
+            <p style="margin:0;font-size:13px;color:#7A7C8A">{{ f.when }}</p>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="why-h" style="background:#0A1633;margin-top:clamp(52px,7vw,88px);padding:clamp(52px,7vw,90px) 0;color:#F4F2EA">
+      <div style="max-width:1280px;margin:0 auto;padding:0 20px">
+        <div style="text-align:center;max-width:58ch;margin:0 auto 40px">
+          <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#E8D391;margin:0 0 10px">{{ t.whyKicker }}</p>
+          <h2 id="why-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:600;margin:0;color:#FBF7EA">{{ t.whyTitle }}</h2>
+        </div>
+        <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+          <sc-for list="{{ t.why }}" as="w" hint-placeholder-count="5">
+            <div style="padding:26px 24px;border:1px solid rgba(212,175,55,.22);border-radius:16px;background:rgba(255,255,255,.04)">
+              <div style="font-size:22px;color:#E8D391;margin-bottom:13px">{{ w.icon }}</div>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin:0 0 7px;color:#FBF7EA">{{ w.title }}</h3>
+              <p style="margin:0;font-size:14px;color:rgba(232,232,240,.72);line-height:1.65">{{ w.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq-h" style="max-width:860px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
+      <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#A8871E;margin:0 0 10px">{{ t.faqKicker }}</p>
+      <h2 id="faq-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;margin:0 0 28px;color:#0A1633">{{ t.faqTitle }}</h2>
+      <div style="display:grid;gap:10px">
+        <sc-for list="{{ faqItems }}" as="q" hint-placeholder-count="5">
+          <div style="border:1px solid #EAE2CE;border-radius:14px;background:#fff;overflow:hidden">
+            <button type="button" onClick="{{ q.toggle }}" aria-expanded="{{ q.openStr }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:19px 22px;background:none;border:0;cursor:pointer;font-family:inherit;text-align:left;font-size:16px;font-weight:400;color:#0A1633">
+              {{ q.q }}
+              <span aria-hidden="true" style="flex-shrink:0;font-size:18px;color:#B8901F">{{ q.mark }}</span>
+            </button>
+            <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;padding:0 22px 22px;font-size:15px;color:#5A5C6E;line-height:1.75">{{ q.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:clamp(52px,7vw,88px) auto clamp(56px,7vw,92px);padding:0 20px">
+      <div style="background:radial-gradient(100% 140% at 50% 0%,#1B2C5C,#0A1633);border:1px solid rgba(212,175,55,.3);border-radius:24px;padding:clamp(40px,6vw,72px) clamp(24px,5vw,56px);text-align:center;color:#F4F2EA">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,46px);font-weight:600;margin:0 0 14px;color:#FBF7EA;text-wrap:pretty">{{ t.finalTitle }}</h2>
+        <p style="font-size:16px;color:rgba(232,232,240,.78);max-width:56ch;margin:0 auto 32px;line-height:1.75;text-wrap:pretty">{{ t.finalBody }}</p>
+        <div style="display:flex;flex-wrap:wrap;gap:13px;justify-content:center">
+          <a href="{{ t.horoscopeHref }}" style="display:inline-flex;align-items:center;gap:9px;padding:14px 28px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border-radius:999px;font-size:15px;font-weight:600" style-hover="filter:brightness(1.07)">{{ t.ctaPrimary }} <span style="font-size:13px">→</span></a>
+          <a href="https://wa.me/919097190900" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:14px 26px;background:#25D366;color:#06210F;border-radius:999px;font-size:15px;font-weight:500" style-hover="background:#1FBE59">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.6 8.6 0 0 1-2.5-1.6 9.4 9.4 0 0 1-1.7-2.2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6L8.9 6.4c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.6 13.6 0 0 0 5.2 4.6c2.2.9 2.6.8 3.1.7a2.9 2.9 0 0 0 1.9-1.4 2.4 2.4 0 0 0 .2-1.3c-.1-.2-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22.5l5.4-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            {{ t.ctaWhatsapp }}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#060E20;color:#C9CADA;border-top:1px solid rgba(212,175,55,.22)">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(44px,6vw,68px) 20px 30px;display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))">
+      <div>
+        <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px">
+          <img src="uploads/kumar%20Gems%20logo.png" alt="Kumar Gems logo" width="44" height="44" loading="lazy" style="width:44px;height:44px;border-radius:50%">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#F3E3B0" data-brandname="1">Kumar Gems</span>
+        </div>
+        <div style="display:grid;gap:8px;font-size:13.5px;line-height:1.6;color:#9FA1B4">
+          <div style="display:flex;align-items:flex-start;gap:9px">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#E8D391" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <address style="font-style:normal">MOHADDINAGAR NEAR DURGA MANDIR<br>BHAGALPUR BIHAR</address>
+          </div>
+          <a href="tel:+919097190900" aria-label="Call Kumar Gems at 9097190900" style="display:flex;align-items:center;gap:9px;color:#C9CADA">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#E8D391" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9Z"/></svg>
+            9097190900
+          </a>
+          <a href="mailto:rashiring24@gmail.com" style="color:#C9CADA">rashiring24@gmail.com</a>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:9px;margin-top:16px">
+          <a href="https://wa.me/919097190900" target="_blank" rel="noopener" aria-label="Message Kumar Gems on WhatsApp" style="display:inline-flex;align-items:center;gap:7px;padding:8px 15px;background:#25D366;color:#06210F;border-radius:999px;font-size:12.5px;font-weight:500">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.6 8.6 0 0 1-2.5-1.6 9.4 9.4 0 0 1-1.7-2.2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6L8.9 6.4c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.6 13.6 0 0 0 5.2 4.6c2.2.9 2.6.8 3.1.7a2.9 2.9 0 0 0 1.9-1.4 2.4 2.4 0 0 0 .2-1.3c-.1-.2-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22.5l5.4-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            {{ t.footerMsgCta }}
+          </a>
+          <a href="https://share.google/1QMajgoQwRt85JKtd" target="_blank" rel="noopener" style="padding:8px 15px;border:1px solid rgba(212,175,55,.34);color:#E8D391;border-radius:999px;font-size:12.5px">{{ t.gbp }}</a>
+        </div>
+      </div>
+      <sc-for list="{{ t.footer }}" as="col" hint-placeholder-count="4">
+        <div>
+          <h3 style="font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:#E8D391;margin:0 0 15px;font-weight:500">{{ col.title }}</h3>
+          <ul style="list-style:none;margin:0;padding:0;display:grid;gap:9px">
+            <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="6">
+              <li><a href="{{ l.href }}" style="font-size:13.5px;color:#9FA1B4" style-hover="color:#E8D391">{{ l.label }}</a></li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-for>
+    </div>
+    <div style="max-width:1280px;margin:0 auto;padding:20px;border-top:1px solid rgba(255,255,255,.07);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:12.5px;color:#7C7E90">
+      <span>{{ t.copyright }}</span>
+      <span>{{ t.disclaimer }}</span>
+    </div>
+  </footer>
+
+  <sc-if value="{{ consultOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="Request a consultation" style="position:fixed;inset:0;z-index:90;background:rgba(6,14,32,.72);display:grid;place-items:center;padding:18px;overflow-y:auto">
+      <div style="width:min(100%,560px);background:#FFFDF8;border:1px solid #E4D8C2;border-radius:20px;box-shadow:0 30px 80px rgba(4,10,26,.45);max-height:92vh;overflow-y:auto">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:26px 26px 0">
+          <div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;margin:0 0 7px;color:#0A1633">{{ t.consultTitle }}</h2>
+            <p style="margin:0;font-size:13.5px;color:#6B6D7C;line-height:1.6;max-width:44ch">{{ t.consultSub }}</p>
+          </div>
+          <button type="button" onClick="{{ closeConsult }}" aria-label="{{ t.formClose }}" style="flex-shrink:0;width:34px;height:34px;border-radius:50%;border:1px solid #E4D8C2;background:#fff;color:#6B6D7C;font-size:17px;cursor:pointer;line-height:1">×</button>
+        </div>
+        <div style="padding:22px 26px 26px;display:grid;gap:14px">
+          <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C;letter-spacing:.02em">{{ t.formName }}
+            <input type="text" value="{{ form.name }}" onChange="{{ setName }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B" style-focus="border-color:#D4AF37">
+          </label>
+          <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))">
+            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ t.formPhone }}
+              <input type="tel" value="{{ form.phone }}" onChange="{{ setPhone }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B" style-focus="border-color:#D4AF37">
+            </label>
+            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ t.formEmail }}
+              <input type="email" value="{{ form.email }}" onChange="{{ setEmail }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B" style-focus="border-color:#D4AF37">
+            </label>
+          </div>
+          <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ t.formSubject }}
+            <select value="{{ form.subject }}" onChange="{{ setSubject }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+              <sc-for list="{{ t.formTopics }}" as="o" hint-placeholder-count="7">
+                <option value="{{ o }}">{{ o }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ t.formMessage }}
+            <textarea rows="4" value="{{ form.message }}" onChange="{{ setMessage }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B;resize:vertical" style-focus="border-color:#D4AF37"></textarea>
+          </label>
+          <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));margin-top:4px">
+            <a href="{{ waHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px;background:#25D366;color:#06210F;border-radius:11px;font-size:14.5px;font-weight:500">{{ t.formSendWa }}</a>
+            <a href="{{ mailHref }}" style="display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px;background:#0A1633;color:#F3E3B0;border-radius:11px;font-size:14.5px;font-weight:500">{{ t.formSendMail }}</a>
+          </div>
+          <p style="margin:2px 0 0;font-size:12px;color:#8A8C9A;line-height:1.6">{{ t.formNote }}</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showTop }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ scrollTop }}" aria-label="{{ t.topLabel }}" style="position:fixed;right:22px;bottom:92px;z-index:70;width:46px;height:46px;border-radius:50%;background:#0A1633;color:#F3E3B0;border:1px solid rgba(212,175,55,.42);cursor:pointer;display:grid;place-items:center;font-size:17px;box-shadow:0 8px 22px rgba(4,10,26,.35);transition:transform .2s ease" style-hover="transform:translateY(-3px)">↑</button>
+  </sc-if>
+
+  <a href="https://wa.me/919097190900" target="_blank" rel="noopener" aria-label="Chat with Kumar Gems on WhatsApp" style="position:fixed;right:22px;bottom:24px;z-index:70;width:56px;height:56px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 26px rgba(37,211,102,.4);transition:transform .2s ease,background .2s ease" style-hover="transform:translateY(-3px);background:#1FBE59">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.6 8.6 0 0 1-2.5-1.6 9.4 9.4 0 0 1-1.7-2.2c-.2-.3 0-.5.1-.6l.5-.6.3-.5a.6.6 0 0 0 0-.6L8.9 6.4c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.4 3.4 3.4 0 0 0-1.1 2.6 6 6 0 0 0 1.3 3.2 13.6 13.6 0 0 0 5.2 4.6c2.2.9 2.6.8 3.1.7a2.9 2.9 0 0 0 1.9-1.4 2.4 2.4 0 0 0 .2-1.3c-.1-.2-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.5 15.2L2 22.5l5.4-1.4A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+  </a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const EN = {
+  code: "en",
+  nav: [
+    {label:"Horoscope",href:"/en/horoscope"},{label:"Kundli",href:"/en/kundli"},
+    {label:"Kundli Milan",href:"/en/kundli-milan"},{label:"Panchang",href:"/en/panchang"},
+    {label:"Numerology",href:"/en/numerology"},{label:"Astrology",href:"/en/vedic-astrology"},
+    {label:"Gemstones",href:"/en/gemstones"},{label:"Remedies",href:"/en/astrology-remedies"}
+  ],
+  more: "More",
+  moreLinks: [
+    {label:"Vastu",href:"/en/vastu"},{label:"Tarot",href:"/en/tarot"},{label:"Palmistry",href:"/en/palmistry"},
+    {label:"Baby Names",href:"/en/baby-names"},{label:"Festivals",href:"/en/festivals"},
+    {label:"Blog",href:"/en/blog"},{label:"About Us",href:"/en/about"},{label:"Contact Us",href:"/en/contact"}
+  ],
+  searchHref: "/en/search", searchLabel: "Search the site", menuLabel: "Open menu",
+  waCta: "WhatsApp",
+  heroKicker: "Astrology and Gemstones, Bhagalpur",
+  heroTitle: "Discover the Wisdom of Astrology",
+  heroSub: "Kumar Gems brings together horoscope reading, kundli analysis, gemstone guidance and numerology in one place. Every reading follows traditional Vedic method, explained in language you can actually use.",
+  ctaPrimary: "Explore Horoscope", ctaSecondary: "Talk to Us", ctaWhatsapp: "Talk to Us",
+  consultCta: "Consult Us", consultTitle: "Request a Consultation",
+  consultSub: "Fill this in and we will continue the conversation on WhatsApp or email. Nothing is stored on this site.",
+  formName: "Name", formPhone: "Phone", formEmail: "Email", formSubject: "Subject", formMessage: "Message",
+  formTopics: ["Horoscope", "Kundli", "Kundli Milan", "Gemstone advice", "Numerology", "Vastu", "Other"],
+  formSendWa: "Send on WhatsApp", formSendMail: "Send by Email", formClose: "Close",
+  formNote: "This form has no backend. Choosing an option opens WhatsApp or your email app with the message ready.",
+  banners: [
+    {
+      title: "When will the blocks in your career clear?",
+      sub: "Ask about it today, read through your chart with Kumar Gems.",
+      cta: "Chat Us",
+      href: "/en/consultation/career",
+      photo: "PHOTO: person checking phone in an office stairwell",
+      bg: "linear-gradient(100deg,#F6EFE2 0%,#F2E6D2 58%,#EADCC4 100%)"
+    },
+    {
+      title: "Is the right time for marriage near?",
+      sub: "Guna milan, manglik matching and muhurat, read in the traditional way.",
+      cta: "Chat Us",
+      href: "/en/consultation/marriage",
+      photo: "PHOTO: couple at a traditional Indian wedding ceremony",
+      bg: "linear-gradient(100deg,#F4EEE6 0%,#F0E2DC 58%,#E8D4CC 100%)"
+    }
+  ],
+  horoscopeHref: "/en/horoscope", kundliHref: "/en/kundli", gemHref: "/en/gemstones",
+  panHref: "/en/panchang", blogHref: "/en/blog", viewAll: "View all",
+  toolsKicker: "Start here", toolsTitle: "Quick Tools",
+  tools: [
+    {icon:"☉",title:"Horoscope",desc:"Daily, weekly, monthly and yearly readings for all twelve signs.",href:"/en/horoscope"},
+    {icon:"◈",title:"Kundli",desc:"Understand your birth chart, lagna, rashi and nakshatra.",href:"/en/kundli"},
+    {icon:"⚭",title:"Kundli Milan",desc:"Guna milan and compatibility read through the ashtakoot system.",href:"/en/kundli-milan"},
+    {icon:"☾",title:"Panchang",desc:"Tithi, nakshatra, yoga, karana and muhurat explained simply.",href:"/en/panchang"},
+    {icon:"❾",title:"Numerology",desc:"Life path, destiny and name numbers and what they indicate.",href:"/en/numerology"},
+    {icon:"◆",title:"Gemstones",desc:"Which stone is traditionally linked to which planet, and why.",href:"/en/gemstones"}
+  ],
+  zodiacKicker: "Today's reading", zodiacTitle: "Horoscope for All Twelve Signs",
+  zodiac: [
+    {sym:"♈",name:"Aries",dates:"Mar 21 - Apr 19",href:"/en/horoscope/aries"},
+    {sym:"♉",name:"Taurus",dates:"Apr 20 - May 20",href:"/en/horoscope/taurus"},
+    {sym:"♊",name:"Gemini",dates:"May 21 - Jun 20",href:"/en/horoscope/gemini"},
+    {sym:"♋",name:"Cancer",dates:"Jun 21 - Jul 22",href:"/en/horoscope/cancer"},
+    {sym:"♌",name:"Leo",dates:"Jul 23 - Aug 22",href:"/en/horoscope/leo"},
+    {sym:"♍",name:"Virgo",dates:"Aug 23 - Sep 22",href:"/en/horoscope/virgo"},
+    {sym:"♎",name:"Libra",dates:"Sep 23 - Oct 22",href:"/en/horoscope/libra"},
+    {sym:"♏",name:"Scorpio",dates:"Oct 23 - Nov 21",href:"/en/horoscope/scorpio"},
+    {sym:"♐",name:"Sagittarius",dates:"Nov 22 - Dec 21",href:"/en/horoscope/sagittarius"},
+    {sym:"♑",name:"Capricorn",dates:"Dec 22 - Jan 19",href:"/en/horoscope/capricorn"},
+    {sym:"♒",name:"Aquarius",dates:"Jan 20 - Feb 18",href:"/en/horoscope/aquarius"},
+    {sym:"♓",name:"Pisces",dates:"Feb 19 - Mar 20",href:"/en/horoscope/pisces"}
+  ],
+  kundliKicker: "Birth chart", kundliTitle: "Your Kundli, Read Line by Line",
+  kundliBody: "A kundli maps the sky at the moment of your birth. Reading it well means looking at lagna, the placement of the nine grahas, the twelve houses and the dashas that follow. We explain what each part traditionally signifies rather than handing over a verdict.",
+  kundliTags: [
+    {label:"Lagna",href:"/en/kundli/lagna"},{label:"Rashi",href:"/en/kundli/rashi"},
+    {label:"Nakshatra",href:"/en/kundli/nakshatra"},{label:"Mangal Dosha",href:"/en/kundli/mangal-dosha"},
+    {label:"Kaal Sarp Dosha",href:"/en/kundli/kaal-sarp-dosha"}
+  ],
+  kundliCta: "Explore Kundli",
+  gemKicker: "Our craft", gemTitle: "Gemstones and Their Planets",
+  gemBody: "Each stone in Vedic tradition carries the signature of a graha. Choosing one is a question of chart, not fashion. Here is where that conversation begins.",
+  gems: [
+    {name:"Ruby",planet:"Sun",desc:"Manikya, traditionally worn for the Sun and matters of authority and clarity.",bg:"linear-gradient(140deg,#3A0A14,#7A1226)",gem:"radial-gradient(circle at 34% 28%,#FF7A8A,#C4102B 55%,#6E0817)",photo:"PHOTO: ruby",href:"/en/gemstones/ruby"},
+    {name:"Emerald",planet:"Mercury",desc:"Panna, associated with Budh, linked in tradition to expression and learning.",bg:"linear-gradient(140deg,#052418,#0B5236)",gem:"radial-gradient(circle at 34% 28%,#7DEBB6,#0E9A5E 55%,#04502F)",photo:"PHOTO: emerald",href:"/en/gemstones/emerald"},
+    {name:"Yellow Sapphire",planet:"Jupiter",desc:"Pukhraj, the stone of Guru, traditionally tied to guidance and growth.",bg:"linear-gradient(140deg,#3A2A05,#7A5A0C)",gem:"radial-gradient(circle at 34% 28%,#FFE79A,#E0A81B 55%,#8A6206)",photo:"PHOTO: yellow sapphire",href:"/en/gemstones/yellow-sapphire"},
+    {name:"Blue Sapphire",planet:"Saturn",desc:"Neelam, the stone of Shani, worn only after careful chart study.",bg:"linear-gradient(140deg,#060F35,#13276E)",gem:"radial-gradient(circle at 34% 28%,#8FB4FF,#1E42C4 55%,#0A1C6E)",photo:"PHOTO: blue sapphire",href:"/en/gemstones/blue-sapphire"},
+    {name:"Pearl",planet:"Moon",desc:"Moti, linked to Chandra and traditionally associated with calm and steadiness.",bg:"linear-gradient(140deg,#2A2C38,#585C70)",gem:"radial-gradient(circle at 34% 28%,#FFFFFF,#EDE7DC 55%,#BDB6A8)",photo:"PHOTO: pearl",href:"/en/gemstones/pearl"},
+    {name:"Red Coral",planet:"Mars",desc:"Moonga, the stone of Mangal, associated in tradition with drive and resolve.",bg:"linear-gradient(140deg,#3A1205,#7A2A0C)",gem:"radial-gradient(circle at 34% 28%,#FFA47A,#D8461A 55%,#7E2109)",photo:"PHOTO: red coral",href:"/en/gemstones/red-coral"},
+    {name:"Hessonite",planet:"Rahu",desc:"Gomed, traditionally associated with focus, clarity and steady effort.",bg:"linear-gradient(140deg,#241006,#6E2D0D)",gem:"radial-gradient(circle at 34% 28%,#FFB06B,#B94D16 55%,#5A1B08)",photo:"PHOTO: hessonite",href:"/en/gemstones/hessonite"},
+    {name:"Cat's Eye",planet:"Ketu",desc:"Lehsunia, traditionally read for intuition, caution and inner steadiness.",bg:"linear-gradient(140deg,#25302B,#68766B)",gem:"radial-gradient(ellipse at 35% 35%,#F5E4B0,#A78D50 42%,#4D4632)",photo:"PHOTO: cats eye",href:"/en/gemstones/cats-eye"},
+    {name:"Diamond",planet:"Venus",desc:"Heera, the stone of Shukra, traditionally worn for grace, comfort and refinement.",bg:"linear-gradient(140deg,#2A3040,#5C6478)",gem:"radial-gradient(circle at 34% 28%,#FFFFFF,#DDE6F2 55%,#9FB0C4)",photo:"PHOTO: diamond",href:"/en/gemstones/diamond"}
+  ],
+  gemCta: "Explore Gemstones",
+  svcKicker: "What we practise", svcTitle: "Astrology Services",
+  services: [
+    {icon:"✦",title:"Vedic Astrology",desc:"Grahas, houses, nakshatras and dasha periods read in classical order.",href:"/en/vedic-astrology"},
+    {icon:"❾",title:"Numerology",desc:"Numbers drawn from your name and date of birth, and their traditional meaning.",href:"/en/numerology"},
+    {icon:"⧉",title:"Tarot",desc:"Card readings for reflection on a question you are sitting with.",href:"/en/tarot"},
+    {icon:"✋",title:"Palmistry",desc:"Lines, mounts and hand shapes in the classical reading tradition.",href:"/en/palmistry"},
+    {icon:"⌂",title:"Vastu",desc:"Direction, placement and layout guidance for home, office and shop.",href:"/en/vastu"}
+  ],
+  panKicker: "Informational", panTitle: "Panchang Snapshot",
+  panchang: [
+    {label:"Tithi",value:"Shukla Panchami"},{label:"Nakshatra",value:"Rohini"},
+    {label:"Rahu Kaal",value:"10:36 to 12:06"},{label:"Choghadiya",value:"Amrit, Shubh, Labh"},
+    {label:"Sunrise",value:"05:42"},{label:"Sunset",value:"18:14"}
+  ],
+  panNote: "These values are sample static content shown for reference only. Panchang changes daily and by location. For the timing that applies to your date and place, message us on WhatsApp.",
+  remKicker: "Traditional practice", remTitle: "Astrology Remedies",
+  remedies: [
+    {icon:"ॐ",title:"Mantra",desc:"Sound practices linked to each graha.",href:"/en/astrology-remedies/mantra"},
+    {icon:"▦",title:"Yantra",desc:"Geometric forms used in traditional worship.",href:"/en/astrology-remedies/yantra"},
+    {icon:"◉",title:"Rudraksha",desc:"Bead types and the mukhi traditionally prescribed.",href:"/en/astrology-remedies/rudraksha"},
+    {icon:"◆",title:"Gemstones",desc:"Stone, weight, metal and finger by tradition.",href:"/en/gemstones"},
+    {icon:"✧",title:"Puja",desc:"Rituals observed for specific planetary periods.",href:"/en/astrology-remedies/puja"},
+    {icon:"☾",title:"Vrat",desc:"Fasting days associated with each planet.",href:"/en/astrology-remedies/vrat"}
+  ],
+  artKicker: "Reading room", artTitle: "Popular Articles",
+  articles: [
+    {cat:"Gemstones",title:"How a Gemstone Is Matched to a Kundli",excerpt:"Weight, metal, finger and timing all follow from the chart, not from the colour you prefer.",photo:"PHOTO: loose gemstones on cloth",href:"/en/blog/matching-gemstone-to-kundli"},
+    {cat:"Kundli",title:"Reading Lagna Before Anything Else",excerpt:"The ascendant sets the frame for every house that follows. Start there.",photo:"PHOTO: hand drawn birth chart",href:"/en/blog/reading-lagna-first"},
+    {cat:"Horoscope",title:"What a Daily Horoscope Can and Cannot Tell You",excerpt:"Sun sign columns work at a very broad level. Here is how to read them sensibly.",photo:"PHOTO: night sky with constellations",href:"/en/blog/daily-horoscope-limits"},
+    {cat:"Numerology",title:"Finding Your Life Path Number",excerpt:"A short worked example using a date of birth, step by step.",photo:"PHOTO: numerals on parchment",href:"/en/blog/life-path-number"},
+    {cat:"Vastu",title:"Main Door Direction in Vastu",excerpt:"Why the entrance carries so much weight in traditional Vastu planning.",photo:"PHOTO: Indian home entrance",href:"/en/blog/main-door-vastu"},
+    {cat:"Remedies",title:"Choosing the Right Rudraksha Mukhi",excerpt:"Each face count is tied to a deity and a graha. The match matters.",photo:"PHOTO: rudraksha beads",href:"/en/blog/rudraksha-mukhi-guide"}
+  ],
+  festKicker: "Calendar", festTitle: "Festivals and Observances",
+  festivals: [
+    {name:"Navratri",when:"Ashwin, nine nights",href:"/en/festivals/navratri"},
+    {name:"Diwali",when:"Kartik Amavasya",href:"/en/festivals/diwali"},
+    {name:"Mahashivratri",when:"Phalguna Krishna Chaturdashi",href:"/en/festivals/mahashivratri"},
+    {name:"Holi",when:"Phalguna Purnima",href:"/en/festivals/holi"},
+    {name:"Ganesh Chaturthi",when:"Bhadrapada Shukla Chaturthi",href:"/en/festivals/ganesh-chaturthi"},
+    {name:"Makar Sankranti",when:"Sun enters Capricorn",href:"/en/festivals/makar-sankranti"}
+  ],
+  whyKicker: "Why Kumar Gems", whyTitle: "How We Work",
+  why: [
+    {icon:"✦",title:"Traditional Knowledge",desc:"Readings follow classical Vedic method rather than shortcuts."},
+    {icon:"☉",title:"Astrology Guidance",desc:"Horoscope, kundli and panchang explained in context, not in isolation."},
+    {icon:"◆",title:"Gemstone Expertise",desc:"Stone selection tied to the chart, with the reasoning shown."},
+    {icon:"✎",title:"Easy to Understand",desc:"Plain explanation of every term before it is used."},
+    {icon:"⌘",title:"Multilingual Experience",desc:"The full site in English and Hindi, with more languages planned."}
+  ],
+  faqKicker: "Questions", faqTitle: "Frequently Asked",
+  faq: [
+    {q:"How do I get in touch with Kumar Gems?",a:"WhatsApp and email are the two ways to reach us. Message 9097190900 on WhatsApp or write to rashiring24@gmail.com. You can also visit us at Mohaddinagar, near Durga Mandir, Bhagalpur, Bihar."},
+    {q:"Is the panchang on this site live?",a:"No. The panchang figures shown here are static sample content for reference. Tithi, nakshatra and rahu kaal change every day and vary by location, so ask us for the values that apply to your date and place."},
+    {q:"How is a gemstone chosen for me?",a:"It starts with the kundli. The planet that needs strengthening, its placement and the current dasha all guide the choice, along with weight, metal and the day it is first worn. We walk through the reasoning with you before recommending anything."},
+    {q:"Do you guarantee results from a gemstone or remedy?",a:"No. Everything on this site is presented as traditional interpretation. We do not make medical, financial or legal claims, and we do not promise outcomes."},
+    {q:"Is the site available in Hindi?",a:"Yes. Use the language selector in the navbar to switch between English and Hindi. Gujarati, Marathi, Bengali, Telugu, Kannada and Tamil are planned."}
+  ],
+  finalTitle: "Explore Your Astrological Journey",
+  finalBody: "Begin with your sign, read your kundli, or ask about the stone that suits your chart. We are a message away.",
+  gbp: "Google Profile", topLabel: "Go to top", footerMsgCta: "Message Us",
+  footer: [
+    {title:"Astrology",links:[{label:"Horoscope",href:"/en/horoscope"},{label:"Kundli",href:"/en/kundli"},{label:"Kundli Milan",href:"/en/kundli-milan"},{label:"Panchang",href:"/en/panchang"},{label:"Numerology",href:"/en/numerology"},{label:"Vedic Astrology",href:"/en/vedic-astrology"}]},
+    {title:"Guidance",links:[{label:"Remedies",href:"/en/astrology-remedies"},{label:"Gemstones",href:"/en/gemstones"},{label:"Vastu",href:"/en/vastu"},{label:"Tarot",href:"/en/tarot"},{label:"Palmistry",href:"/en/palmistry"},{label:"Baby Names",href:"/en/baby-names"}]},
+    {title:"Resources",links:[{label:"Festivals",href:"/en/festivals"},{label:"Blog",href:"/en/blog"},{label:"FAQ",href:"/en/faq"},{label:"Search",href:"/en/search"},{label:"About Us",href:"/en/about"},{label:"Contact Us",href:"/en/contact"}]},
+    {title:"Legal",links:[{label:"Privacy Policy",href:"/en/privacy-policy"},{label:"Terms and Conditions",href:"/en/terms"},{label:"Disclaimer",href:"/en/disclaimer"},{label:"Cookie Policy",href:"/en/cookie-policy"}]}
+  ],
+  copyright: "\u00A9 2026 Kumar Gems, Bhagalpur, Bihar. All rights reserved.",
+  disclaimer: "Astrology content is traditional interpretation, not guaranteed fact."
+};
+
+const HI = {
+  code: "hi",
+  nav: [
+    {label:"राशिफल",href:"/hi/rashifal"},{label:"कुंडली",href:"/hi/kundli"},
+    {label:"कुंडली मिलान",href:"/hi/kundli-milan"},{label:"पंचांग",href:"/hi/panchang"},
+    {label:"अंक ज्योतिष",href:"/hi/ank-jyotish"},{label:"ज्योतिष",href:"/hi/vaidik-jyotish"},
+    {label:"रत्न",href:"/hi/ratna"},{label:"उपाय",href:"/hi/jyotish-upay"}
+  ],
+  more: "और",
+  moreLinks: [
+    {label:"वास्तु",href:"/hi/vastu"},{label:"टैरो",href:"/hi/tarot"},{label:"हस्तरेखा",href:"/hi/hastrekha"},
+    {label:"शिशु नाम",href:"/hi/shishu-naam"},{label:"त्यौहार",href:"/hi/tyohar"},
+    {label:"ब्लॉग",href:"/hi/blog"},{label:"हमारे बारे में",href:"/hi/hamare-bare-mein"},{label:"संपर्क करें",href:"/hi/sampark"}
+  ],
+  searchHref: "/hi/khoj", searchLabel: "साइट पर खोजें", menuLabel: "मेन्यू खोलें",
+  waCta: "व्हाट्सएप",
+  heroKicker: "ज्योतिष और रत्न, भागलपुर",
+  heroTitle: "ज्योतिष के ज्ञान को जानिए",
+  heroSub: "कुमार जेम्स पर राशिफल, कुंडली विश्लेषण, रत्न परामर्श और अंक ज्योतिष एक ही जगह उपलब्ध हैं। हर विश्लेषण पारंपरिक वैदिक पद्धति पर आधारित है, और ऐसी भाषा में समझाया जाता है जो आपके काम आए।",
+  ctaPrimary: "राशिफल देखें", ctaSecondary: "हमसे बात करें", ctaWhatsapp: "हमसे बात करें",
+  consultCta: "परामर्श लें", consultTitle: "परामर्श के लिए अनुरोध",
+  consultSub: "यह भरें, बातचीत आगे संदेश या ईमेल पर जारी रहेगी। इस साइट पर कोई जानकारी संग्रहीत नहीं होती।",
+  formName: "नाम", formPhone: "फ़ोन", formEmail: "ईमेल", formSubject: "विषय", formMessage: "संदेश",
+  formTopics: ["राशिफल", "कुंडली", "कुंडली मिलान", "रत्न परामर्श", "अंक ज्योतिष", "वास्तु", "अन्य"],
+  formSendWa: "संदेश भेजें", formSendMail: "ईमेल से भेजें", formClose: "बंद करें",
+  formNote: "इस फ़ॉर्म का कोई बैकएंड नहीं है। विकल्प चुनने पर संदेश तैयार होकर आपके ऐप में खुल जाएगा।",
+  banners: [
+    {
+      title: "करियर की रुकावटें कब खत्म होंगी?",
+      sub: "आज ही कुमार जेम्स के साथ अपनी कुंडली देखकर जानिए।",
+      cta: "चैट करें",
+      href: "/hi/paramarsh/career",
+      photo: "PHOTO: person checking phone in an office stairwell",
+      bg: "linear-gradient(100deg,#F6EFE2 0%,#F2E6D2 58%,#EADCC4 100%)"
+    },
+    {
+      title: "क्या विवाह का सही समय पास है?",
+      sub: "गुण मिलान, मांगलिक विचार और मुहूर्त, पारंपरिक पद्धति से।",
+      cta: "चैट करें",
+      href: "/hi/paramarsh/vivah",
+      photo: "PHOTO: couple at a traditional Indian wedding ceremony",
+      bg: "linear-gradient(100deg,#F4EEE6 0%,#F0E2DC 58%,#E8D4CC 100%)"
+    }
+  ],
+  horoscopeHref: "/hi/rashifal", kundliHref: "/hi/kundli", gemHref: "/hi/ratna",
+  panHref: "/hi/panchang", blogHref: "/hi/blog", viewAll: "सभी देखें",
+  toolsKicker: "यहाँ से शुरू करें", toolsTitle: "त्वरित साधन",
+  tools: [
+    {icon:"☉",title:"राशिफल",desc:"बारह राशियों के लिए दैनिक, साप्ताहिक, मासिक और वार्षिक फल।",href:"/hi/rashifal"},
+    {icon:"◈",title:"कुंडली",desc:"अपनी जन्म कुंडली, लग्न, राशि और नक्षत्र को समझें।",href:"/hi/kundli"},
+    {icon:"⚭",title:"कुंडली मिलान",desc:"अष्टकूट पद्धति से गुण मिलान और अनुकूलता।",href:"/hi/kundli-milan"},
+    {icon:"☾",title:"पंचांग",desc:"तिथि, नक्षत्र, योग, करण और मुहूर्त सरल भाषा में।",href:"/hi/panchang"},
+    {icon:"❾",title:"अंक ज्योतिष",desc:"मूलांक, भाग्यांक और नामांक तथा उनका संकेत।",href:"/hi/ank-jyotish"},
+    {icon:"◆",title:"रत्न",desc:"कौन सा रत्न किस ग्रह से जुड़ा है, और क्यों।",href:"/hi/ratna"}
+  ],
+  zodiacKicker: "आज का फल", zodiacTitle: "बारह राशियों का राशिफल",
+  zodiac: [
+    {sym:"♈",name:"मेष",dates:"21 मार्च - 19 अप्रैल",href:"/hi/rashifal/mesh"},
+    {sym:"♉",name:"वृषभ",dates:"20 अप्रैल - 20 मई",href:"/hi/rashifal/vrishabh"},
+    {sym:"♊",name:"मिथुन",dates:"21 मई - 20 जून",href:"/hi/rashifal/mithun"},
+    {sym:"♋",name:"कर्क",dates:"21 जून - 22 जुलाई",href:"/hi/rashifal/kark"},
+    {sym:"♌",name:"सिंह",dates:"23 जुलाई - 22 अगस्त",href:"/hi/rashifal/singh"},
+    {sym:"♍",name:"कन्या",dates:"23 अगस्त - 22 सितंबर",href:"/hi/rashifal/kanya"},
+    {sym:"♎",name:"तुला",dates:"23 सितंबर - 22 अक्टूबर",href:"/hi/rashifal/tula"},
+    {sym:"♏",name:"वृश्चिक",dates:"23 अक्टूबर - 21 नवंबर",href:"/hi/rashifal/vrishchik"},
+    {sym:"♐",name:"धनु",dates:"22 नवंबर - 21 दिसंबर",href:"/hi/rashifal/dhanu"},
+    {sym:"♑",name:"मकर",dates:"22 दिसंबर - 19 जनवरी",href:"/hi/rashifal/makar"},
+    {sym:"♒",name:"कुंभ",dates:"20 जनवरी - 18 फरवरी",href:"/hi/rashifal/kumbh"},
+    {sym:"♓",name:"मीन",dates:"19 फरवरी - 20 मार्च",href:"/hi/rashifal/meen"}
+  ],
+  kundliKicker: "जन्म कुंडली", kundliTitle: "आपकी कुंडली, पंक्ति दर पंक्ति",
+  kundliBody: "कुंडली आपके जन्म के समय आकाश की स्थिति दर्शाती है। इसे ठीक से पढ़ने के लिए लग्न, नौ ग्रहों की स्थिति, बारह भाव और आगे आने वाली दशाओं को देखना पड़ता है। हम हर हिस्से का पारंपरिक अर्थ समझाते हैं, कोई अंतिम निर्णय नहीं सुनाते।",
+  kundliTags: [
+    {label:"लग्न",href:"/hi/kundli/lagna"},{label:"राशि",href:"/hi/kundli/rashi"},
+    {label:"नक्षत्र",href:"/hi/kundli/nakshatra"},{label:"मंगल दोष",href:"/hi/kundli/mangal-dosh"},
+    {label:"कालसर्प दोष",href:"/hi/kundli/kaal-sarp-dosh"}
+  ],
+  kundliCta: "कुंडली देखें",
+  gemKicker: "हमारा कार्य", gemTitle: "रत्न और उनके ग्रह",
+  gemBody: "वैदिक परंपरा में हर रत्न किसी न किसी ग्रह से जुड़ा है। रत्न का चुनाव कुंडली से तय होता है, पसंद से नहीं। बातचीत यहीं से शुरू होती है।",
+  gems: [
+    {name:"माणिक्य",planet:"सूर्य",desc:"सूर्य का रत्न, परंपरा में आत्मविश्वास और स्पष्टता से जोड़ा जाता है।",bg:"linear-gradient(140deg,#3A0A14,#7A1226)",gem:"radial-gradient(circle at 34% 28%,#FF7A8A,#C4102B 55%,#6E0817)",photo:"PHOTO: ruby",href:"/hi/ratna/manikya"},
+    {name:"पन्ना",planet:"बुध",desc:"बुध से संबंधित रत्न, परंपरा में वाणी और अध्ययन से जुड़ा।",bg:"linear-gradient(140deg,#052418,#0B5236)",gem:"radial-gradient(circle at 34% 28%,#7DEBB6,#0E9A5E 55%,#04502F)",photo:"PHOTO: emerald",href:"/hi/ratna/panna"},
+    {name:"पुखराज",planet:"गुरु",desc:"बृहस्पति का रत्न, परंपरा में मार्गदर्शन और उन्नति से जुड़ा।",bg:"linear-gradient(140deg,#3A2A05,#7A5A0C)",gem:"radial-gradient(circle at 34% 28%,#FFE79A,#E0A81B 55%,#8A6206)",photo:"PHOTO: yellow sapphire",href:"/hi/ratna/pukhraj"},
+    {name:"नीलम",planet:"शनि",desc:"शनि का रत्न, कुंडली के सावधान अध्ययन के बाद ही धारण किया जाता है।",bg:"linear-gradient(140deg,#060F35,#13276E)",gem:"radial-gradient(circle at 34% 28%,#8FB4FF,#1E42C4 55%,#0A1C6E)",photo:"PHOTO: blue sapphire",href:"/hi/ratna/neelam"},
+    {name:"मोती",planet:"चंद्र",desc:"चंद्रमा से जुड़ा रत्न, परंपरा में मन की शांति से संबंधित।",bg:"linear-gradient(140deg,#2A2C38,#585C70)",gem:"radial-gradient(circle at 34% 28%,#FFFFFF,#EDE7DC 55%,#BDB6A8)",photo:"PHOTO: pearl",href:"/hi/ratna/moti"},
+    {name:"मूंगा",planet:"मंगल",desc:"मंगल का रत्न, परंपरा में साहस और दृढ़ता से जोड़ा जाता है।",bg:"linear-gradient(140deg,#3A1205,#7A2A0C)",gem:"radial-gradient(circle at 34% 28%,#FFA47A,#D8461A 55%,#7E2109)",photo:"PHOTO: red coral",href:"/hi/ratna/moonga"},
+    {name:"गोमेद",planet:"राहु",desc:"राहु से जुड़ा रत्न, परंपरा में एकाग्रता और स्पष्टता से संबंधित।",bg:"linear-gradient(140deg,#241006,#6E2D0D)",gem:"radial-gradient(circle at 34% 28%,#FFB06B,#B94D16 55%,#5A1B08)",photo:"PHOTO: hessonite",href:"/hi/ratna/gomed"},
+    {name:"लहसुनिया",planet:"केतु",desc:"केतु का रत्न, परंपरा में अंतर्दृष्टि और सावधानी से जोड़ा जाता है।",bg:"linear-gradient(140deg,#25302B,#68766B)",gem:"radial-gradient(ellipse at 35% 35%,#F5E4B0,#A78D50 42%,#4D4632)",photo:"PHOTO: cats eye",href:"/hi/ratna/lehsunia"},
+    {name:"हीरा",planet:"शुक्र",desc:"शुक्र का रत्न, परंपरा में सौम्यता, सुख और परिष्कार से जुड़ा।",bg:"linear-gradient(140deg,#2A3040,#5C6478)",gem:"radial-gradient(circle at 34% 28%,#FFFFFF,#DDE6F2 55%,#9FB0C4)",photo:"PHOTO: diamond",href:"/hi/ratna/heera"}
+  ],
+  gemCta: "सभी रत्न देखें",
+  svcKicker: "हमारी सेवाएँ", svcTitle: "ज्योतिष सेवाएँ",
+  services: [
+    {icon:"✦",title:"वैदिक ज्योतिष",desc:"ग्रह, भाव, नक्षत्र और दशा शास्त्रीय क्रम में पढ़े जाते हैं।",href:"/hi/vaidik-jyotish"},
+    {icon:"❾",title:"अंक ज्योतिष",desc:"नाम और जन्मतिथि से निकले अंक और उनका पारंपरिक अर्थ।",href:"/hi/ank-jyotish"},
+    {icon:"⧉",title:"टैरो",desc:"जिस प्रश्न पर आप विचार कर रहे हैं, उस पर कार्ड पठन।",href:"/hi/tarot"},
+    {icon:"✋",title:"हस्तरेखा",desc:"रेखाएँ, पर्वत और हाथ की बनावट, शास्त्रीय परंपरा में।",href:"/hi/hastrekha"},
+    {icon:"⌂",title:"वास्तु",desc:"घर, कार्यालय और दुकान के लिए दिशा और स्थान संबंधी परामर्श।",href:"/hi/vastu"}
+  ],
+  panKicker: "सूचनात्मक", panTitle: "पंचांग झलक",
+  panchang: [
+    {label:"तिथि",value:"शुक्ल पंचमी"},{label:"नक्षत्र",value:"रोहिणी"},
+    {label:"राहु काल",value:"10:36 से 12:06"},{label:"चौघड़िया",value:"अमृत, शुभ, लाभ"},
+    {label:"सूर्योदय",value:"05:42"},{label:"सूर्यास्त",value:"18:14"}
+  ],
+  panNote: "यहाँ दिए गए मान केवल उदाहरण के लिए हैं, स्थिर सामग्री हैं। पंचांग प्रतिदिन और स्थान के अनुसार बदलता है। अपनी तिथि और स्थान के अनुसार सही समय जानने के लिए हमें सीधे संदेश भेजें।",
+  remKicker: "पारंपरिक विधि", remTitle: "ज्योतिष उपाय",
+  remedies: [
+    {icon:"ॐ",title:"मंत्र",desc:"प्रत्येक ग्रह से जुड़े मंत्र।",href:"/hi/jyotish-upay/mantra"},
+    {icon:"▦",title:"यंत्र",desc:"पूजा में प्रयुक्त पारंपरिक ज्यामितीय यंत्र।",href:"/hi/jyotish-upay/yantra"},
+    {icon:"◉",title:"रुद्राक्ष",desc:"मुखी के अनुसार रुद्राक्ष के प्रकार।",href:"/hi/jyotish-upay/rudraksha"},
+    {icon:"◆",title:"रत्न",desc:"रत्न, वजन, धातु और उंगली परंपरा के अनुसार।",href:"/hi/ratna"},
+    {icon:"✧",title:"पूजा",desc:"विशेष ग्रह दशाओं में की जाने वाली पूजा।",href:"/hi/jyotish-upay/puja"},
+    {icon:"☾",title:"व्रत",desc:"प्रत्येक ग्रह से जुड़े व्रत के दिन।",href:"/hi/jyotish-upay/vrat"}
+  ],
+  artKicker: "पठन कक्ष", artTitle: "लोकप्रिय लेख",
+  articles: [
+    {cat:"रत्न",title:"कुंडली के अनुसार रत्न कैसे चुना जाता है",excerpt:"वजन, धातु, उंगली और समय सब कुंडली से तय होते हैं, पसंद के रंग से नहीं।",photo:"PHOTO: loose gemstones on cloth",href:"/hi/blog/kundli-ke-anusar-ratna"},
+    {cat:"कुंडली",title:"सबसे पहले लग्न क्यों देखा जाता है",excerpt:"लग्न आगे आने वाले हर भाव का आधार तय करता है। शुरुआत वहीं से होती है।",photo:"PHOTO: hand drawn birth chart",href:"/hi/blog/lagna-pehle"},
+    {cat:"राशिफल",title:"दैनिक राशिफल क्या बता सकता है और क्या नहीं",excerpt:"राशि आधारित दैनिक फल बहुत सामान्य स्तर पर काम करता है। इसे समझदारी से पढ़ें।",photo:"PHOTO: night sky with constellations",href:"/hi/blog/dainik-rashifal-seema"},
+    {cat:"अंक ज्योतिष",title:"अपना मूलांक कैसे निकालें",excerpt:"जन्मतिथि से एक छोटा उदाहरण, चरण दर चरण।",photo:"PHOTO: numerals on parchment",href:"/hi/blog/mulank-kaise-nikale"},
+    {cat:"वास्तु",title:"वास्तु में मुख्य द्वार की दिशा",excerpt:"पारंपरिक वास्तु में प्रवेश द्वार को इतना महत्व क्यों दिया जाता है।",photo:"PHOTO: Indian home entrance",href:"/hi/blog/mukhya-dwar-vastu"},
+    {cat:"उपाय",title:"सही मुखी का रुद्राक्ष कैसे चुनें",excerpt:"हर मुखी किसी देवता और ग्रह से जुड़ा है। सही मेल आवश्यक है।",photo:"PHOTO: rudraksha beads",href:"/hi/blog/rudraksha-mukhi-chayan"}
+  ],
+  festKicker: "पंचांग तिथियाँ", festTitle: "त्यौहार और पर्व",
+  festivals: [
+    {name:"नवरात्रि",when:"आश्विन, नौ रात्रि",href:"/hi/tyohar/navratri"},
+    {name:"दीवाली",when:"कार्तिक अमावस्या",href:"/hi/tyohar/diwali"},
+    {name:"महाशिवरात्रि",when:"फाल्गुन कृष्ण चतुर्दशी",href:"/hi/tyohar/mahashivratri"},
+    {name:"होली",when:"फाल्गुन पूर्णिमा",href:"/hi/tyohar/holi"},
+    {name:"गणेश चतुर्थी",when:"भाद्रपद शुक्ल चतुर्थी",href:"/hi/tyohar/ganesh-chaturthi"},
+    {name:"मकर संक्रांति",when:"सूर्य का मकर प्रवेश",href:"/hi/tyohar/makar-sankranti"}
+  ],
+  whyKicker: "क्यों कुमार जेम्स", whyTitle: "हम कैसे काम करते हैं",
+  why: [
+    {icon:"✦",title:"पारंपरिक ज्ञान",desc:"विश्लेषण शास्त्रीय वैदिक पद्धति से किया जाता है।"},
+    {icon:"☉",title:"ज्योतिष मार्गदर्शन",desc:"राशिफल, कुंडली और पंचांग संदर्भ के साथ समझाए जाते हैं।"},
+    {icon:"◆",title:"रत्न परामर्श",desc:"रत्न का चुनाव कुंडली से, और उसका कारण भी स्पष्ट किया जाता है।"},
+    {icon:"✎",title:"सरल भाषा",desc:"हर शब्द का अर्थ पहले समझाया जाता है।"},
+    {icon:"⌘",title:"बहुभाषी अनुभव",desc:"पूरी वेबसाइट हिंदी और अंग्रेज़ी में, आगे और भाषाएँ जुड़ेंगी।"}
+  ],
+  faqKicker: "प्रश्न", faqTitle: "अक्सर पूछे जाने वाले प्रश्न",
+  faq: [
+    {q:"कुमार जेम्स से संपर्क कैसे करें?",a:"संदेश और ईमेल, दो माध्यम उपलब्ध हैं। 9097190900 पर संदेश भेजें या rashiring24@gmail.com पर लिखें। आप मोहद्दीनगर, दुर्गा मंदिर के पास, भागलपुर, बिहार में भी आ सकते हैं।"},
+    {q:"क्या इस साइट का पंचांग लाइव है?",a:"नहीं। यहाँ दिया गया पंचांग केवल उदाहरण के रूप में स्थिर सामग्री है। तिथि, नक्षत्र और राहु काल प्रतिदिन और स्थान के अनुसार बदलते हैं, इसलिए अपनी तिथि और स्थान के अनुसार मान हमसे पूछें।"},
+    {q:"मेरे लिए रत्न कैसे चुना जाता है?",a:"शुरुआत कुंडली से होती है। किस ग्रह को बल देना है, उसकी स्थिति और चल रही दशा, इन सबसे चुनाव तय होता है, साथ ही वजन, धातु और धारण का दिन भी। सुझाव देने से पहले हम पूरा कारण आपके साथ साझा करते हैं।"},
+    {q:"क्या रत्न या उपाय के परिणाम की गारंटी है?",a:"नहीं। इस साइट की सारी सामग्री पारंपरिक व्याख्या के रूप में प्रस्तुत है। हम चिकित्सा, वित्तीय या कानूनी दावे नहीं करते, और किसी परिणाम की गारंटी नहीं देते।"},
+    {q:"क्या साइट हिंदी में उपलब्ध है?",a:"हाँ। नेवबार में भाषा चयनकर्ता से हिंदी और अंग्रेज़ी के बीच बदलें। गुजराती, मराठी, बांग्ला, तेलुगु, कन्नड़ और तमिल आगे जोड़ी जाएँगी।"}
+  ],
+  finalTitle: "अपनी ज्योतिषीय यात्रा शुरू करें",
+  finalBody: "अपनी राशि से शुरू करें, कुंडली पढ़वाएँ, या अपनी कुंडली के अनुकूल रत्न के बारे में पूछें। हम एक संदेश दूर हैं।",
+  gbp: "गूगल प्रोफ़ाइल", topLabel: "ऊपर जाएँ", footerMsgCta: "संदेश भेजें",
+  footer: [
+    {title:"ज्योतिष",links:[{label:"राशिफल",href:"/hi/rashifal"},{label:"कुंडली",href:"/hi/kundli"},{label:"कुंडली मिलान",href:"/hi/kundli-milan"},{label:"पंचांग",href:"/hi/panchang"},{label:"अंक ज्योतिष",href:"/hi/ank-jyotish"},{label:"वैदिक ज्योतिष",href:"/hi/vaidik-jyotish"}]},
+    {title:"मार्गदर्शन",links:[{label:"उपाय",href:"/hi/jyotish-upay"},{label:"रत्न",href:"/hi/ratna"},{label:"वास्तु",href:"/hi/vastu"},{label:"टैरो",href:"/hi/tarot"},{label:"हस्तरेखा",href:"/hi/hastrekha"},{label:"शिशु नाम",href:"/hi/shishu-naam"}]},
+    {title:"संसाधन",links:[{label:"त्यौहार",href:"/hi/tyohar"},{label:"ब्लॉग",href:"/hi/blog"},{label:"सामान्य प्रश्न",href:"/hi/prashn"},{label:"खोज",href:"/hi/khoj"},{label:"हमारे बारे में",href:"/hi/hamare-bare-mein"},{label:"संपर्क करें",href:"/hi/sampark"}]},
+    {title:"कानूनी",links:[{label:"गोपनीयता नीति",href:"/hi/gopniyata-niti"},{label:"नियम एवं शर्तें",href:"/hi/niyam-sharten"},{label:"अस्वीकरण",href:"/hi/asweekaran"},{label:"कुकी नीति",href:"/hi/cookie-niti"}]}
+  ],
+  copyright: "\u00A9 2026 कुमार जेम्स, भागलपुर, बिहार। सर्वाधिकार सुरक्षित।",
+  disclaimer: "ज्योतिष सामग्री पारंपरिक व्याख्या है, प्रमाणित तथ्य नहीं।"
+};
+
+const KG_PHOTOS = {
+ "PHOTO: ruby": "uploads/ruby.jpg",
+ "PHOTO: emerald": "https://www.rashi-ratan.com/products/amT-Panna%20(Eemerald)/image-1.jpg",
+ "PHOTO: yellow sapphire": "https://www.haridwarrudraksha.com/cdn/shop/files/a_272.jpg?v=1767007883",
+ "PHOTO: blue sapphire": "uploads/blue-sapphire.jpg",
+ "PHOTO: pearl": "uploads/pearl.jpg",
+ "PHOTO: red coral": "uploads/red-coral.jpg",
+ "PHOTO: hessonite": "uploads/hessonite.jpg",
+ "PHOTO: cats eye": "uploads/cats-eye.jpg",
+ "PHOTO: diamond": "https://blog.brilliance.com/wp-content/uploads/2017/06/perfect-diamond-isolated-on-shiny-background.jpg",
+ "PHOTO: night sky with visible constellations": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Milky_Way_Night_Sky_Black_Rock_Desert_Nevada.jpg",
+ "PHOTO: oil lamps lit for a festival evening": "https://upload.wikimedia.org/wikipedia/commons/6/61/Diwali_Diya.jpg",
+ "PHOTO: Indian home interior with natural light": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Indian_interior.jpg",
+ "PHOTO: rudraksha beads of different mukhi counts": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Rudraksha_beads.jpg",
+ "PHOTO: couple at a traditional Indian wedding ceremony": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Indian_wedding.jpg"
+};
+function kgPhoto(label){ return window.__kgPhotos?.[label] || KG_PHOTOS[label] || ""; }
+function kgAlt(label){ return String(label || "").replace(/^PHOTO:\s*/, ""); }
+
+class Component extends DCLogic {
+  state = { lang: "en", menuOpen: false, moreOpen: false, openFaq: 0, showTop: false,
+    consultOpen: false, form: { name: "", phone: "", email: "", subject: "", message: "" } };
+
+  _set(k) { return e => { const v = e.target.value; this.setState(s => ({ form: Object.assign({}, s.form, { [k]: v }) })); }; }
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      if ((y > 420) !== this.state.showTop) this.setState({ showTop: y > 420 });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+  }
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._onScroll);
+  }
+
+  renderVals() {
+    const t = this.state.lang === "hi" ? HI : EN;
+    const hi = this.state.lang === "hi";
+    const faqItems = t.faq.map((f, i) => ({
+      q: f.q, a: f.a,
+      open: this.state.openFaq === i,
+      openStr: this.state.openFaq === i ? "true" : "false",
+      mark: this.state.openFaq === i ? "\u2212" : "+",
+      toggle: () => this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i }))
+    }));
+    const f = this.state.form;
+    const subject = f.subject || t.formTopics[0];
+    const body = [
+      t.formName + ": " + (f.name || "-"),
+      t.formPhone + ": " + (f.phone || "-"),
+      t.formEmail + ": " + (f.email || "-"),
+      t.formSubject + ": " + subject,
+      t.formMessage + ": " + (f.message || "-")
+    ].join("\n");
+    const withImg = list => list.map(x => { const u = kgPhoto(x.photo); return Object.assign({}, x, { img: u, noImg: !u }); });
+    const _banners = withImg(t.banners);
+    const gems = withImg(t.gems);
+    const articles = withImg(t.articles);
+    return {
+      t, faqItems,
+      banner1: _banners[0], banner2: _banners[1], gems, articles,
+      consultOpen: this.state.consultOpen,
+      form: f,
+      setName: this._set("name"), setPhone: this._set("phone"), setEmail: this._set("email"),
+      setSubject: this._set("subject"), setMessage: this._set("message"),
+      waHref: "https://wa.me/919097190900?text=" + encodeURIComponent(body),
+      mailHref: "mailto:rashiring24@gmail.com?subject=" + encodeURIComponent("Kumar Gems: " + subject) + "&body=" + encodeURIComponent(body),
+      openConsult: () => this.setState({ consultOpen: true, menuOpen: false, moreOpen: false }),
+      closeConsult: () => this.setState({ consultOpen: false }),
+      menuOpen: this.state.menuOpen,
+      menuOpenStr: this.state.menuOpen ? "true" : "false",
+      moreOpen: this.state.moreOpen,
+      moreOpenStr: this.state.moreOpen ? "true" : "false",
+      showTop: this.state.showTop,
+      homeHref: hi ? "/hi/" : "/en/",
+      langLabel: hi ? "हिंदी / EN" : "EN / हिंदी",
+      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false, moreOpen: false })),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen, moreOpen: false })),
+      toggleMore: () => this.setState(s => ({ moreOpen: !s.moreOpen })),
+      scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" })
+    };
+  }
+}
+
+Object.defineProperty(EN, "allLinks", { get(){ return [{label:"Search ⌕", href:EN.searchHref}].concat(EN.nav, EN.moreLinks); } });
+Object.defineProperty(HI, "allLinks", { get(){ return [{label:"खोज ⌕", href:HI.searchHref}].concat(HI.nav, HI.moreLinks); } });
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@ const dir = __dirname;
 const OLD = 'allLinks: ui.nav.concat(ui.moreLinks),';
 const NEW = 'allLinks: [ui.moreLinks[ui.moreLinks.length - 1]].concat(ui.nav, ui.moreLinks.slice(0, -1)),';
 
-const skip = new Set(['index.html', 'Kumar Gems Home.dc.html']);
+const skip = new Set(['index.html', 'Kundli Planet Home.dc.html']);
 const files = fs.readdirSync(dir).filter(f => f.endsWith('.html') && !skip.has(f));
 
 let changed = 0;

@@ -73,7 +73,7 @@ window.__kgPhotos = {
   const title = (value) => value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
   const page = (name, hindi = false) => `${name}${hindi ? " HI" : ""}.dc.html`;
   const exact = {
-    "/en": "Kumar Gems Home.dc.html", "/hi": "index.html",
+    "/en": "Kundli Planet Home.dc.html", "/hi": "index.html",
     "/en/consultation": "Career Consultation.dc.html", "/hi/paramarsh": "Career Consultation HI.dc.html",
     "/en/faq": "index.html#faq", "/hi/prashn": "index.html#faq",
     "/en/search": "index.html", "/hi/khoj": "index.html",

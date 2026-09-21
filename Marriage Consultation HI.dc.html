@@ -27,7 +27,7 @@
   body{margin:0;background:#FAF7F0;color:#15162B;overflow-x:hidden}
   a{color:#8A6A12;text-decoration:none}a:hover{color:#B8901F}
   :focus-visible{outline:2px solid #D4AF37;outline-offset:3px}
-  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}}
+  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}[data-searchbtn]{display:grid !important}}[data-desknav] a[href$="/kundli"],[data-desknav] a[href$="/kundli-milan"]{font-weight:600}
   @media (max-width:860px){
     [data-brandsub]{display:none !important}
     [data-logo]{width:38px !important;height:38px !important}
@@ -49,7 +49,7 @@
 <div style="font-family:Outfit,system-ui,sans-serif;font-weight:300;line-height:1.65;background:#FAF7F0;min-height:100vh;overflow-x:hidden">
 
   <header style="position:sticky;top:0;z-index:60;background:#0A1633;border-bottom:1px solid rgba(212,175,55,.28)">
-    <div style="max-width:1100px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap" data-headinner="1">
+    <div style="max-width:1280px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap" data-headinner="1">
       <a href="{{ t.homeHref }}" style="display:flex;align-items:center;gap:11px;flex-shrink:0">
         <img src="uploads/kundli%20planet%20ogo.png" alt="Kundli Planet logo" width="60" height="60" style="width:60px;height:60px;border-radius:50%;display:block" data-logo="1">
         <span style="display:flex;flex-direction:column;line-height:1.05">
@@ -57,12 +57,23 @@
           <span style="font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,227,176,.6)" data-brandsub="1">Bhagalpur, Bihar</span>
         </span>
       </a>
-      <nav aria-label="Primary" data-desknav="1" style="display:none;gap:1px;flex:1 1 auto;justify-content:center;align-items:center;flex-wrap:wrap">
+      <nav aria-label="Primary" data-desknav="1" style="display:none;gap:2px;flex:1 1 auto;justify-content:center;align-items:center">
         <sc-for list="{{ t.nav }}" as="n" hint-placeholder-count="9">
-          <a href="{{ n.href }}" style="padding:8px 9px;font-size:13px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
+          <a href="{{ n.href }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
         </sc-for>
+        <div style="position:relative">
+          <button type="button" onClick="{{ toggleMore }}" aria-haspopup="true" aria-expanded="{{ moreOpenStr }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;background:none;border:0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:300;display:flex;align-items:center;gap:5px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ t.more }} <span style="font-size:9px;opacity:.7">▼</span></button>
+          <sc-if value="{{ moreOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:calc(100% + 8px);right:0;background:#0F1E42;border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:8px;min-width:210px;box-shadow:0 22px 50px rgba(4,10,26,.5);display:grid;gap:1px">
+              <sc-for list="{{ t.moreLinks }}" as="m" hint-placeholder-count="8">
+                <a href="{{ m.href }}" style="padding:9px 12px;font-size:13.5px;color:#DCDCE6;border-radius:8px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ m.label }}</a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
       </nav>
-      <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto" data-deskonly="1">
+        <a href="{{ t.searchHref }}" aria-label="{{ t.searchLabel }}" data-searchbtn="1" style="display:none;width:36px;height:36px;place-items:center;border:1px solid rgba(212,175,55,.34);border-radius:50%;color:#F3E3B0;font-size:14px" style-hover="background:rgba(212,175,55,.16)">⌕</a>
         <button type="button" onClick="{{ toggleLang }}" data-langbtn="1" style="padding:8px 13px;border:1px solid rgba(212,175,55,.34);background:none;border-radius:999px;color:#F3E3B0;font-family:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap" style-hover="background:rgba(212,175,55,.16)">{{ langLabel }}</button>
         <button type="button" data-consultbtn="1" onClick="{{ openConsult }}" style="display:inline-flex;align-items:center;gap:7px;padding:10px 17px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.07)">✦ {{ t.consultCta }}</button>
         <button type="button" onClick="{{ toggleMenu }}" aria-label="{{ t.menuLabel }}" aria-expanded="{{ menuOpenStr }}" data-burger="1" style="width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(212,175,55,.34);background:none;border-radius:10px;color:#F3E3B0;cursor:pointer;font-size:16px">☰</button>
@@ -70,7 +81,7 @@
     </div>
     <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
       <div style="border-top:1px solid rgba(212,175,55,.22);background:#08122A;max-height:70vh;overflow-y:auto;padding:12px 20px 20px">
-        <div style="display:grid;gap:1px;max-width:1100px;margin:0 auto">
+        <div style="display:grid;gap:1px;max-width:1280px;margin:0 auto">
           <sc-for list="{{ t.allLinks }}" as="m" hint-placeholder-count="10">
             <a href="{{ m.href }}" style="padding:12px 10px;font-size:15px;color:#DCDCE6;border-bottom:1px solid rgba(255,255,255,.06)">{{ m.label }}</a>
           </sc-for>
@@ -80,17 +91,21 @@
   </header>
 
   <main>
-    <nav aria-label="Breadcrumb" style="max-width:1100px;margin:0 auto;padding:18px 20px 0;font-size:12.5px;color:#7A7C8A">
+    <nav aria-label="Breadcrumb" style="max-width:1280px;margin:0 auto;padding:18px 20px 0;font-size:12.5px;color:#7A7C8A">
       <a href="{{ t.homeHref }}">{{ t.crumbHome }}</a> &gt; <a href="{{ t.consultHref }}">{{ t.crumbConsult }}</a> &gt; <span style="color:#4A4C5C">{{ t.crumbHere }}</span>
     </nav>
 
-    <section style="max-width:1100px;margin:0 auto;padding:clamp(28px,4vw,46px) 20px 0">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(28px,4vw,46px) 20px 0">
       <div style="background:linear-gradient(100deg,#F4EEE6 0%,#F0E2DC 58%,#E8D4CC 100%);border:1px solid #E4D3C8;border-radius:22px;padding:clamp(30px,5vw,54px);display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center">
         <div>
           <p style="font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#96522A;margin:0 0 12px">{{ t.kicker }}</p>
           <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.4vw,50px);font-weight:700;margin:0 0 14px;color:#4A2A1E;line-height:1.14;text-wrap:pretty">{{ t.h1 }}</h1>
           <p style="margin:0 0 26px;font-size:clamp(15px,1.6vw,18px);color:#6B4436;line-height:1.7;max-width:50ch;text-wrap:pretty">{{ t.lede }}</p>
-          <button type="button" onClick="{{ openConsult }}" style="padding:13px 32px;background:#6B3A28;color:#FBF3E2;border:0;border-radius:8px;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer" style-hover="background:#52291B">{{ t.cta }}</button>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <button type="button" onClick="{{ openConsult }}" style="padding:13px 32px;background:#6B3A28;color:#FBF3E2;border:0;border-radius:8px;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer" style-hover="background:#52291B">{{ t.cta }}</button>
+            <a href="{{ t.kundliHref }}" style="display:inline-flex;align-items:center;padding:13px 32px;background:transparent;color:#6B3A28;border:1px solid #6B3A28;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:rgba(107,58,40,.08)">{{ t.cta3 }}</a>
+            <a href="{{ t.kundliMilanHref }}" style="display:inline-flex;align-items:center;padding:13px 32px;background:transparent;color:#6B3A28;border:1px solid #6B3A28;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:rgba(107,58,40,.08)">{{ t.cta2 }}</a>
+          </div>
         </div>
         <div style="align-self:stretch;min-height:210px;border-radius:14px;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.6) 0 10px,rgba(255,255,255,.3) 10px 20px);display:grid;place-items:center">
           <sc-if value="{{ photoUrl }}" hint-placeholder-val="{{ true }}">
@@ -103,7 +118,19 @@
       </div>
     </section>
 
-    <section style="max-width:1100px;margin:0 auto;padding:clamp(40px,6vw,70px) 20px 0;display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
+    <section style="max-width:1280px;margin:clamp(20px,3vw,28px) auto 0;padding:0 20px">
+      <a href="{{ t.kundliHref }}" aria-label="Free Kundli" style="display:block;border-radius:16px;overflow:hidden">
+        <img src="uploads/FREE%20KUNDLI.png" alt="Free Kundli" loading="lazy" style="width:100%;height:auto;display:block">
+      </a>
+    </section>
+
+    <section style="max-width:1280px;margin:clamp(16px,2.5vw,24px) auto 0;padding:0 20px">
+      <a href="{{ t.kundliMilanHref }}" aria-label="Kundli Milan" style="display:block;border-radius:16px;overflow:hidden">
+        <img src="uploads/kundli%20milan.png" alt="Kundli Milan" loading="lazy" style="width:100%;height:auto;display:block">
+      </a>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,70px) 20px 0;display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
       <div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:600;margin:0 0 14px;color:#0A1633">{{ t.readTitle }}</h2>
         <p style="margin:0 0 16px;font-size:15.5px;color:#4A4C5C;line-height:1.8;text-wrap:pretty">{{ t.readBody1 }}</p>
@@ -119,7 +146,7 @@
       </div>
     </section>
 
-    <section style="max-width:1100px;margin:0 auto;padding:clamp(40px,6vw,70px) 20px 0">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,70px) 20px 0">
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:600;margin:0 0 22px;color:#0A1633">{{ t.stepsTitle }}</h2>
       <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
         <sc-for list="{{ t.steps }}" as="s" hint-placeholder-count="4">
@@ -148,7 +175,7 @@
       </div>
     </section>
 
-    <section style="max-width:1100px;margin:clamp(44px,6vw,72px) auto clamp(52px,7vw,84px);padding:0 20px">
+    <section style="max-width:1280px;margin:clamp(44px,6vw,72px) auto clamp(52px,7vw,84px);padding:0 20px">
       <div style="background:radial-gradient(100% 140% at 50% 0%,#1B2C5C,#0A1633);border:1px solid rgba(212,175,55,.3);border-radius:22px;padding:clamp(34px,5vw,58px) 24px;text-align:center;color:#F4F2EA">
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(25px,3.4vw,38px);font-weight:600;margin:0 0 12px;color:#FBF7EA;text-wrap:pretty">{{ t.finalTitle }}</h2>
         <p style="font-size:15.5px;color:rgba(232,232,240,.78);max-width:52ch;margin:0 auto 26px;line-height:1.75">{{ t.finalBody }}</p>
@@ -251,7 +278,7 @@
 const EN = {
   homeHref: "/en/", consultHref: "/en/consultation",
   crumbHome: "Home", crumbConsult: "Consultation", crumbHere: "Marriage",
-  consultCta: "Consult Us", cta: "Chat Us", menuLabel: "Open menu",
+  consultCta: "Consult Us", cta: "Chat Us", cta2: "Get Free Kundli Milan", cta3: "Free Kundli Generation", kundliHref: "/en/kundli", kundliMilanHref: "/en/kundli-milan", more: "More", searchHref: "/en/search", searchLabel: "Search the site", menuLabel: "Open menu",
   nav: [
     {label:"Home",href:"/en/"},{label:"Horoscope",href:"/en/horoscope"},{label:"Kundli",href:"/en/kundli"},
     {label:"Kundli Milan",href:"/en/kundli-milan"},{label:"Panchang",href:"/en/panchang"},
@@ -314,7 +341,7 @@ const EN = {
 const HI = {
   homeHref: "/hi/", consultHref: "/hi/paramarsh",
   crumbHome: "होम", crumbConsult: "परामर्श", crumbHere: "विवाह",
-  consultCta: "परामर्श लें", cta: "चैट करें", menuLabel: "मेन्यू खोलें",
+  consultCta: "परामर्श लें", cta: "चैट करें", cta2: "मुफ़्त कुंडली मिलान पाएं", cta3: "मुफ़्त कुंडली बनाएं", kundliHref: "/hi/kundli", kundliMilanHref: "/hi/kundli-milan", more: "और", searchHref: "/hi/khoj", searchLabel: "साइट पर खोजें", menuLabel: "मेन्यू खोलें",
   nav: [
     {label:"होम",href:"/hi/"},{label:"राशिफल",href:"/hi/rashifal"},{label:"कुंडली",href:"/hi/kundli"},
     {label:"कुंडली मिलान",href:"/hi/kundli-milan"},{label:"पंचांग",href:"/hi/panchang"},
@@ -385,7 +412,7 @@ function kgPhoto(label){ return window.__kgPhotos?.[label] || KG_PHOTOS[label] |
 function kgAlt(label){ return String(label || "").replace(/^PHOTO:\s*/, ""); }
 
 class Component extends DCLogic {
-  state = { lang: "hi", openFaq: 0, consultOpen: false, menuOpen: false,
+  state = { lang: "hi", openFaq: 0, consultOpen: false, menuOpen: false, moreOpen: false,
     form: { name: "", phone: "", email: "", subject: "", message: "" } };
 
   _set(k) { return e => { const v = e.target.value; this.setState(s => ({ form: Object.assign({}, s.form, { [k]: v }) })); }; }
@@ -407,9 +434,9 @@ class Component extends DCLogic {
       t, photoUrl: _pu, noPhoto: !_pu,
       langLabel: this.state.lang === "hi" ? "हिंदी / EN" : "EN / हिंदी",
       allLinks: [t.moreLinks[t.moreLinks.length - 1]].concat(t.nav, t.moreLinks.slice(0, -1)),
-      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false })),
-      menuOpen: this.state.menuOpen, menuOpenStr: this.state.menuOpen ? "true" : "false",
-      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false, moreOpen: false })),
+      menuOpen: this.state.menuOpen, menuOpenStr: this.state.menuOpen ? "true" : "false", moreOpen: this.state.moreOpen, moreOpenStr: this.state.moreOpen ? "true" : "false", toggleMore: () => this.setState(s => ({ moreOpen: !s.moreOpen })),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen, moreOpen: false })),
       faqItems: t.faq.map((q, i) => ({
         q: q.q, a: q.a,
         open: this.state.openFaq === i,
@@ -422,7 +449,7 @@ class Component extends DCLogic {
       setSubject: this._set("subject"), setMessage: this._set("message"),
       waHref: "https://wa.me/919097190900?text=" + encodeURIComponent(body),
       mailHref: "mailto:rashiring24@gmail.com?subject=" + encodeURIComponent("Kundli Planet: " + subject) + "&body=" + encodeURIComponent(body),
-      openConsult: () => this.setState({ consultOpen: true }),
+      openConsult: () => this.setState({ consultOpen: true, menuOpen: false, moreOpen: false }),
       closeConsult: () => this.setState({ consultOpen: false })
     };
   }

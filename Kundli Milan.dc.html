@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <script src="./kundli-engine.js"></script>
+<script src="./pdf-generator.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="./uploads/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./uploads/favicon_io/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./uploads/favicon_io/apple-touch-icon.png">
@@ -29,7 +30,7 @@
   body{margin:0;background:#FAF7F0;color:#15162B;overflow-x:hidden}
   a{color:#8A6A12;text-decoration:none}a:hover{color:#B8901F}
   :focus-visible{outline:2px solid #D4AF37;outline-offset:3px}
-  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}}
+  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}[data-searchbtn]{display:grid !important}}[data-desknav] a[href$="/kundli"],[data-desknav] a[href$="/kundli-milan"]{font-weight:600}
   @media (max-width:860px){
     [data-brandsub]{display:none !important}
     [data-logo]{width:38px !important;height:38px !important}
@@ -59,12 +60,23 @@
           <span style="font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,227,176,.6)" data-brandsub="1">Bhagalpur, Bihar</span>
         </span>
       </a>
-      <nav aria-label="Primary" data-desknav="1" style="display:none;gap:1px;flex:1 1 auto;justify-content:center;align-items:center;flex-wrap:wrap">
+      <nav aria-label="Primary" data-desknav="1" style="display:none;gap:2px;flex:1 1 auto;justify-content:center;align-items:center">
         <sc-for list="{{ ui.nav }}" as="n" hint-placeholder-count="9">
-          <a href="{{ n.href }}" style="padding:8px 9px;font-size:13px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
+          <a href="{{ n.href }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
         </sc-for>
+        <div style="position:relative">
+          <button type="button" onClick="{{ toggleMore }}" aria-haspopup="true" aria-expanded="{{ moreOpenStr }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;background:none;border:0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:300;display:flex;align-items:center;gap:5px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ ui.more }} <span style="font-size:9px;opacity:.7">▼</span></button>
+          <sc-if value="{{ moreOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:calc(100% + 8px);right:0;background:#0F1E42;border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:8px;min-width:210px;box-shadow:0 22px 50px rgba(4,10,26,.5);display:grid;gap:1px">
+              <sc-for list="{{ ui.moreLinks }}" as="m" hint-placeholder-count="8">
+                <a href="{{ m.href }}" style="padding:9px 12px;font-size:13.5px;color:#DCDCE6;border-radius:8px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ m.label }}</a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
       </nav>
-      <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto" data-deskonly="1">
+        <a href="{{ ui.searchHref }}" aria-label="{{ ui.searchLabel }}" data-searchbtn="1" style="display:none;width:36px;height:36px;place-items:center;border:1px solid rgba(212,175,55,.34);border-radius:50%;color:#F3E3B0;font-size:14px" style-hover="background:rgba(212,175,55,.16)">⌕</a>
         <button type="button" onClick="{{ toggleLang }}" data-langbtn="1" style="padding:8px 13px;border:1px solid rgba(212,175,55,.34);background:none;border-radius:999px;color:#F3E3B0;font-family:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap" style-hover="background:rgba(212,175,55,.16)">{{ langLabel }}</button>
         <button type="button" data-consultbtn="1" onClick="{{ openConsult }}" style="display:inline-flex;align-items:center;gap:7px;padding:10px 17px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.07)">✦ {{ ui.consultCta }}</button>
         <button type="button" onClick="{{ toggleMenu }}" aria-label="{{ ui.menuLabel }}" aria-expanded="{{ menuOpenStr }}" data-burger="1" style="width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(212,175,55,.34);background:none;border-radius:10px;color:#F3E3B0;cursor:pointer;font-size:16px">☰</button>
@@ -82,7 +94,7 @@
   </header>
 
   <main>
-    <nav aria-label="Breadcrumb" style="max-width:1100px;margin:0 auto;padding:18px 20px 0;font-size:12.5px;color:#7A7C8A">
+    <nav aria-label="Breadcrumb" style="max-width:1280px;margin:0 auto;padding:18px 20px 0;font-size:12.5px;color:#7A7C8A">
       <a href="{{ ui.homeHref }}">{{ ui.crumbHome }}</a> &gt;
       <sc-if value="{{ mt.isResult }}" hint-placeholder-val="{{ false }}">
         <a href="#milan-tool" onClick="{{ mt.backToForm }}" style="color:#7A7C8A">{{ p.crumb }}</a> &gt; <span style="color:#4A4C5C">{{ mt.resultCrumb }}</span>
@@ -92,17 +104,20 @@
       </sc-if>
     </nav>
 
-    <section style="max-width:1100px;margin:0 auto;padding:clamp(24px,4vw,42px) 20px 0">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(24px,4vw,42px) 20px 0">
       <div style="background:linear-gradient(100deg,#F6EFE2 0%,#F2E6D2 58%,#EADCC4 100%);border:1px solid #E4D8C2;border-radius:22px;padding:clamp(30px,5vw,54px);display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center">
         <div>
           <p style="font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#96742A;margin:0 0 12px">{{ p.kicker }}</p>
           <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.4vw,50px);font-weight:700;margin:0 0 14px;color:#4A3312;line-height:1.14;text-wrap:pretty">{{ p.h1 }}</h1>
           <p style="margin:0 0 26px;font-size:clamp(15px,1.6vw,18px);color:#6B5230;line-height:1.7;max-width:50ch;text-wrap:pretty">{{ p.lede }}</p>
-          <button type="button" onClick="{{ openConsult }}" style="padding:13px 30px;background:#6B4A1C;color:#FBF3E2;border:0;border-radius:8px;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer" style-hover="background:#523713">{{ ui.chatCta }}</button>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <button type="button" onClick="{{ openConsult }}" style="padding:13px 30px;background:#6B4A1C;color:#FBF3E2;border:0;border-radius:8px;font-family:inherit;font-size:15px;font-weight:500;cursor:pointer" style-hover="background:#523713">{{ ui.chatCta }}</button>
+            <a href="#milan-tool" style="display:inline-flex;align-items:center;padding:13px 30px;background:transparent;color:#6B4A1C;border:1px solid #6B4A1C;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:rgba(107,74,28,.08)">{{ ui.milanCta }}</a>
+          </div>
         </div>
-        <div style="align-self:stretch;min-height:200px;border-radius:14px;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.6) 0 10px,rgba(255,255,255,.3) 10px 20px);display:grid;place-items:center">
+        <div style="align-self:center;width:100%;height:clamp(280px,38vw,420px);border-radius:14px;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.6) 0 10px,rgba(255,255,255,.3) 10px 20px);display:grid;place-items:center">
           <sc-if value="{{ photoUrl }}" hint-placeholder-val="{{ true }}">
-            <img src="{{ photoUrl }}" alt="{{ photoAlt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img src="{{ photoUrl }}" alt="{{ photoAlt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 72%;display:block">
           </sc-if>
           <sc-if value="{{ noPhoto }}" hint-placeholder-val="{{ false }}">
             <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:#8A7550;text-align:center;padding:0 16px">{{ p.photo }}</span>
@@ -111,7 +126,7 @@
       </div>
     </section>
 
-    <section id="milan-tool" style="max-width:1100px;margin:0 auto;padding:clamp(30px,5vw,50px) 20px 0">
+    <section id="milan-tool" style="max-width:1280px;margin:0 auto;padding:clamp(30px,5vw,50px) 20px 0">
       <sc-if value="{{ mt.isForm }}" hint-placeholder-val="{{ true }}">
         <div style="background:#fff;border:1px solid #EAE2CE;border-radius:20px;padding:clamp(24px,4vw,42px)">
           <p style="font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#96742A;margin:0 0 10px">{{ mt.t.kicker }}</p>
@@ -208,8 +223,14 @@
         <div>
           <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px">
             <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:600;margin:0;color:#0A1633">{{ mt.t.summaryH }}</h2>
-            <button type="button" onClick="{{ mt.backToForm }}" style="padding:10px 18px;background:#0A1633;color:#F3E3B0;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer">{{ mt.t.matchAnother }}</button>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <button type="button" onClick="{{ mt.downloadPdf }}" disabled="{{ mt.pdfBusy }}" style="padding:10px 18px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;opacity:{{ mt.pdfBusyOpacity }}">{{ mt.pdfButtonLabel }}</button>
+              <button type="button" onClick="{{ mt.backToForm }}" style="padding:10px 18px;background:#0A1633;color:#F3E3B0;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer">{{ mt.t.matchAnother }}</button>
+            </div>
           </div>
+          <sc-if value="{{ mt.pdfHasError }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:-8px 0 18px;padding:11px 14px;background:#FBEAE9;border:1px solid #F0C9C6;border-radius:10px;font-size:13.5px;color:#8A2A24">{{ mt.pdfErrorText }}</p>
+          </sc-if>
 
           <div role="tablist" style="display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid #EAE2CE;margin-bottom:26px">
             <sc-for list="{{ mt.tabs }}" as="tb" hint-placeholder-count="4">
@@ -437,7 +458,13 @@
       </sc-if>
     </section>
 
-    <section style="max-width:1100px;margin:0 auto;padding:clamp(38px,5.5vw,66px) 20px 0;display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
+    <section style="max-width:1280px;margin:clamp(20px,3vw,28px) auto 0;padding:0 20px">
+      <a href="{{ ui.kundliHref }}" aria-label="Free Kundli" style="display:block;border-radius:16px;overflow:hidden">
+        <img src="uploads/FREE%20KUNDLI.png" alt="Free Kundli" loading="lazy" style="width:100%;height:auto;display:block">
+      </a>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(38px,5.5vw,66px) 20px 0;display:grid;gap:34px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))">
       <div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:600;margin:0 0 14px;color:#0A1633">{{ p.readTitle }}</h2>
         <p style="margin:0 0 16px;font-size:15.5px;color:#4A4C5C;line-height:1.8;text-wrap:pretty">{{ p.readBody1 }}</p>
@@ -453,7 +480,7 @@
       </div>
     </section>
 
-    <section style="max-width:1100px;margin:0 auto;padding:clamp(38px,5.5vw,66px) 20px 0">
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(38px,5.5vw,66px) 20px 0">
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:600;margin:0 0 6px;color:#0A1633">{{ p.subTitle }}</h2>
       <p style="margin:0 0 22px;font-size:15px;color:#6B6D7C;max-width:60ch">{{ p.subLede }}</p>
       <div style="display:grid;gap:13px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))">
@@ -482,7 +509,7 @@
       </div>
     </section>
 
-    <section style="max-width:1100px;margin:clamp(42px,6vw,70px) auto clamp(50px,7vw,80px);padding:0 20px">
+    <section style="max-width:1280px;margin:clamp(42px,6vw,70px) auto clamp(50px,7vw,80px);padding:0 20px">
       <div style="background:radial-gradient(100% 140% at 50% 0%,#1B2C5C,#0A1633);border:1px solid rgba(212,175,55,.3);border-radius:22px;padding:clamp(34px,5vw,58px) 24px;text-align:center;color:#F4F2EA">
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(25px,3.4vw,38px);font-weight:600;margin:0 0 12px;color:#FBF7EA;text-wrap:pretty">{{ p.finalTitle }}</h2>
         <p style="font-size:15.5px;color:rgba(232,232,240,.78);max-width:52ch;margin:0 auto 26px;line-height:1.75">{{ p.finalBody }}</p>
@@ -588,7 +615,7 @@
 <script type="text/x-dc" data-dc-script data-props="{}">
 const UI_EN = {
   homeHref: "/en/", crumbHome: "Home",
-  consultCta: "Consult Us", chatCta: "Chat Us", menuLabel: "Open menu", topLabel: "Go to top",
+  consultCta: "Consult Us", chatCta: "Chat Us", milanCta: "Get Free Kundli Milan", kundliHref: "/en/kundli", more: "More", searchHref: "/en/search", searchLabel: "Search the site", menuLabel: "Open menu", topLabel: "Go to top",
   faqTitle: "Common questions", gbp: "Google Profile", footerMsgCta: "Message Us",
   consultTitle: "Request a Consultation",
   consultSub: "Fill this in and we will continue the conversation on WhatsApp or email. Nothing is stored on this site.",
@@ -619,7 +646,7 @@ const UI_EN = {
 
 const UI_HI = {
   homeHref: "/hi/", crumbHome: "होम",
-  consultCta: "परामर्श लें", chatCta: "चैट करें", menuLabel: "मेन्यू खोलें", topLabel: "ऊपर जाएँ",
+  consultCta: "परामर्श लें", chatCta: "चैट करें", milanCta: "मुफ़्त कुंडली मिलान पाएं", kundliHref: "/hi/kundli", more: "और", searchHref: "/hi/khoj", searchLabel: "साइट पर खोजें", menuLabel: "मेन्यू खोलें", topLabel: "ऊपर जाएँ",
   faqTitle: "सामान्य प्रश्न", gbp: "गूगल प्रोफ़ाइल", footerMsgCta: "संदेश भेजें",
   consultTitle: "परामर्श के लिए अनुरोध",
   consultSub: "यह भरें, बातचीत आगे संदेश या ईमेल पर जारी रहेगी। इस साइट पर कोई जानकारी संग्रहीत नहीं होती।",
@@ -646,6 +673,11 @@ const UI_HI = {
     {title:"संसाधन",links:[{label:"त्यौहार",href:"/hi/tyohar"},{label:"ब्लॉग",href:"/hi/blog"},{label:"सामान्य प्रश्न",href:"/hi/prashn"},{label:"खोज",href:"/hi/khoj"},{label:"हमारे बारे में",href:"/hi/hamare-bare-mein"},{label:"संपर्क करें",href:"/hi/sampark"}]},
     {title:"कानूनी",links:[{label:"गोपनीयता नीति",href:"/hi/gopniyata-niti"},{label:"नियम एवं शर्तें",href:"/hi/niyam-sharten"},{label:"अस्वीकरण",href:"/hi/asweekaran"},{label:"कुकी नीति",href:"/hi/cookie-niti"}]}
   ]
+};
+
+const PDF_LABELS = {
+  en: { download: "Download Kundli Milan PDF", preparing: "Preparing PDF...", error: "Unable to generate PDF. Please try again." },
+  hi: { download: "कुंडली मिलान पीडीएफ डाउनलोड करें", preparing: "पीडीएफ तैयार हो रहा है...", error: "पीडीएफ बनाने में समस्या हुई। कृपया पुनः प्रयास करें।" }
 };
 
 /*PAGE_START*/
@@ -908,13 +940,13 @@ function kgPhoto(label){ return window.__kgPhotos?.[label] || KG_PHOTOS[label] |
 function kgAlt(label){ return String(label || "").replace(/^PHOTO:\s*/, ""); }
 
 class Component extends DCLogic {
-  state = { lang: "en", menuOpen: false, openFaq: 0, showTop: false, consultOpen: false,
+  state = { lang: "en", menuOpen: false, moreOpen: false, openFaq: 0, showTop: false, consultOpen: false,
     form: { name: "", phone: "", email: "", subject: "", message: "" },
     milan: {
       view: "form", activeTab: "basic",
       p1: { name: "", gender: "Male", dob: "", tob: "", placeQuery: "", place: null },
       p2: { name: "", gender: "Female", dob: "", tob: "", placeQuery: "", place: null },
-      p1Suggestions: [], p2Suggestions: [], error: "", result: null
+      p1Suggestions: [], p2Suggestions: [], error: "", result: null, pdfStatus: "idle"
     } };
 
   _mUpdate(patch) {
@@ -994,6 +1026,18 @@ class Component extends DCLogic {
   }
   _backToMilanForm() { this._mUpdate({ view: "form" }); }
   _setMilanTab(tab) { return () => this._mUpdate({ activeTab: tab }); }
+  async _downloadMilanPdf() {
+    if (this.state.milan.pdfStatus === "busy") return;
+    this._mUpdate({ pdfStatus: "busy" });
+    try {
+      const vals = this.renderVals();
+      await window.KundliPDF.generateMilanPdf(vals.mt, this.state.lang);
+      this._mUpdate({ pdfStatus: "idle" });
+    } catch (e) {
+      console.error("Kundli Milan PDF generation failed:", e);
+      this._mUpdate({ pdfStatus: "error" });
+    }
+  }
 
   componentDidMount() {
     this._onScroll = () => {
@@ -1034,6 +1078,7 @@ class Component extends DCLogic {
     const _pu = kgPhoto(p.photo);
     const M = this.state.milan;
     const T = hi ? window.KundliEngine.MT_STRINGS.hi : window.KundliEngine.MT_STRINGS.en;
+    const PL = hi ? PDF_LABELS.hi : PDF_LABELS.en;
     const NA = window.KundliEngine.KT_STRINGS[hi ? "hi" : "en"].naText;
     const orNA = v => (v === null || v === undefined || v === "" ? NA : v);
     const mkSuggestions = (list, person) => list.map(c => ({
@@ -1045,10 +1090,14 @@ class Component extends DCLogic {
       { left: 8, top: 76 }, { left: 24, top: 93 }, { left: 50, top: 86 }, { left: 76, top: 93 },
       { left: 92, top: 76 }, { left: 85, top: 50 }, { left: 92, top: 24 }, { left: 76, top: 7 }
     ];
+    const SIGN_ABBR_HI = { Ari: "मेष", Tau: "वृष", Gem: "मिथुन", Can: "कर्क", Leo: "सिंह", Vir: "कन्या", Lib: "तुला", Sco: "वृश्चिक", Sag: "धनु", Cap: "मकर", Aqu: "कुंभ", Pis: "मीन" };
+    const PLANET_ABBR_HI = { Su: "सू", Mo: "चं", Ma: "मं", Me: "बु", Ju: "गु", Ve: "शु", Sa: "श", Ra: "रा", Ke: "के", Asc: "ल" };
     const buildChartHouses = houses => HOUSE_POS.map((pos, i) => {
       const h = (houses && houses[i]) || { signAbbr: "", planets: [] };
+      const signLabel = hi ? (SIGN_ABBR_HI[h.signAbbr] || h.signAbbr || "") : (h.signAbbr || "");
+      const planetLabels = (h.planets || []).map(pl => hi ? (PLANET_ABBR_HI[pl] || pl) : pl);
       return {
-        sign: h.signAbbr || "", planets: h.planets && h.planets.length ? h.planets.join(" ") : "—",
+        sign: signLabel, planets: planetLabels.length ? planetLabels.join(" ") : "—",
         posStyle: "position:absolute;left:" + pos.left + "%;top:" + pos.top + "%;transform:translate(-50%,-50%);text-align:center"
       };
     });
@@ -1144,21 +1193,25 @@ class Component extends DCLogic {
       hasError: !!M.error, error: M.error || "",
       submit: () => this._submitMilan(),
       backToForm: () => this._backToMilanForm(),
-      openConsult: () => this.setState({ consultOpen: true }),
+      openConsult: () => this.setState({ consultOpen: true, menuOpen: false, moreOpen: false }),
       tabs: TAB_DEFS.map(td => ({ label: td.label, selectedStr: M.activeTab === td.key ? "true" : "false", onClick: this._setMilanTab(td.key), style: tabStyle(td.key) })),
       tab: { basic: M.activeTab === "basic", dosha: M.activeTab === "dosha", planets: M.activeTab === "planets", chart: M.activeTab === "chart" },
       dosha: mDosha,
       ashtakoot: mAshtakoot,
-      result: mResult
+      result: mResult,
+      downloadPdf: () => this._downloadMilanPdf(),
+      pdfBusy: M.pdfStatus === "busy", pdfBusyOpacity: M.pdfStatus === "busy" ? "0.7" : "1",
+      pdfButtonLabel: M.pdfStatus === "busy" ? PL.preparing : PL.download,
+      pdfHasError: M.pdfStatus === "error", pdfErrorText: PL.error
     };
     return {
       photoAlt: kgAlt(p.photo),
       ui, p, meta, mt, photoUrl: _pu, noPhoto: !_pu,
       allLinks: [ui.moreLinks[ui.moreLinks.length - 1]].concat(ui.nav, ui.moreLinks.slice(0, -1)),
       langLabel: hi ? "हिंदी / EN" : "EN / हिंदी",
-      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false })),
-      menuOpen: this.state.menuOpen, menuOpenStr: this.state.menuOpen ? "true" : "false",
-      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false, moreOpen: false })),
+      menuOpen: this.state.menuOpen, menuOpenStr: this.state.menuOpen ? "true" : "false", moreOpen: this.state.moreOpen, moreOpenStr: this.state.moreOpen ? "true" : "false", toggleMore: () => this.setState(s => ({ moreOpen: !s.moreOpen })),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen, moreOpen: false })),
       showTop: this.state.showTop,
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       faqItems: p.faq.map((q, i) => ({
@@ -1172,7 +1225,7 @@ class Component extends DCLogic {
       setSubject: this._set("subject"), setMessage: this._set("message"),
       waHref: "https://wa.me/919097190900?text=" + encodeURIComponent(body),
       mailHref: "mailto:rashiring24@gmail.com?subject=" + encodeURIComponent("Kundli Planet: " + subject) + "&body=" + encodeURIComponent(body),
-      openConsult: () => this.setState({ consultOpen: true, menuOpen: false }),
+      openConsult: () => this.setState({ consultOpen: true, menuOpen: false, moreOpen: false }),
       closeConsult: () => this.setState({ consultOpen: false })
     };
   }

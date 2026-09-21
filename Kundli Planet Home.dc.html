@@ -33,7 +33,7 @@
   :focus-visible{outline:2px solid #D4AF37;outline-offset:3px}
   @keyframes kgTwinkle{0%,100%{opacity:.25}50%{opacity:.9}}
   @keyframes kgRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}[data-searchbtn]{display:grid !important}}
+  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}[data-searchbtn]{display:grid !important}}[data-desknav] a[href$="/kundli"],[data-desknav] a[href$="/kundli-milan"]{font-weight:600}
   @media (max-width:860px){
     [data-brandsub]{display:none !important}
     [data-logo]{width:38px !important;height:38px !important}
@@ -65,7 +65,7 @@
       </a>
 
       <nav aria-label="Primary" style="display:none;gap:2px;flex:1 1 auto;justify-content:center;align-items:center" data-desknav="1">
-        <sc-for list="{{ t.nav }}" as="n" hint-placeholder-count="9">
+        <sc-for list="{{ t.nav }}" as="n" hint-placeholder-count="8">
           <a href="{{ n.href }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
         </sc-for>
         <div style="position:relative">
@@ -128,6 +128,33 @@
       </div>
     </section>
 
+    <section aria-labelledby="kundli-h" style="max-width:1280px;margin:clamp(36px,5vw,56px) auto 0;padding:0 20px">
+      <div style="position:relative;overflow:hidden;background:linear-gradient(135deg,#0A1633 0%,#16264F 100%);border:1px solid rgba(212,175,55,.22);border-radius:24px;padding:clamp(32px,5vw,58px);color:#F4F2EA;display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center;box-shadow:0 26px 60px rgba(6,14,32,.35)">
+        <div aria-hidden="true" style="position:absolute;inset:0;background-image:radial-gradient(1.5px 1.5px at 14% 26%,rgba(255,255,255,.55) 50%,transparent 51%),radial-gradient(1.3px 1.3px at 70% 16%,rgba(243,227,176,.6) 50%,transparent 51%),radial-gradient(1.6px 1.6px at 88% 62%,rgba(255,255,255,.4) 50%,transparent 51%);opacity:.7"></div>
+        <div style="position:relative">
+          <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#E8D391;margin:0 0 12px">{{ t.kundliKicker }}</p>
+          <h2 id="kundli-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(27px,3.4vw,40px);font-weight:600;margin:0 0 16px;color:#FBF7EA">{{ t.kundliTitle }}</h2>
+          <p style="font-size:15.5px;line-height:1.75;color:rgba(232,232,240,.8);margin:0 0 26px;max-width:52ch;text-wrap:pretty">{{ t.kundliBody }}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px">
+            <sc-for list="{{ t.kundliTags }}" as="k" hint-placeholder-count="5">
+              <a href="{{ k.href }}" style="padding:7px 14px;border:1px solid rgba(212,175,55,.38);border-radius:999px;font-size:13px;color:#E8D391" style-hover="background:rgba(212,175,55,.16)">{{ k.label }}</a>
+            </sc-for>
+          </div>
+          <a href="{{ t.kundliHref }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border-radius:999px;font-size:15px;font-weight:600" style-hover="filter:brightness(1.07)">{{ t.kundliCta }} <span style="font-size:13px">→</span></a>
+        </div>
+        <div style="position:relative;display:grid;place-items:center">
+          <div aria-hidden="true" style="position:absolute;inset:-10%;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.22),transparent 62%)"></div>
+          <img src="https://www.shreesamarthjyotishkendra.com/assets/images/kundalishastra.jpg" alt="Kundli birth chart illustration" loading="lazy" style="position:relative;width:min(100%,340px);border-radius:16px;box-shadow:0 22px 48px rgba(0,0,0,.45);border:1px solid rgba(212,175,55,.3)">
+        </div>
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:clamp(24px,3vw,32px) auto 0;padding:0 20px">
+      <a href="{{ t.kundliMilanHref }}" aria-label="Kundli Milan" style="display:block;border-radius:16px;overflow:hidden">
+        <img src="uploads/kundli%20milan.png" alt="Kundli Milan" loading="lazy" style="width:100%;height:auto;display:block">
+      </a>
+    </section>
+
     <section aria-label="Career consultation" style="max-width:1280px;margin:clamp(40px,5vw,64px) auto 0;padding:0 20px">
       <div style="position:relative;overflow:hidden;border-radius:20px;background:{{ banner1.bg }};border:1px solid #E4D8C2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center;min-height:210px">
         <div style="padding:clamp(28px,4vw,46px);z-index:1">
@@ -165,7 +192,10 @@
         <div style="padding:clamp(28px,4vw,46px);z-index:1">
           <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,34px);font-weight:700;margin:0 0 10px;color:#4A2A1E;line-height:1.2;text-wrap:pretty">{{ banner2.title }}</h2>
           <p style="margin:0 0 22px;font-size:clamp(14px,1.5vw,17px);color:#6B4436;line-height:1.6;max-width:46ch">{{ banner2.sub }}</p>
-          <a href="{{ banner2.href }}" style="display:inline-flex;align-items:center;gap:8px;padding:12px 30px;background:#6B3A28;color:#FBF3E2;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:#52291B">{{ banner2.cta }}</a>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <a href="{{ banner2.href }}" style="display:inline-flex;align-items:center;gap:8px;padding:12px 30px;background:#6B3A28;color:#FBF3E2;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:#52291B">{{ banner2.cta }}</a>
+            <a href="{{ banner2.href2 }}" style="display:inline-flex;align-items:center;gap:8px;padding:12px 30px;background:transparent;color:#6B3A28;border:1px solid #6B3A28;border-radius:8px;font-size:15px;font-weight:500" style-hover="background:rgba(107,58,40,.08)">{{ banner2.cta2 }}</a>
+          </div>
         </div>
         <div style="align-self:stretch;min-height:190px;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(255,255,255,.55) 0 10px,rgba(255,255,255,.25) 10px 20px);display:grid;place-items:center;border-left:1px solid rgba(180,130,110,.18)">
           <sc-if value="{{ banner2.img }}" hint-placeholder-val="{{ true }}">
@@ -196,31 +226,6 @@
             </span>
           </a>
         </sc-for>
-      </div>
-    </section>
-
-    <section aria-labelledby="kundli-h" style="max-width:1280px;margin:clamp(52px,7vw,88px) auto 0;padding:0 20px">
-      <div style="background:linear-gradient(135deg,#0A1633 0%,#16264F 100%);border-radius:24px;padding:clamp(32px,5vw,58px);color:#F4F2EA;display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center">
-        <div>
-          <p style="font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#E8D391;margin:0 0 12px">{{ t.kundliKicker }}</p>
-          <h2 id="kundli-h" style="font-family:'Cormorant Garamond',serif;font-size:clamp(27px,3.4vw,40px);font-weight:600;margin:0 0 16px;color:#FBF7EA">{{ t.kundliTitle }}</h2>
-          <p style="font-size:15.5px;line-height:1.75;color:rgba(232,232,240,.8);margin:0 0 26px;max-width:52ch;text-wrap:pretty">{{ t.kundliBody }}</p>
-          <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px">
-            <sc-for list="{{ t.kundliTags }}" as="k" hint-placeholder-count="5">
-              <a href="{{ k.href }}" style="padding:7px 14px;border:1px solid rgba(212,175,55,.38);border-radius:999px;font-size:13px;color:#E8D391" style-hover="background:rgba(212,175,55,.16)">{{ k.label }}</a>
-            </sc-for>
-          </div>
-          <a href="{{ t.kundliHref }}" style="display:inline-flex;align-items:center;gap:9px;padding:13px 26px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border-radius:999px;font-size:15px;font-weight:600" style-hover="filter:brightness(1.07)">{{ t.kundliCta }} <span style="font-size:13px">→</span></a>
-        </div>
-        <div style="display:grid;place-items:center">
-          <div aria-hidden="true" style="width:min(100%,300px);aspect-ratio:1;position:relative;transform:rotate(45deg);border:1px solid rgba(212,175,55,.38);border-radius:8px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr">
-            <div style="border-right:1px solid rgba(212,175,55,.28);border-bottom:1px solid rgba(212,175,55,.28)"></div>
-            <div style="border-bottom:1px solid rgba(212,175,55,.28)"></div>
-            <div style="border-right:1px solid rgba(212,175,55,.28)"></div>
-            <div></div>
-            <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:70.7%;height:70.7%;border:1px solid rgba(212,175,55,.3);transform:rotate(45deg)"></div></div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -307,6 +312,12 @@
           </a>
         </sc-for>
       </div>
+    </section>
+
+    <section style="max-width:1280px;margin:clamp(20px,3vw,28px) auto 0;padding:0 20px">
+      <a href="{{ t.kundliHref }}" aria-label="Free Kundli" style="display:block;border-radius:16px;overflow:hidden">
+        <img src="uploads/FREE%20KUNDLI.png" alt="Free Kundli" loading="lazy" style="width:100%;height:auto;display:block">
+      </a>
     </section>
 
     <section aria-labelledby="art-h" style="max-width:1280px;margin:0 auto;padding:clamp(52px,7vw,88px) 20px 0">
@@ -532,11 +543,13 @@ const EN = {
       sub: "Guna milan, manglik matching and muhurat, read in the traditional way.",
       cta: "Chat Us",
       href: "/en/consultation/marriage",
+      cta2: "Get Free Kundli Milan",
+      href2: "/en/kundli-milan",
       photo: "PHOTO: couple at a traditional Indian wedding ceremony",
       bg: "linear-gradient(100deg,#F4EEE6 0%,#F0E2DC 58%,#E8D4CC 100%)"
     }
   ],
-  horoscopeHref: "/en/horoscope", kundliHref: "/en/kundli", gemHref: "/en/gemstones",
+  horoscopeHref: "/en/horoscope", kundliHref: "/en/kundli", kundliMilanHref: "/en/kundli-milan", gemHref: "/en/gemstones",
   panHref: "/en/panchang", blogHref: "/en/blog", viewAll: "View all",
   toolsKicker: "Start here", toolsTitle: "Quick Tools",
   tools: [
@@ -695,11 +708,13 @@ const HI = {
       sub: "गुण मिलान, मांगलिक विचार और मुहूर्त, पारंपरिक पद्धति से।",
       cta: "चैट करें",
       href: "/hi/paramarsh/vivah",
+      cta2: "मुफ़्त कुंडली मिलान पाएं",
+      href2: "/hi/kundli-milan",
       photo: "PHOTO: couple at a traditional Indian wedding ceremony",
       bg: "linear-gradient(100deg,#F4EEE6 0%,#F0E2DC 58%,#E8D4CC 100%)"
     }
   ],
-  horoscopeHref: "/hi/rashifal", kundliHref: "/hi/kundli", gemHref: "/hi/ratna",
+  horoscopeHref: "/hi/rashifal", kundliHref: "/hi/kundli", kundliMilanHref: "/hi/kundli-milan", gemHref: "/hi/ratna",
   panHref: "/hi/panchang", blogHref: "/hi/blog", viewAll: "सभी देखें",
   toolsKicker: "यहाँ से शुरू करें", toolsTitle: "त्वरित साधन",
   tools: [

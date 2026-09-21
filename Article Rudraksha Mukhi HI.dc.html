@@ -28,7 +28,7 @@
   body{margin:0;background:#FAF7F0;color:#15162B;overflow-x:hidden}
   a{color:#8A6A12;text-decoration:none}a:hover{color:#B8901F}
   :focus-visible{outline:2px solid #D4AF37;outline-offset:3px}
-  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}}
+  @media (min-width:1120px){[data-desknav]{display:flex !important}[data-burger]{display:none !important}[data-searchbtn]{display:grid !important}}[data-desknav] a[href$="/kundli"],[data-desknav] a[href$="/kundli-milan"]{font-weight:600}
   @media (max-width:860px){
     [data-brandsub]{display:none !important}
     [data-logo]{width:38px !important;height:38px !important}
@@ -58,12 +58,23 @@
           <span style="font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(243,227,176,.6)" data-brandsub="1">Bhagalpur, Bihar</span>
         </span>
       </a>
-      <nav aria-label="Primary" data-desknav="1" style="display:none;gap:1px;flex:1 1 auto;justify-content:center;align-items:center;flex-wrap:wrap">
+      <nav aria-label="Primary" data-desknav="1" style="display:none;gap:2px;flex:1 1 auto;justify-content:center;align-items:center">
         <sc-for list="{{ ui.nav }}" as="n" hint-placeholder-count="9">
-          <a href="{{ n.href }}" style="padding:8px 9px;font-size:13px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
+          <a href="{{ n.href }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;border-radius:7px;white-space:nowrap" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ n.label }}</a>
         </sc-for>
+        <div style="position:relative">
+          <button type="button" onClick="{{ toggleMore }}" aria-haspopup="true" aria-expanded="{{ moreOpenStr }}" style="padding:9px 10px;font-size:13.5px;color:#DCDCE6;background:none;border:0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:300;display:flex;align-items:center;gap:5px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ ui.more }} <span style="font-size:9px;opacity:.7">▼</span></button>
+          <sc-if value="{{ moreOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;top:calc(100% + 8px);right:0;background:#0F1E42;border:1px solid rgba(212,175,55,.3);border-radius:12px;padding:8px;min-width:210px;box-shadow:0 22px 50px rgba(4,10,26,.5);display:grid;gap:1px">
+              <sc-for list="{{ ui.moreLinks }}" as="m" hint-placeholder-count="8">
+                <a href="{{ m.href }}" style="padding:9px 12px;font-size:13.5px;color:#DCDCE6;border-radius:8px" style-hover="background:rgba(212,175,55,.14);color:#F3E3B0">{{ m.label }}</a>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
       </nav>
-      <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+      <div style="display:flex;align-items:center;gap:8px;margin-left:auto" data-deskonly="1">
+        <a href="{{ ui.searchHref }}" aria-label="{{ ui.searchLabel }}" data-searchbtn="1" style="display:none;width:36px;height:36px;place-items:center;border:1px solid rgba(212,175,55,.34);border-radius:50%;color:#F3E3B0;font-size:14px" style-hover="background:rgba(212,175,55,.16)">⌕</a>
         <button type="button" onClick="{{ toggleLang }}" data-langbtn="1" style="padding:8px 13px;border:1px solid rgba(212,175,55,.34);background:none;border-radius:999px;color:#F3E3B0;font-family:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap" style-hover="background:rgba(212,175,55,.16)">{{ langLabel }}</button>
         <button type="button" data-consultbtn="1" onClick="{{ openConsult }}" style="display:inline-flex;align-items:center;gap:7px;padding:10px 17px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="filter:brightness(1.07)">✦ {{ ui.consultCta }}</button>
         <button type="button" onClick="{{ toggleMenu }}" aria-label="{{ ui.menuLabel }}" aria-expanded="{{ menuOpenStr }}" data-burger="1" style="width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(212,175,55,.34);background:none;border-radius:10px;color:#F3E3B0;cursor:pointer;font-size:16px">☰</button>
@@ -120,7 +131,7 @@
       <p style="margin:0 0 clamp(30px,4vw,44px);padding:18px 20px;background:#F3EDE0;border-radius:12px;font-size:13.5px;color:#6B6D7C;line-height:1.7">{{ ui.disclaimerNote }}</p>
     </article>
 
-    <section style="max-width:1100px;margin:0 auto;padding:0 20px">
+    <section style="max-width:1280px;margin:0 auto;padding:0 20px">
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,2.6vw,30px);font-weight:600;margin:0 0 18px;color:#0A1633">{{ ui.relatedTitle }}</h2>
       <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))">
         <sc-for list="{{ related }}" as="r" hint-placeholder-count="5">
@@ -132,7 +143,7 @@
       </div>
     </section>
 
-    <section style="max-width:1100px;margin:clamp(42px,6vw,70px) auto clamp(50px,7vw,80px);padding:0 20px">
+    <section style="max-width:1280px;margin:clamp(42px,6vw,70px) auto clamp(50px,7vw,80px);padding:0 20px">
       <div style="background:radial-gradient(100% 140% at 50% 0%,#1B2C5C,#0A1633);border:1px solid rgba(212,175,55,.3);border-radius:22px;padding:clamp(34px,5vw,58px) 24px;text-align:center;color:#F4F2EA">
         <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(25px,3.4vw,38px);font-weight:600;margin:0 0 12px;color:#FBF7EA;text-wrap:pretty">{{ a.finalTitle }}</h2>
         <p style="font-size:15.5px;color:rgba(232,232,240,.78);max-width:52ch;margin:0 auto 26px;line-height:1.75">{{ a.finalBody }}</p>
@@ -238,7 +249,7 @@
 <script type="text/x-dc" data-dc-script data-props="{}">
 const UI_EN = {
   homeHref: "/en/", blogHref: "/en/blog", crumbHome: "Home", crumbBlog: "Blog",
-  consultCta: "Consult Us", menuLabel: "Open menu", topLabel: "Go to top",
+  consultCta: "Consult Us", more: "More", searchHref: "/en/search", searchLabel: "Search the site", menuLabel: "Open menu", topLabel: "Go to top",
   takeawayTitle: "What to take from this", relatedTitle: "More from the blog",
   disclaimerNote: "Everything in this article describes traditional interpretation. It is not medical, financial or legal advice, and no outcome is promised.",
   gbp: "Google Profile", footerMsgCta: "Message Us",
@@ -271,7 +282,7 @@ const UI_EN = {
 
 const UI_HI = {
   homeHref: "/hi/", blogHref: "/hi/blog", crumbHome: "होम", crumbBlog: "ब्लॉग",
-  consultCta: "परामर्श लें", menuLabel: "मेन्यू खोलें", topLabel: "ऊपर जाएँ",
+  consultCta: "परामर्श लें", more: "और", searchHref: "/hi/khoj", searchLabel: "साइट पर खोजें", menuLabel: "मेन्यू खोलें", topLabel: "ऊपर जाएँ",
   takeawayTitle: "सार", relatedTitle: "ब्लॉग से और",
   disclaimerNote: "इस लेख की सारी बातें पारंपरिक व्याख्या हैं। यह चिकित्सा, वित्तीय या कानूनी सलाह नहीं है, और किसी परिणाम का वचन नहीं दिया जाता।",
   gbp: "गूगल प्रोफ़ाइल", footerMsgCta: "संदेश भेजें",
@@ -416,7 +427,7 @@ function kgPhoto(label){ return window.__kgPhotos?.[label] || KG_PHOTOS[label] |
 function kgAlt(label){ return String(label || "").replace(/^PHOTO:\s*/, ""); }
 
 class Component extends DCLogic {
-  state = { lang: "hi", menuOpen: false, showTop: false, consultOpen: false,
+  state = { lang: "hi", menuOpen: false, moreOpen: false, showTop: false, consultOpen: false,
     form: { name: "", phone: "", email: "", subject: "", message: "" } };
 
   componentDidMount() {
@@ -464,9 +475,9 @@ class Component extends DCLogic {
         href: hi ? "/hi/blog/" + p.slugHi : "/en/blog/" + p.slug
       })),
       langLabel: hi ? "हिंदी / EN" : "EN / हिंदी",
-      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false })),
-      menuOpen: this.state.menuOpen, menuOpenStr: this.state.menuOpen ? "true" : "false",
-      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false, moreOpen: false })),
+      menuOpen: this.state.menuOpen, menuOpenStr: this.state.menuOpen ? "true" : "false", moreOpen: this.state.moreOpen, moreOpenStr: this.state.moreOpen ? "true" : "false", toggleMore: () => this.setState(s => ({ moreOpen: !s.moreOpen })),
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen, moreOpen: false })),
       showTop: this.state.showTop,
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       consultOpen: this.state.consultOpen, form: f,
@@ -474,7 +485,7 @@ class Component extends DCLogic {
       setSubject: this._set("subject"), setMessage: this._set("message"),
       waHref: "https://wa.me/919097190900?text=" + encodeURIComponent(body),
       mailHref: "mailto:rashiring24@gmail.com?subject=" + encodeURIComponent("Kundli Planet: " + subject) + "&body=" + encodeURIComponent(body),
-      openConsult: () => this.setState({ consultOpen: true, menuOpen: false }),
+      openConsult: () => this.setState({ consultOpen: true, menuOpen: false, moreOpen: false }),
       closeConsult: () => this.setState({ consultOpen: false })
     };
   }

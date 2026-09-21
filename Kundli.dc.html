@@ -1315,6 +1315,22 @@ class Component extends DCLogic {
     const cardStyle = ok => "background:#fff;border:1px solid #EAE2CE;border-left:3px solid " + (ok ? "#C0392B" : "#8FAE8F") + ";border-radius:14px;padding:18px 20px";
     const statusOf = key => (K[key] && K[key].status) || "idle";
     const emptyVerdictCard = () => ({ isLoading: false, isError: false, isSuccess: false, verdict: "", detail: "", cardStyle: cardStyle(false), badgeStyle: badgeStyle(false) });
+    // Some of these dosha endpoints return their "report"/"conclusion" field
+    // as a nested object (e.g. { report, one_line } or { match, report })
+    // rather than a plain string - mirroring the shape already seen on the
+    // Kundli Milan dosha.conclusion field. Stringifying such an object
+    // directly produces the literal text "[object Object]" in the UI/PDF,
+    // so pull a human-readable string out of it instead of assuming it is
+    // already text.
+    const textFromField = v => {
+      if (typeof v === "string") return v.trim() ? v : null;
+      if (typeof v === "number") return String(v);
+      if (v && typeof v === "object") {
+        const keys = ["report", "one_line", "match_report", "text", "description", "summary", "message", "detail", "conclusion"];
+        for (const k of keys) { if (typeof v[k] === "string" && v[k].trim()) return v[k]; }
+      }
+      return null;
+    };
 
     const kManglikStatus = statusOf("manglik");
     let kManglik = Object.assign(emptyVerdictCard(), { isLoading: kManglikStatus === "loading", isError: kManglikStatus === "error" });
@@ -1323,7 +1339,7 @@ class Component extends DCLogic {
       const isYes = !!m.is_present;
       kManglik = Object.assign(kManglik, {
         isSuccess: true, verdict: isYes ? T.verdictPresent : T.verdictNotPresent,
-        detail: m.manglik_report || (isYes ? T.verdictPresent : T.verdictNotPresent),
+        detail: textFromField(m.manglik_report) || (isYes ? T.verdictPresent : T.verdictNotPresent),
         cardStyle: cardStyle(isYes), badgeStyle: badgeStyle(isYes)
       });
     }
@@ -1335,7 +1351,7 @@ class Component extends DCLogic {
       const isYes = !!ks.present;
       kKaalSarp = Object.assign(kKaalSarp, {
         isSuccess: true, verdict: isYes ? T.verdictPresent : T.verdictNotPresent,
-        detail: ks.report || ks.one_line || (isYes ? T.verdictPresent : T.verdictNotPresent),
+        detail: textFromField(ks.report) || textFromField(ks.one_line) || (isYes ? T.verdictPresent : T.verdictNotPresent),
         cardStyle: cardStyle(isYes), badgeStyle: badgeStyle(isYes)
       });
     }
@@ -1347,7 +1363,7 @@ class Component extends DCLogic {
       const isActive = !!ss.sadhesati_status;
       kSadeSati = Object.assign(kSadeSati, {
         isSuccess: true, verdict: isActive ? T.verdictActive : T.verdictNotActive,
-        detail: ss.is_undergoing_sadhesati || (isActive ? T.verdictActive : T.verdictNotActive),
+        detail: textFromField(ss.is_undergoing_sadhesati) || (isActive ? T.verdictActive : T.verdictNotActive),
         cardStyle: cardStyle(isActive), badgeStyle: badgeStyle(isActive)
       });
     }
@@ -1359,7 +1375,7 @@ class Component extends DCLogic {
       const isYes = !!pd.is_pitri_dosha_present;
       kPitraDosh = Object.assign(kPitraDosh, {
         isSuccess: true, verdict: isYes ? T.verdictPresent : T.verdictNotPresent,
-        detail: pd.conclusion || (isYes ? T.verdictPresent : T.verdictNotPresent),
+        detail: textFromField(pd.conclusion) || (isYes ? T.verdictPresent : T.verdictNotPresent),
         cardStyle: cardStyle(isYes), badgeStyle: badgeStyle(isYes)
       });
     }

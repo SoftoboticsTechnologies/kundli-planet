@@ -206,80 +206,233 @@
 
       <sc-if value="{{ mt.isResult }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px">
             <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:600;margin:0;color:#0A1633">{{ mt.t.summaryH }}</h2>
             <button type="button" onClick="{{ mt.backToForm }}" style="padding:10px 18px;background:#0A1633;color:#F3E3B0;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer">{{ mt.t.matchAnother }}</button>
           </div>
 
-          <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-bottom:22px">
-            <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:20px 22px">
-              <h3 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-size:18px;color:#0A1633">{{ mt.t.person1 }}</h3>
-              <p style="margin:0 0 6px;font-size:14px;color:#15162B"><strong>{{ mt.result.person1Label.name }}</strong></p>
-              <p style="margin:0 0 4px;font-size:13.5px;color:#5A5C6E">{{ mt.result.person1Label.dob }}, {{ mt.result.person1Label.tob }}</p>
-              <p style="margin:0;font-size:13.5px;color:#5A5C6E">{{ mt.result.person1Label.place }}</p>
-            </div>
-            <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:20px 22px">
-              <h3 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-size:18px;color:#0A1633">{{ mt.t.person2 }}</h3>
-              <p style="margin:0 0 6px;font-size:14px;color:#15162B"><strong>{{ mt.result.person2Label.name }}</strong></p>
-              <p style="margin:0 0 4px;font-size:13.5px;color:#5A5C6E">{{ mt.result.person2Label.dob }}, {{ mt.result.person2Label.tob }}</p>
-              <p style="margin:0;font-size:13.5px;color:#5A5C6E">{{ mt.result.person2Label.place }}</p>
-            </div>
+          <div role="tablist" style="display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid #EAE2CE;margin-bottom:26px">
+            <sc-for list="{{ mt.tabs }}" as="tb" hint-placeholder-count="4">
+              <button type="button" role="tab" aria-selected="{{ tb.selectedStr }}" onClick="{{ tb.onClick }}" style="{{ tb.style }}">{{ tb.label }}</button>
+            </sc-for>
           </div>
 
-          <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:16px;padding:22px 24px;margin-bottom:24px">
-            <h3 style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#4A3312">{{ mt.t.gunaH }}</h3>
-            <p style="margin:0;font-size:14px;color:#6B5230;line-height:1.75">{{ mt.t.gunaBody }} <a onClick="{{ mt.openConsult }}" href="javascript:void(0)" style="color:#8A6A12;text-decoration:underline">{{ mt.t.requestMilan }}</a></p>
-          </div>
-
-          <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ mt.t.comparisonH }}</h3>
-          <p style="margin:0 0 16px;font-size:13.5px;color:#6B6D7C">{{ mt.t.comparisonSub }}</p>
-          <div style="display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
+          <sc-if value="{{ mt.tab.basic }}" hint-placeholder-val="{{ true }}">
             <div>
-              <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.result.person1Label.name }}</p>
-              <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #EAE2CE;border-radius:14px">
-                <table style="width:100%;border-collapse:collapse;min-width:460px;font-size:13px">
+              <h3 style="margin:0 0 16px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ mt.t.coupleBasicH }}</h3>
+              <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));margin-bottom:22px">
+                <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:20px 22px">
+                  <h4 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ mt.t.boysDetails }}</h4>
+                  <sc-for list="{{ mt.result.p1BasicRows }}" as="r" hint-placeholder-count="5">
+                    <div style="display:flex;justify-content:space-between;gap:14px;padding:10px 4px;border-top:1px solid #F2ECDD"><span style="font-size:13px;color:#6B6D7C">{{ r.label }}</span><span style="font-size:13.5px;color:#15162B;font-weight:600;text-align:right">{{ r.value }}</span></div>
+                  </sc-for>
+                </div>
+                <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:20px 22px">
+                  <h4 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ mt.t.girlsDetails }}</h4>
+                  <sc-for list="{{ mt.result.p2BasicRows }}" as="r" hint-placeholder-count="5">
+                    <div style="display:flex;justify-content:space-between;gap:14px;padding:10px 4px;border-top:1px solid #F2ECDD"><span style="font-size:13px;color:#6B6D7C">{{ r.label }}</span><span style="font-size:13.5px;color:#15162B;font-weight:600;text-align:right">{{ r.value }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+              <sc-if value="{{ mt.result.basicBanner.show }}" hint-placeholder-val="{{ false }}">
+                <div style="{{ mt.result.basicBanner.style }}">
+                  <p style="margin:0 0 6px;font-size:15px;font-weight:700">{{ mt.result.basicBanner.title }}</p>
+                  <p style="margin:0;font-size:13.5px;line-height:1.7">{{ mt.result.basicBanner.body }}</p>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ mt.tab.dosha }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <h3 style="margin:0 0 18px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ mt.t.coupleBasicH }}</h3>
+              <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));margin-bottom:28px">
+                <sc-for list="{{ mt.dosha.badges }}" as="b" hint-placeholder-count="4">
+                  <div style="text-align:center;padding:10px">
+                    <div style="width:54px;height:54px;margin:0 auto 10px;border-radius:50%;background:#F0E4C2;display:grid;place-items:center;font-size:22px;color:#B8901F">{{ b.icon }}</div>
+                    <p style="margin:0 0 4px;font-size:13.5px;font-weight:600;color:#0A1633">{{ b.label }}</p>
+                    <p style="margin:0;font-size:13px;color:#6B6D7C">{{ b.value }}</p>
+                  </div>
+                </sc-for>
+              </div>
+
+              <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ mt.t.ashtakootTableH }}</h3>
+              <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #EAE2CE;border-radius:14px;margin-bottom:22px">
+                <table style="width:100%;border-collapse:collapse;min-width:560px;font-size:13px">
                   <thead><tr style="background:#F6EFE2;text-align:left">
-                    <th style="padding:10px 12px">{{ mt.t.colPlanet }}</th><th style="padding:10px 12px">{{ mt.t.colSign }}</th><th style="padding:10px 12px">{{ mt.t.colNakshatra }}</th><th style="padding:10px 12px">{{ mt.t.colHouse }}</th>
+                    <th style="padding:10px 12px">{{ mt.t.colAttribute }}</th><th style="padding:10px 12px">{{ mt.t.colMale }}</th><th style="padding:10px 12px">{{ mt.t.colFemale }}</th><th style="padding:10px 12px">{{ mt.t.colOutOf }}</th><th style="padding:10px 12px">{{ mt.t.colReceived }}</th><th style="padding:10px 12px">{{ mt.t.colAreaOfLife }}</th>
                   </tr></thead>
                   <tbody>
-                    <sc-for list="{{ mt.result.p1Planets }}" as="pr" hint-placeholder-count="9">
+                    <sc-for list="{{ mt.ashtakoot.rows }}" as="ar" hint-placeholder-count="8">
                       <tr style="border-top:1px solid #EAE2CE">
-                        <td style="padding:9px 12px;font-weight:500;color:#0A1633;white-space:nowrap">{{ pr.symbol }} {{ pr.nameLine }}</td>
-                        <td style="padding:9px 12px">{{ pr.sign }}</td>
-                        <td style="padding:9px 12px">{{ pr.nakshatra }}</td>
-                        <td style="padding:9px 12px">{{ pr.house }}</td>
+                        <td style="padding:9px 12px;font-weight:600;color:#0A1633">{{ ar.attribute }}</td>
+                        <td style="padding:9px 12px">{{ ar.male }}</td>
+                        <td style="padding:9px 12px">{{ ar.female }}</td>
+                        <td style="padding:9px 12px">{{ ar.outOf }}</td>
+                        <td style="padding:9px 12px">{{ ar.received }}</td>
+                        <td style="padding:9px 12px">{{ ar.area }}</td>
                       </tr>
                     </sc-for>
+                    <sc-if value="{{ mt.ashtakoot.hasTotal }}" hint-placeholder-val="{{ false }}">
+                      <tr style="border-top:1px solid #EAE2CE;background:#FBF7EA">
+                        <td style="padding:9px 12px;font-weight:700;color:#0A1633">{{ mt.t.colTotalRow }}</td>
+                        <td style="padding:9px 12px">-</td>
+                        <td style="padding:9px 12px">-</td>
+                        <td style="padding:9px 12px;font-weight:700">{{ mt.ashtakoot.total.outOf }}</td>
+                        <td style="padding:9px 12px;font-weight:700">{{ mt.ashtakoot.total.received }}</td>
+                        <td style="padding:9px 12px">-</td>
+                      </tr>
+                    </sc-if>
                   </tbody>
                 </table>
               </div>
+
+              <sc-if value="{{ mt.result.doshaBanner.show }}" hint-placeholder-val="{{ false }}">
+                <div style="{{ mt.result.doshaBanner.style }}">
+                  <p style="margin:0 0 6px;font-size:15px;font-weight:700">{{ mt.result.doshaBanner.title }}</p>
+                  <p style="margin:0;font-size:13.5px;line-height:1.7">{{ mt.result.doshaBanner.body }}</p>
+                </div>
+              </sc-if>
             </div>
-            <div>
-              <p style="margin:0 0 8px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.result.person2Label.name }}</p>
-              <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #EAE2CE;border-radius:14px">
-                <table style="width:100%;border-collapse:collapse;min-width:460px;font-size:13px">
-                  <thead><tr style="background:#F6EFE2;text-align:left">
-                    <th style="padding:10px 12px">{{ mt.t.colPlanet }}</th><th style="padding:10px 12px">{{ mt.t.colSign }}</th><th style="padding:10px 12px">{{ mt.t.colNakshatra }}</th><th style="padding:10px 12px">{{ mt.t.colHouse }}</th>
-                  </tr></thead>
-                  <tbody>
-                    <sc-for list="{{ mt.result.p2Planets }}" as="pr" hint-placeholder-count="9">
-                      <tr style="border-top:1px solid #EAE2CE">
-                        <td style="padding:9px 12px;font-weight:500;color:#0A1633;white-space:nowrap">{{ pr.symbol }} {{ pr.nameLine }}</td>
-                        <td style="padding:9px 12px">{{ pr.sign }}</td>
-                        <td style="padding:9px 12px">{{ pr.nakshatra }}</td>
-                        <td style="padding:9px 12px">{{ pr.house }}</td>
-                      </tr>
-                    </sc-for>
-                  </tbody>
-                </table>
+          </sc-if>
+
+          <sc-if value="{{ mt.tab.planets }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;gap:30px">
+              <div>
+                <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ mt.t.boysPlanetH }}</h3>
+                <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #EAE2CE;border-radius:14px">
+                  <table style="width:100%;border-collapse:collapse;min-width:780px;font-size:13px">
+                    <thead><tr style="background:#F6EFE2;text-align:left">
+                      <th style="padding:10px 12px">{{ mt.t.colSymbols }}</th><th style="padding:10px 12px">{{ mt.t.colPlanets }}</th><th style="padding:10px 12px">{{ mt.t.colSign }}</th><th style="padding:10px 12px">{{ mt.t.colSignLord }}</th><th style="padding:10px 12px">{{ mt.t.colDegree }}</th><th style="padding:10px 12px">{{ mt.t.colNakshatra }}</th><th style="padding:10px 12px">{{ mt.t.colNakshatraLord }}</th><th style="padding:10px 12px">{{ mt.t.colHouse }}</th><th style="padding:10px 12px">{{ mt.t.colPlanetAwastha }}</th>
+                    </tr></thead>
+                    <tbody>
+                      <sc-for list="{{ mt.result.p1Planets }}" as="pr" hint-placeholder-count="10">
+                        <tr style="border-top:1px solid #EAE2CE">
+                          <td style="padding:9px 12px;font-size:16px">{{ pr.symbol }}</td>
+                          <td style="padding:9px 12px;font-weight:600;color:#0A1633;white-space:nowrap">{{ pr.nameLine }}</td>
+                          <td style="padding:9px 12px">{{ pr.sign }}</td>
+                          <td style="padding:9px 12px">{{ pr.signLord }}</td>
+                          <td style="padding:9px 12px">{{ pr.degree }}</td>
+                          <td style="padding:9px 12px">{{ pr.nakshatra }}</td>
+                          <td style="padding:9px 12px">{{ pr.nakshatraLord }}</td>
+                          <td style="padding:9px 12px">{{ pr.house }}</td>
+                          <td style="padding:9px 12px">{{ pr.awastha }}</td>
+                        </tr>
+                      </sc-for>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div>
+                <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ mt.t.girlsPlanetH }}</h3>
+                <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #EAE2CE;border-radius:14px">
+                  <table style="width:100%;border-collapse:collapse;min-width:780px;font-size:13px">
+                    <thead><tr style="background:#F6EFE2;text-align:left">
+                      <th style="padding:10px 12px">{{ mt.t.colSymbols }}</th><th style="padding:10px 12px">{{ mt.t.colPlanets }}</th><th style="padding:10px 12px">{{ mt.t.colSign }}</th><th style="padding:10px 12px">{{ mt.t.colSignLord }}</th><th style="padding:10px 12px">{{ mt.t.colDegree }}</th><th style="padding:10px 12px">{{ mt.t.colNakshatra }}</th><th style="padding:10px 12px">{{ mt.t.colNakshatraLord }}</th><th style="padding:10px 12px">{{ mt.t.colHouse }}</th><th style="padding:10px 12px">{{ mt.t.colPlanetAwastha }}</th>
+                    </tr></thead>
+                    <tbody>
+                      <sc-for list="{{ mt.result.p2Planets }}" as="pr" hint-placeholder-count="10">
+                        <tr style="border-top:1px solid #EAE2CE">
+                          <td style="padding:9px 12px;font-size:16px">{{ pr.symbol }}</td>
+                          <td style="padding:9px 12px;font-weight:600;color:#0A1633;white-space:nowrap">{{ pr.nameLine }}</td>
+                          <td style="padding:9px 12px">{{ pr.sign }}</td>
+                          <td style="padding:9px 12px">{{ pr.signLord }}</td>
+                          <td style="padding:9px 12px">{{ pr.degree }}</td>
+                          <td style="padding:9px 12px">{{ pr.nakshatra }}</td>
+                          <td style="padding:9px 12px">{{ pr.nakshatraLord }}</td>
+                          <td style="padding:9px 12px">{{ pr.house }}</td>
+                          <td style="padding:9px 12px">{{ pr.awastha }}</td>
+                        </tr>
+                      </sc-for>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
+          </sc-if>
 
-          <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:16px;padding:20px 24px;margin-top:22px">
-            <h3 style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:17px;color:#4A3312">{{ mt.t.doshaCompareH }}</h3>
-            <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ mt.t.doshaCompareBody }} <a onClick="{{ mt.openConsult }}" href="javascript:void(0)" style="color:#8A6A12;text-decoration:underline">{{ mt.t.requestReading }}</a></p>
-          </div>
+          <sc-if value="{{ mt.tab.chart }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <div style="display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-bottom:28px">
+                <div style="background:#fff;border:1px solid #EAE2CE;border-radius:18px;padding:22px">
+                  <div style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:15.5px;font-weight:600;color:#0A1633;margin-bottom:10px">{{ mt.t.boysDetails }}</div>
+                  <div style="position:relative;width:100%;aspect-ratio:1/1;max-width:340px;margin:0 auto">
+                    <svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+                      <polygon points="0,0 100,0 100,100 0,100" fill="none" stroke="#D4AF37" stroke-width="0.6"/>
+                      <line x1="0" y1="0" x2="100" y2="100" stroke="#D4AF37" stroke-width="0.6"/>
+                      <line x1="100" y1="0" x2="0" y2="100" stroke="#D4AF37" stroke-width="0.6"/>
+                      <polygon points="50,0 100,50 50,100 0,50" fill="none" stroke="#D4AF37" stroke-width="0.6"/>
+                    </svg>
+                    <sc-for list="{{ mt.result.p1ChartHouses }}" as="h" hint-placeholder-count="12">
+                      <div style="{{ h.posStyle }}"><div style="font-size:11px;color:#96742A">{{ h.sign }}</div><div style="font-size:13px;font-weight:600;color:#0A1633">{{ h.planets }}</div></div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="background:#fff;border:1px solid #EAE2CE;border-radius:18px;padding:22px">
+                  <div style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:15.5px;font-weight:600;color:#0A1633;margin-bottom:10px">{{ mt.t.girlsDetails }}</div>
+                  <div style="position:relative;width:100%;aspect-ratio:1/1;max-width:340px;margin:0 auto">
+                    <svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+                      <polygon points="0,0 100,0 100,100 0,100" fill="none" stroke="#D4AF37" stroke-width="0.6"/>
+                      <line x1="0" y1="0" x2="100" y2="100" stroke="#D4AF37" stroke-width="0.6"/>
+                      <line x1="100" y1="0" x2="0" y2="100" stroke="#D4AF37" stroke-width="0.6"/>
+                      <polygon points="50,0 100,50 50,100 0,50" fill="none" stroke="#D4AF37" stroke-width="0.6"/>
+                    </svg>
+                    <sc-for list="{{ mt.result.p2ChartHouses }}" as="h" hint-placeholder-count="12">
+                      <div style="{{ h.posStyle }}"><div style="font-size:11px;color:#96742A">{{ h.sign }}</div><div style="font-size:13px;font-weight:600;color:#0A1633">{{ h.planets }}</div></div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))">
+                <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:20px 22px">
+                  <h4 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ mt.t.maleManglikH }}</h4>
+                  <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.t.basedOnAspectsH }}</p>
+                  <ul style="margin:0 0 14px;padding-left:18px">
+                    <sc-for list="{{ mt.result.p1Manglik.basedOnAspect }}" as="a" hint-placeholder-count="4">
+                      <li style="font-size:13px;color:#5A5C6E;line-height:1.6;margin-bottom:4px">{{ a }}</li>
+                    </sc-for>
+                  </ul>
+                  <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.t.basedOnHouseH }}</p>
+                  <ul style="margin:0 0 14px;padding-left:18px">
+                    <sc-for list="{{ mt.result.p1Manglik.basedOnHouse }}" as="a" hint-placeholder-count="2">
+                      <li style="font-size:13px;color:#5A5C6E;line-height:1.6;margin-bottom:4px">{{ a }}</li>
+                    </sc-for>
+                  </ul>
+                  <p style="margin:0 0 4px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.t.manglikEffectH }}</p>
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E">{{ mt.result.p1Manglik.effectText }}</p>
+                </div>
+                <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:20px 22px">
+                  <h4 style="margin:0 0 12px;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ mt.t.femaleManglikH }}</h4>
+                  <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.t.basedOnAspectsH }}</p>
+                  <ul style="margin:0 0 14px;padding-left:18px">
+                    <sc-for list="{{ mt.result.p2Manglik.basedOnAspect }}" as="a" hint-placeholder-count="4">
+                      <li style="font-size:13px;color:#5A5C6E;line-height:1.6;margin-bottom:4px">{{ a }}</li>
+                    </sc-for>
+                  </ul>
+                  <p style="margin:0 0 6px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.t.basedOnHouseH }}</p>
+                  <ul style="margin:0 0 14px;padding-left:18px">
+                    <sc-for list="{{ mt.result.p2Manglik.basedOnHouse }}" as="a" hint-placeholder-count="2">
+                      <li style="font-size:13px;color:#5A5C6E;line-height:1.6;margin-bottom:4px">{{ a }}</li>
+                    </sc-for>
+                  </ul>
+                  <p style="margin:0 0 4px;font-size:13px;font-weight:600;color:#0A1633">{{ mt.t.manglikEffectH }}</p>
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E">{{ mt.result.p2Manglik.effectText }}</p>
+                </div>
+              </div>
+
+              <div style="display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));margin-top:20px">
+                <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:16px;padding:18px 20px">
+                  <h4 style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:16px;color:#4A3312">{{ mt.t.manglikAnalysisH }}</h4>
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ mt.result.p1Manglik.report }}</p>
+                </div>
+                <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:16px;padding:18px 20px">
+                  <h4 style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:16px;color:#4A3312">{{ mt.t.manglikAnalysisH }}</h4>
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ mt.result.p2Manglik.report }}</p>
+                </div>
+              </div>
+            </div>
+          </sc-if>
         </div>
       </sc-if>
     </section>
@@ -758,7 +911,7 @@ class Component extends DCLogic {
   state = { lang: "hi", menuOpen: false, openFaq: 0, showTop: false, consultOpen: false,
     form: { name: "", phone: "", email: "", subject: "", message: "" },
     milan: {
-      view: "form",
+      view: "form", activeTab: "basic",
       p1: { name: "", gender: "Male", dob: "", tob: "", placeQuery: "", place: null },
       p2: { name: "", gender: "Female", dob: "", tob: "", placeQuery: "", place: null },
       p1Suggestions: [], p2Suggestions: [], error: "", result: null
@@ -832,14 +985,15 @@ class Component extends DCLogic {
       ]);
       const person1 = await this._buildPerson(M.p1, loc1, tz1);
       const person2 = await this._buildPerson(M.p2, loc2, tz2);
-      const result = await window.KundliEngine.fetchKundliMilan(person1, person2);
-      this._mUpdate({ view: "result", result: result });
+      const result = await window.KundliEngine.fetchKundliMatchingReport(person1, person2);
+      this._mUpdate({ view: "result", result: result, activeTab: "basic" });
     } catch (e) {
       console.error("Kundli Milan generation failed:", e);
       this._mUpdate({ view: "form", error: this._mt().errorGeneric });
     }
   }
   _backToMilanForm() { this._mUpdate({ view: "form" }); }
+  _setMilanTab(tab) { return () => this._mUpdate({ activeTab: tab }); }
 
   componentDidMount() {
     this._onScroll = () => {
@@ -886,26 +1040,96 @@ class Component extends DCLogic {
       label: c.Area + (c.State ? ", " + c.State : "") + (c.CountryCode ? ", " + c.CountryCode : ""),
       onClick: this._selectPlace(person, c)
     }));
-    const planetRows = planets => (planets || []).map(pl => ({
+    const HOUSE_POS = [
+      { left: 50, top: 14 }, { left: 24, top: 7 }, { left: 8, top: 24 }, { left: 15, top: 50 },
+      { left: 8, top: 76 }, { left: 24, top: 93 }, { left: 50, top: 86 }, { left: 76, top: 93 },
+      { left: 92, top: 76 }, { left: 85, top: 50 }, { left: 92, top: 24 }, { left: 76, top: 7 }
+    ];
+    const buildChartHouses = houses => HOUSE_POS.map((pos, i) => {
+      const h = (houses && houses[i]) || { signAbbr: "", planets: [] };
+      return {
+        sign: h.signAbbr || "", planets: h.planets && h.planets.length ? h.planets.join(" ") : "—",
+        posStyle: "position:absolute;left:" + pos.left + "%;top:" + pos.top + "%;transform:translate(-50%,-50%);text-align:center"
+      };
+    });
+    const matchPlanetRows = planets => (planets || []).map(pl => ({
       symbol: pl.symbol, nameLine: pl.name + (pl.retrograde ? " (R)" : ""),
-      sign: orNA(pl.sign), nakshatra: orNA(pl.nakshatra), house: orNA(pl.house)
+      sign: orNA(pl.sign), signLord: orNA(pl.signLord), degree: orNA(pl.degree),
+      nakshatra: orNA(pl.nakshatra), nakshatraLord: orNA(pl.nakshatraLord),
+      house: orNA(pl.house), awastha: orNA(pl.awastha)
     }));
-    let mResult = { person1Label: { name: NA, dob: NA, tob: NA, place: NA }, person2Label: { name: NA, dob: NA, tob: NA, place: NA }, p1Planets: [], p2Planets: [] };
+    const fmtDobTob = inp => {
+      if (!inp) return NA;
+      const dd = String(inp.day).padStart(2, "0"), mm = String(inp.month).padStart(2, "0");
+      const hh = String(inp.hour).padStart(2, "0"), mi = String(inp.min).padStart(2, "0");
+      return dd + "/" + mm + "/" + inp.year + ", " + hh + ":" + mi;
+    };
+    const basicRows = person => ([
+      { label: T.nameF, value: orNA(person.input && person.input.name) },
+      { label: T.birthDateTimeF, value: fmtDobTob(person.input) },
+      { label: T.birthPlaceF, value: orNA(person.input && person.input.city) },
+      { label: T.janamRashiF, value: orNA(person.astro && person.astro.sign) },
+      { label: T.rashiLordF, value: orNA(person.astro && person.astro.SignLord) }
+    ]);
+    const manglikDetail = pm => {
+      if (!pm) return { basedOnAspect: [], basedOnHouse: [], effectText: NA, report: NA };
+      return {
+        basedOnAspect: pm.basedOnAspect || [],
+        basedOnHouse: pm.basedOnHouse || [],
+        effectText: pm.status ? (T.manglikDoshaIs + " " + pm.status) : NA,
+        report: orNA(pm.report)
+      };
+    };
+    const bannerStyle = ok => "border-radius:16px;padding:18px 22px;" + (ok
+      ? "background:#E9F5EC;border:1px solid #BEE0C6;color:#1F6B34"
+      : "background:#FBEAE9;border:1px solid #F0C9C6;color:#8A2A24");
+    const yesNo = v => v === null || v === undefined ? NA : (v ? T.yesLabel : T.noLabel);
+
+    let mResult = {
+      p1BasicRows: [], p2BasicRows: [], p1Planets: [], p2Planets: [], p1ChartHouses: buildChartHouses([]), p2ChartHouses: buildChartHouses([]),
+      p1Manglik: manglikDetail(null), p2Manglik: manglikDetail(null),
+      basicBanner: { show: false, style: "", title: "", body: "" },
+      doshaBanner: { show: false, style: "", title: "", body: "" }
+    };
+    let mDosha = { badges: [] };
+    let mAshtakoot = { rows: [], hasTotal: false, total: { outOf: "", received: "" } };
     if (M.result) {
       const res = M.result;
       mResult = {
-        person1Label: {
-          name: orNA(res.person1.basicDetails.name), dob: orNA(res.person1.basicDetails.birthDate),
-          tob: orNA(res.person1.basicDetails.birthTime), place: orNA(res.person1.basicDetails.birthPlace)
-        },
-        person2Label: {
-          name: orNA(res.person2.basicDetails.name), dob: orNA(res.person2.basicDetails.birthDate),
-          tob: orNA(res.person2.basicDetails.birthTime), place: orNA(res.person2.basicDetails.birthPlace)
-        },
-        p1Planets: planetRows(res.person1.planets),
-        p2Planets: planetRows(res.person2.planets)
+        p1BasicRows: basicRows(res.person1), p2BasicRows: basicRows(res.person2),
+        p1Planets: matchPlanetRows(res.person1.planets), p2Planets: matchPlanetRows(res.person2.planets),
+        p1ChartHouses: buildChartHouses(res.person1.chartHouses), p2ChartHouses: buildChartHouses(res.person2.chartHouses),
+        p1Manglik: manglikDetail(res.person1.manglik), p2Manglik: manglikDetail(res.person2.manglik),
+        basicBanner: res.manglikConclusion ? {
+          show: true, style: bannerStyle(!!res.manglikConclusion.match),
+          title: res.manglikConclusion.match ? T.matchRecommended : T.matchNotRecommended,
+          body: res.manglikConclusion.report || ""
+        } : { show: false, style: "", title: "", body: "" },
+        doshaBanner: res.dosha && res.dosha.conclusionReport ? {
+          show: true, style: bannerStyle(!!res.dosha.conclusionMatch),
+          title: res.dosha.conclusionMatch ? T.matchRecommended : T.matchNotRecommended,
+          body: res.dosha.conclusionReport
+        } : { show: false, style: "", title: "", body: "" }
+      };
+      mDosha = {
+        badges: [
+          { icon: "✦", label: T.ashtakootLabel, value: (res.dosha.ashtakootPoints != null ? res.dosha.ashtakootPoints : NA) + "/" + (res.ashtakoot.total ? res.ashtakoot.total.outOf : 36) },
+          { icon: "✿", label: T.rajjooDoshaLabel, value: yesNo(res.dosha.rajjuDosha) },
+          { icon: "☘", label: T.vedhaDoshaLabel, value: yesNo(res.dosha.vedhaDosha) },
+          { icon: "❤", label: T.manglikMatchLabel, value: yesNo(res.dosha.manglikMatch) }
+        ]
+      };
+      mAshtakoot = {
+        rows: (res.ashtakoot.rows || []).map(r => ({ attribute: r.attribute, male: orNA(r.male), female: orNA(r.female), outOf: r.outOf, received: r.received, area: orNA(r.area) })),
+        hasTotal: !!res.ashtakoot.total,
+        total: res.ashtakoot.total ? { outOf: res.ashtakoot.total.outOf, received: res.ashtakoot.total.received } : { outOf: "", received: "" }
       };
     }
+    const TAB_DEFS = [
+      { key: "basic", label: T.tabBasic }, { key: "dosha", label: T.tabDosha },
+      { key: "planets", label: T.tabPlanets }, { key: "chart", label: T.tabChart }
+    ];
+    const tabStyle = key => "padding:12px 18px;background:none;border:0;border-bottom:2px solid " + (M.activeTab === key ? "#D4AF37" : "transparent") + ";color:" + (M.activeTab === key ? "#0A1633" : "#8A8C9A") + ";font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap";
     const mt = {
       t: T,
       isForm: M.view === "form", isLoading: M.view === "loading", isResult: M.view === "result",
@@ -921,6 +1145,10 @@ class Component extends DCLogic {
       submit: () => this._submitMilan(),
       backToForm: () => this._backToMilanForm(),
       openConsult: () => this.setState({ consultOpen: true }),
+      tabs: TAB_DEFS.map(td => ({ label: td.label, selectedStr: M.activeTab === td.key ? "true" : "false", onClick: this._setMilanTab(td.key), style: tabStyle(td.key) })),
+      tab: { basic: M.activeTab === "basic", dosha: M.activeTab === "dosha", planets: M.activeTab === "planets", chart: M.activeTab === "chart" },
+      dosha: mDosha,
+      ashtakoot: mAshtakoot,
       result: mResult
     };
     return {

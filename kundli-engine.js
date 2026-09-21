@@ -16,6 +16,11 @@
     timezoneUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetTimezoneDST",
     kundliUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetAstroDetail",
     kundliMatchingUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetKundliMatching",
+    kundliMatchingAstroUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetKundliMatchingAstroDetails",
+    kundliMatchingDoshaUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetKundliMatchingDoshaDetails",
+    kundliMatchingAshtakootUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetKundliMatchingAshtakootDetails",
+    kundliMatchingManglikUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetKundliMatchingManglikReport",
+    horaChartUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetHoraChart",
     numerologyUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetNumeroTable",
     nakshatraPredictionUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetDailyNakshatraPredictionDetail",
     planetaryUrl: "https://cmsch.astroyogi.com/api/VedicPanchang/GetPlanetryDetail",
@@ -307,7 +312,7 @@
       errDob: "Please choose a date of birth", errTob: "Please choose a time of birth",
       errPlace: "Please select a birth place from the suggestions",
       matchAnother: "Match Another Pair", resultCrumb: "Result",
-      summaryH: "Kundli Matching Summary",
+      summaryH: "Kundli Matching Report",
       gunaH: "Guna Milan (36-Point Ashtakoot Score)",
       gunaBody: "The connected astrology data source does not currently expose a scoring endpoint for varna, vashya, tara, yoni, graha maitri, gana, bhakoot and nadi koots, so no total or per-koot score is shown here rather than one calculated or invented independently.",
       requestMilan: "Request a full Kundli Milan reading",
@@ -316,7 +321,29 @@
       colPlanet: "Planet", colSign: "Sign", colNakshatra: "Nakshatra", colHouse: "House",
       doshaCompareH: "Manglik, Nadi Dosha & Bhakoot Dosha",
       doshaCompareBody: "These comparisons are not returned by the connected data source, so nothing is shown here rather than guessed.",
-      requestReading: "Request a full reading"
+      requestReading: "Request a full reading",
+
+      tabBasic: "Basic Details", tabDosha: "Dosha", tabPlanets: "Planet Details", tabChart: "Lagna Chart",
+      boysDetails: "Boy's details", girlsDetails: "Girl's details",
+      nameF: "Name", birthDateTimeF: "Birth Date & Time", birthPlaceF: "Birth Place",
+      janamRashiF: "Janam Rashi", rashiLordF: "Rashi Lord",
+      matchRecommended: "Match is recommended", matchNotRecommended: "Match is not recommended",
+      loadingReport: "Loading match report...",
+
+      coupleBasicH: "Couple's basic details",
+      ashtakootLabel: "Ashtakoot", rajjooDoshaLabel: "Rajjoo Dosha", vedhaDoshaLabel: "Vedha Dosha", manglikMatchLabel: "Manglik Match",
+      yesLabel: "Yes", noLabel: "No",
+      ashtakootTableH: "Match Ashtakoot Points",
+      colAttribute: "Atribute", colMale: "Male", colFemale: "Female", colOutOf: "Out of", colReceived: "Received", colAreaOfLife: "Area Of Life", colTotalRow: "Total",
+
+      boysPlanetH: "Boy's Planet Details", girlsPlanetH: "Girl's Planet Details",
+      colSymbols: "Symbols", colPlanets: "Planets", colSignLord: "Sign Lord", colDegree: "Degree",
+      colNakshatraLord: "Nakshatra Lord", colPlanetAwastha: "Planet Awastha",
+
+      maleManglikH: "Male Manglik Details", femaleManglikH: "Female Manglik Details",
+      basedOnAspectsH: "Based on Aspects", basedOnHouseH: "Based on house",
+      manglikEffectH: "Manglik Effect", manglikAnalysisH: "Manglik Analysis",
+      manglikDoshaIs: "Manglik dosha is"
     },
     hi: {
       kicker: "मुफ़्त कुंडली मिलान", title: "दोनों के जन्म विवरण दर्ज करें",
@@ -332,7 +359,7 @@
       errDob: "कृपया जन्म तिथि चुनें", errTob: "कृपया जन्म समय चुनें",
       errPlace: "कृपया सुझावों में से जन्म स्थान चुनें",
       matchAnother: "दूसरी जोड़ी मिलाएं", resultCrumb: "परिणाम",
-      summaryH: "कुंडली मिलान सारांश",
+      summaryH: "कुंडली मिलान रिपोर्ट",
       gunaH: "गुण मिलान (36 अंकों की अष्टकूट प्रणाली)",
       gunaBody: "जुड़ा हुआ ज्योतिष डेटा स्रोत फ़िलहाल वर्ण, वश्य, तारा, योनि, ग्रह मैत्री, गण, भकूट और नाड़ी कूट के लिए स्कोरिंग उपलब्ध नहीं कराता, इसलिए यहां कोई कुल या कूट-वार अंक नहीं दिखाया गया है।",
       requestMilan: "पूर्ण कुंडली मिलान का अनुरोध करें",
@@ -341,7 +368,29 @@
       colPlanet: "ग्रह", colSign: "राशि", colNakshatra: "नक्षत्र", colHouse: "भाव",
       doshaCompareH: "मांगलिक, नाड़ी दोष और भकूट दोष",
       doshaCompareBody: "यह तुलना जुड़े हुए डेटा स्रोत से प्राप्त नहीं होती, इसलिए यहां अनुमान लगाकर कुछ नहीं दिखाया गया है।",
-      requestReading: "पूर्ण विश्लेषण का अनुरोध करें"
+      requestReading: "पूर्ण विश्लेषण का अनुरोध करें",
+
+      tabBasic: "मूल विवरण", tabDosha: "दोष", tabPlanets: "ग्रह विवरण", tabChart: "लग्न चार्ट",
+      boysDetails: "लड़के का विवरण", girlsDetails: "लड़की का विवरण",
+      nameF: "नाम", birthDateTimeF: "जन्म तिथि एवं समय", birthPlaceF: "जन्म स्थान",
+      janamRashiF: "जन्म राशि", rashiLordF: "राशि स्वामी",
+      matchRecommended: "विवाह की सलाह दी जाती है", matchNotRecommended: "विवाह की सलाह नहीं दी जाती",
+      loadingReport: "मिलान रिपोर्ट लोड हो रही है...",
+
+      coupleBasicH: "जोड़े का मूल विवरण",
+      ashtakootLabel: "अष्टकूट", rajjooDoshaLabel: "रज्जु दोष", vedhaDoshaLabel: "वेध दोष", manglikMatchLabel: "मांगलिक मिलान",
+      yesLabel: "हाँ", noLabel: "नहीं",
+      ashtakootTableH: "अष्टकूट अंक तालिका",
+      colAttribute: "गुण", colMale: "पुरुष", colFemale: "महिला", colOutOf: "कुल", colReceived: "प्राप्त", colAreaOfLife: "जीवन क्षेत्र", colTotalRow: "योग",
+
+      boysPlanetH: "लड़के के ग्रह विवरण", girlsPlanetH: "लड़की के ग्रह विवरण",
+      colSymbols: "प्रतीक", colPlanets: "ग्रह", colSignLord: "राशि स्वामी", colDegree: "अंश",
+      colNakshatraLord: "नक्षत्र स्वामी", colPlanetAwastha: "ग्रह अवस्था",
+
+      maleManglikH: "पुरुष मांगलिक विवरण", femaleManglikH: "महिला मांगलिक विवरण",
+      basedOnAspectsH: "दृष्टि के आधार पर", basedOnHouseH: "भाव के आधार पर",
+      manglikEffectH: "मांगलिक प्रभाव", manglikAnalysisH: "मांगलिक विश्लेषण",
+      manglikDoshaIs: "मांगलिक दोष है"
     }
   };
 
@@ -803,6 +852,160 @@
     });
   }
 
+  // Shared param builder + fetch pattern for the two-person "m_.../f_..."
+  // Kundli Milan endpoints (astro/dosha/ashtakoot/manglik report), mirroring
+  // fetchSimpleEndpoint's single-person pattern above.
+  function buildMatchingParams(person1, person2) {
+    var params = {};
+    var p1 = buildPersonParams(person1), p2 = buildPersonParams(person2);
+    Object.keys(p1).forEach(function (k) { params["m_" + k] = p1[k]; });
+    Object.keys(p2).forEach(function (k) { params["f_" + k] = p2[k]; });
+    return params;
+  }
+  function fetchMatchingEndpoint(url, person1, person2, errLabel) {
+    var fullUrl = url + "?" + new URLSearchParams(buildMatchingParams(person1, person2)).toString();
+    return fetch(fullUrl).then(function (r) {
+      if (!r.ok) throw new Error(errLabel + " HTTP " + r.status);
+      return r.json();
+    }).then(function (json) {
+      if (!json || json.Status !== "success" || !json.Data) throw new Error(errLabel + "_BAD_RESPONSE");
+      return json.Data;
+    }).catch(function (err) {
+      console.error("KundliEngine: " + errLabel + " failed", err);
+      throw new Error(errLabel + "_FETCH_FAILED");
+    });
+  }
+  function fetchKundliMatchingAstroDetails(person1, person2) { return fetchMatchingEndpoint(API_CONFIG.kundliMatchingAstroUrl, person1, person2, "MATCHING_ASTRO"); }
+  function fetchKundliMatchingDoshaDetails(person1, person2) { return fetchMatchingEndpoint(API_CONFIG.kundliMatchingDoshaUrl, person1, person2, "MATCHING_DOSHA"); }
+  function fetchKundliMatchingAshtakootDetails(person1, person2) { return fetchMatchingEndpoint(API_CONFIG.kundliMatchingAshtakootUrl, person1, person2, "MATCHING_ASHTAKOOT"); }
+  function fetchKundliMatchingManglikReport(person1, person2) { return fetchMatchingEndpoint(API_CONFIG.kundliMatchingManglikUrl, person1, person2, "MATCHING_MANGLIK"); }
+
+  // GetHoraChart returns Data.Chart as exactly 12 entries already ordered
+  // house 1 -> house 12 (Chart[0].sign === the ascendant sign), so no
+  // house-offset math is needed the way buildHouses() does for fetchKundli.
+  function fetchHoraChart(person) {
+    return fetchSimpleEndpoint(API_CONFIG.horaChartUrl, person, "HORA_CHART").then(function (d) { return d.Chart || []; });
+  }
+  function buildHoraChartHouses(chartArr) {
+    return (chartArr || []).map(function (h) {
+      return {
+        sign: val(h.sign_name),
+        signAbbr: h.sign_name ? String(h.sign_name).slice(0, 3) : "",
+        planets: (h.planet_small || []).map(function (s) { return String(s).trim(); }).filter(Boolean)
+      };
+    });
+  }
+
+  // function buildMatchingPlanetRows(rawPlanets) -> flat rows for the Kundli
+  // Milan "Planet Details" table (Symbols / Planet / Sign / Sign Lord /
+  // Degree / Nakshatra / Nakshatra Lord / House / Planet Awastha), straight
+  // from GetKundliMatching's male_planet_details / female_planet_details.
+  function buildMatchingPlanetRows(rawPlanets) {
+    return (rawPlanets || []).map(function (p) {
+      return {
+        name: p.name,
+        symbol: PLANET_SYMBOLS[p.name] || String(p.name || "").slice(0, 2),
+        retrograde: String(p.isRetro) === "true",
+        sign: val(p.sign), signLord: val(p.signLord),
+        degree: degToDM(p.normDegree),
+        nakshatra: val(p.nakshatra), nakshatraLord: val(p.nakshatraLord),
+        house: val(p.house), awastha: val(p.planet_awastha)
+      };
+    });
+  }
+
+  // function buildAshtakootRows(data) -> { rows, total, conclusion } for
+  // GetKundliMatchingAshtakootDetails.Data, in the classical koot order.
+  var ASHTAKOOT_KOOTS = ["varna", "vashya", "tara", "yoni", "maitri", "gan", "bhakut", "nadi"];
+  function buildAshtakootRows(data) {
+    if (!data) return { rows: [], total: null, conclusion: null };
+    var rows = ASHTAKOOT_KOOTS.filter(function (k) { return !!data[k]; }).map(function (k) {
+      var d = data[k];
+      return {
+        key: k,
+        attribute: k.charAt(0).toUpperCase() + k.slice(1),
+        male: val(d.male_koot_attribute), female: val(d.female_koot_attribute),
+        outOf: d.total_points, received: d.received_points, area: val(d.description)
+      };
+    });
+    var total = data.total ? {
+      outOf: data.total.total_points, received: data.total.received_points, minRequired: data.total.minimum_required
+    } : null;
+    return { rows: rows, total: total, conclusion: data.conclusion || null };
+  }
+
+  // function buildManglikPersonDetail(m) -> normalized single-side entry from
+  // GetKundliMatchingManglikReport.Data.male / .female
+  function buildManglikPersonDetail(m) {
+    if (!m) return null;
+    return {
+      basedOnAspect: (m.manglik_present_rule && m.manglik_present_rule.based_on_aspect) || [],
+      basedOnHouse: (m.manglik_present_rule && m.manglik_present_rule.based_on_house) || [],
+      cancelRules: m.manglik_cancel_rule || [],
+      isCancelled: !!m.is_mars_manglik_cancelled,
+      status: m.manglik_status || null,
+      percentagePresent: m.percentage_manglik_present,
+      percentageAfterCancellation: m.percentage_manglik_after_cancellation,
+      report: m.manglik_report || null,
+      isPresent: !!m.is_present
+    };
+  }
+
+  // async function fetchKundliMatchingReport(person1, person2) -> the real,
+  // normalized Kundli Milan report backing the tabbed Basic Details / Dosha /
+  // Planet Details / Lagna Chart view: fires all five matching-specific
+  // Astroyogi endpoints plus GetHoraChart (once per person) in parallel.
+  function fetchKundliMatchingReport(person1, person2) {
+    return Promise.all([
+      fetchMatchingEndpoint(API_CONFIG.kundliMatchingUrl, person1, person2, "MATCHING_PLANETS"),
+      fetchKundliMatchingAstroDetails(person1, person2),
+      fetchKundliMatchingDoshaDetails(person1, person2),
+      fetchKundliMatchingAshtakootDetails(person1, person2),
+      fetchKundliMatchingManglikReport(person1, person2),
+      fetchHoraChart(person1),
+      fetchHoraChart(person2)
+    ]).then(function (results) {
+      var planetsData = results[0] || {};
+      var astro = results[1] || {};
+      var dosha = results[2] || {};
+      var ashtakootData = results[3] || {};
+      var manglikData = results[4] || {};
+      var chart1 = results[5] || [];
+      var chart2 = results[6] || [];
+      var ashtakoot = buildAshtakootRows(ashtakootData);
+      return {
+        person1: {
+          input: person1,
+          astro: astro.male_astro_details || {},
+          planets: buildMatchingPlanetRows(planetsData.male_planet_details),
+          manglik: buildManglikPersonDetail(manglikData.male),
+          chartHouses: buildHoraChartHouses(chart1)
+        },
+        person2: {
+          input: person2,
+          astro: astro.female_astro_details || {},
+          planets: buildMatchingPlanetRows(planetsData.female_planet_details),
+          manglik: buildManglikPersonDetail(manglikData.female),
+          chartHouses: buildHoraChartHouses(chart2)
+        },
+        dosha: {
+          ashtakootStatus: dosha.ashtakoota ? !!dosha.ashtakoota.status : null,
+          ashtakootPoints: dosha.ashtakoota ? dosha.ashtakoota.received_points : null,
+          manglikMatch: dosha.manglik ? !!dosha.manglik.status : null,
+          rajjuDosha: dosha.rajju_dosha ? !!dosha.rajju_dosha.status : null,
+          vedhaDosha: dosha.vedha_dosha ? !!dosha.vedha_dosha.status : null,
+          conclusionMatch: dosha.conclusion ? !!dosha.conclusion.match : null,
+          conclusionReport: dosha.conclusion ? (dosha.conclusion.match_report || dosha.conclusion.report) : null
+        },
+        ashtakoot: ashtakoot,
+        manglikConclusion: manglikData.conclusion || null
+      };
+    }).catch(function (err) {
+      console.error("KundliEngine: fetchKundliMatchingReport failed", err);
+      throw new Error("MATCHING_REPORT_FETCH_FAILED");
+    });
+  }
+
   // async function fetchKundliMilan(person1, person2)
   // NOTE: No dedicated Ashtakoot/Guna-Milan scoring endpoint was found publicly
   // exposed alongside GetTimezoneDST / GetAstroDetail. GetKundliMatching exists
@@ -852,6 +1055,13 @@
     getTimezone: getTimezone,
     fetchKundli: fetchKundli,
     fetchKundliMilan: fetchKundliMilan,
+    fetchKundliMatchingReport: fetchKundliMatchingReport,
+    fetchKundliMatchingAstroDetails: fetchKundliMatchingAstroDetails,
+    fetchKundliMatchingDoshaDetails: fetchKundliMatchingDoshaDetails,
+    fetchKundliMatchingAshtakootDetails: fetchKundliMatchingAshtakootDetails,
+    fetchKundliMatchingManglikReport: fetchKundliMatchingManglikReport,
+    fetchHoraChart: fetchHoraChart,
+    buildHoraChartHouses: buildHoraChartHouses,
     fetchNumerology: fetchNumerology,
     buildNumerologyRows: buildNumerologyRows,
     fetchNakshatraPrediction: fetchNakshatraPrediction,

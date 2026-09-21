@@ -45,6 +45,26 @@
     [data-consultbtn]{padding:8px 11px !important;font-size:11px !important}
     [data-headinner]{gap:8px !important}
   }
+
+  [data-kcard]{box-shadow:0 1px 3px rgba(10,22,51,.05);transition:box-shadow .2s ease,transform .2s ease}
+  [data-khouse-card]:hover{box-shadow:0 12px 28px rgba(10,22,51,.09);transform:translateY(-3px)}
+  [data-ksub-card]:hover{box-shadow:0 10px 24px rgba(10,22,51,.08)}
+  [data-kinput]{transition:border-color .15s ease,box-shadow .15s ease}
+  [data-kinput]:focus{outline:none;border-color:#D4AF37 !important;box-shadow:0 0 0 3px rgba(212,175,55,.16)}
+  [data-ktabs]{scrollbar-width:none;-ms-overflow-style:none}
+  [data-ktabs]::-webkit-scrollbar{display:none}
+  [data-ktab-btn]{transition:background .15s ease,color .15s ease,border-color .15s ease,transform .1s ease}
+  [data-ktab-btn]:active{transform:scale(.97)}
+  [data-ksubmit]:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  [data-ksubmit]{transition:filter .15s ease,transform .15s ease}
+  [data-ksuggest-btn]:hover{background:#FBF7EA !important}
+  [data-kfield-wrap]{position:relative}
+  @media (max-width:600px){
+    [data-ktool-card]{padding:20px 16px !important;border-radius:16px !important}
+    [data-kreport-head]{gap:10px !important}
+    [data-ktab-btn]{padding:9px 14px !important;font-size:13px !important}
+    table [data-kfirstcol]{position:sticky;left:0;background:inherit}
+  }
 </style>
 </helmet>
 
@@ -93,7 +113,7 @@
     </nav>
 
     <section style="max-width:1100px;margin:0 auto;padding:clamp(24px,4vw,42px) 20px 0">
-      <div style="background:linear-gradient(100deg,#F6EFE2 0%,#F2E6D2 58%,#EADCC4 100%);border:1px solid #E4D8C2;border-radius:22px;padding:clamp(30px,5vw,54px);display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center">
+      <div style="background:linear-gradient(100deg,#F6EFE2 0%,#F2E6D2 58%,#EADCC4 100%);border:1px solid #E4D8C2;border-radius:22px;padding:clamp(30px,5vw,54px);display:grid;gap:30px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:center;box-shadow:0 18px 44px rgba(139,106,18,.08)">
         <div>
           <p style="font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#96742A;margin:0 0 12px">{{ p.kicker }}</p>
           <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.4vw,50px);font-weight:700;margin:0 0 14px;color:#4A3312;line-height:1.14;text-wrap:pretty">{{ p.h1 }}</h1>
@@ -113,36 +133,36 @@
 
     <section id="kundli-tool" style="max-width:1100px;margin:0 auto;padding:clamp(30px,5vw,50px) 20px 0">
       <sc-if value="{{ kt.isForm }}" hint-placeholder-val="{{ true }}">
-        <div style="background:#fff;border:1px solid #EAE2CE;border-radius:20px;padding:clamp(24px,4vw,42px)">
+        <div data-kcard="1" data-ktool-card="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:20px;padding:clamp(24px,4vw,42px)">
           <p style="font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#96742A;margin:0 0 10px">{{ kt.t.kicker }}</p>
           <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(23px,3vw,32px);font-weight:600;margin:0 0 8px;color:#0A1633">{{ kt.t.title }}</h2>
           <p style="margin:0 0 24px;font-size:14.5px;color:#6B6D7C;max-width:60ch">{{ kt.t.subtitle }}</p>
           <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))">
-            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ kt.t.nameLabel }}
-              <input type="text" value="{{ kt.form.name }}" onChange="{{ kt.setName }}" placeholder="{{ kt.t.namePlaceholder }}" style="padding:12px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C;font-weight:500">{{ kt.t.nameLabel }}
+              <input data-kinput="1" type="text" value="{{ kt.form.name }}" onChange="{{ kt.setName }}" placeholder="{{ kt.t.namePlaceholder }}" style="padding:13px 14px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
             </label>
-            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ kt.t.genderLabel }}
-              <select value="{{ kt.form.gender }}" onChange="{{ kt.setGender }}" style="padding:12px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C;font-weight:500">{{ kt.t.genderLabel }}
+              <select data-kinput="1" value="{{ kt.form.gender }}" onChange="{{ kt.setGender }}" style="padding:13px 14px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
                 <sc-for list="{{ kt.genderOptions }}" as="g" hint-placeholder-count="2">
                   <option value="{{ g.value }}">{{ g.label }}</option>
                 </sc-for>
               </select>
             </label>
-            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ kt.t.dobLabel }}
-              <input type="date" value="{{ kt.form.dob }}" onChange="{{ kt.setDob }}" style="padding:12px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C;font-weight:500">{{ kt.t.dobLabel }}
+              <input data-kinput="1" type="date" value="{{ kt.form.dob }}" onChange="{{ kt.setDob }}" style="padding:13px 14px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
             </label>
-            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ kt.t.tobLabel }}
-              <input type="time" value="{{ kt.form.tob }}" onChange="{{ kt.setTob }}" style="padding:12px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C;font-weight:500">{{ kt.t.tobLabel }}
+              <input data-kinput="1" type="time" value="{{ kt.form.tob }}" onChange="{{ kt.setTob }}" style="padding:13px 14px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
             </label>
           </div>
-          <div style="position:relative;margin-top:16px;max-width:420px">
-            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ kt.t.placeLabel }}
-              <input type="text" value="{{ kt.form.placeQuery }}" onChange="{{ kt.onPlaceInput }}" placeholder="{{ kt.t.placePlaceholder }}" autocomplete="off" style="padding:12px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+          <div data-kfield-wrap="1" style="margin-top:16px;max-width:420px">
+            <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C;font-weight:500">{{ kt.t.placeLabel }}
+              <input data-kinput="1" type="text" value="{{ kt.form.placeQuery }}" onChange="{{ kt.onPlaceInput }}" placeholder="{{ kt.t.placePlaceholder }}" autocomplete="off" style="padding:13px 14px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
             </label>
             <sc-if value="{{ kt.showSuggestions }}" hint-placeholder-val="{{ false }}">
               <div style="position:absolute;top:100%;left:0;right:0;z-index:20;background:#fff;border:1px solid #E0D6C2;border-radius:10px;margin-top:4px;max-height:220px;overflow-y:auto;box-shadow:0 12px 30px rgba(4,10,26,.12)">
                 <sc-for list="{{ kt.citySuggestions }}" as="c" hint-placeholder-count="5">
-                  <button type="button" onClick="{{ c.onClick }}" style="display:block;width:100%;text-align:left;padding:10px 13px;border:0;border-bottom:1px solid #F2ECDD;background:#fff;cursor:pointer;font-family:inherit;font-size:13.5px;color:#15162B">{{ c.label }}</button>
+                  <button data-ksuggest-btn="1" type="button" onClick="{{ c.onClick }}" style="display:block;width:100%;text-align:left;padding:10px 13px;border:0;border-bottom:1px solid #F2ECDD;background:#fff;cursor:pointer;font-family:inherit;font-size:13.5px;color:#15162B">{{ c.label }}</button>
                 </sc-for>
               </div>
             </sc-if>
@@ -153,12 +173,12 @@
           <sc-if value="{{ kt.hasError }}" hint-placeholder-val="{{ false }}">
             <p style="margin:16px 0 0;padding:11px 14px;background:#FBEAE9;border:1px solid #F0C9C6;border-radius:10px;font-size:13.5px;color:#8A2A24">{{ kt.error }}</p>
           </sc-if>
-          <button type="button" onClick="{{ kt.submit }}" style="margin-top:22px;padding:14px 34px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer">{{ kt.t.submit }}</button>
+          <button data-ksubmit="1" type="button" onClick="{{ kt.submit }}" style="margin-top:22px;padding:14px 34px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(199,154,32,.28)">{{ kt.t.submit }}</button>
         </div>
       </sc-if>
 
       <sc-if value="{{ kt.isLoading }}" hint-placeholder-val="{{ false }}">
-        <div style="text-align:center;padding:70px 20px;background:#fff;border:1px solid #EAE2CE;border-radius:20px">
+        <div data-kcard="1" data-ktool-card="1" style="text-align:center;padding:70px 20px;background:#fff;border:1px solid #EAE2CE;border-radius:20px">
           <div style="width:38px;height:38px;margin:0 auto 18px;border-radius:50%;border:3px solid #EAE2CE;border-top-color:#D4AF37;animation:kgspin 0.8s linear infinite"></div>
           <p style="margin:0;font-size:15px;color:#4A4C5C">{{ kt.t.loading }}</p>
         </div>
@@ -167,7 +187,7 @@
 
       <sc-if value="{{ kt.isReport }}" hint-placeholder-val="{{ false }}">
         <div>
-          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px">
+          <div data-kreport-head="1" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px">
             <div>
               <p style="font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:#96742A;margin:0 0 8px">{{ kt.t.reportKicker }}</p>
               <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:600;margin:0;color:#0A1633">{{ kt.report.basicDetails.name }}</h2>
@@ -175,66 +195,104 @@
             <button type="button" onClick="{{ kt.backToForm }}" style="padding:10px 18px;background:#0A1633;color:#F3E3B0;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer">{{ kt.t.generateAnother }}</button>
           </div>
 
-          <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:20px" data-kg-tabs="1">
+          <div data-ktabs="1" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:20px">
             <sc-for list="{{ kt.tabs }}" as="t" hint-placeholder-count="7">
               <sc-if value="{{ t.active }}" hint-placeholder-val="{{ false }}">
-                <button type="button" onClick="{{ t.onClick }}" style="flex:0 0 auto;padding:10px 18px;border:1px solid #0A1633;border-radius:999px;background:#0A1633;color:#F3E3B0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;white-space:nowrap">{{ t.label }}</button>
+                <button data-ktab-btn="1" type="button" onClick="{{ t.onClick }}" style="flex:0 0 auto;padding:10px 18px;border:1px solid #0A1633;border-radius:999px;background:#0A1633;color:#F3E3B0;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:0 6px 16px rgba(10,22,51,.22)">{{ t.label }}</button>
               </sc-if>
               <sc-if value="{{ t.inactive }}" hint-placeholder-val="{{ true }}">
-                <button type="button" onClick="{{ t.onClick }}" style="flex:0 0 auto;padding:10px 18px;border:1px solid #EAE2CE;border-radius:999px;background:#fff;color:#4A4C5C;cursor:pointer;font-family:inherit;font-size:13.5px;white-space:nowrap">{{ t.label }}</button>
+                <button data-ktab-btn="1" type="button" onClick="{{ t.onClick }}" style="flex:0 0 auto;padding:10px 18px;border:1px solid #EAE2CE;border-radius:999px;background:#fff;color:#4A4C5C;cursor:pointer;font-family:inherit;font-size:13.5px;white-space:nowrap">{{ t.label }}</button>
               </sc-if>
             </sc-for>
           </div>
 
           <sc-if value="{{ kt.showBasic }}" hint-placeholder-val="{{ true }}">
             <div style="display:grid;gap:20px">
-              <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
+              <div data-kcard="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
                 <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.basicDetailsH }}</h3>
-                <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))">
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.nameF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.name }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.genderF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.gender }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.birthDateF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.birthDate }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.birthTimeF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.birthTime }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.birthPlaceF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.birthPlace }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.ascendantF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.ascendant }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.rashiF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.rashi }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.nakshatraF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.basicDetails.nakshatra }}</p></div>
-                </div>
+                <div style="overflow-x:auto"><table data-kdetail-table="1" aria-label="Basic birth details"><tbody>
+                  <tr><th>{{ kt.t.nameF }}</th><td>{{ kt.report.basicDetails.name }}</td><th>{{ kt.t.genderF }}</th><td>{{ kt.report.basicDetails.gender }}</td></tr>
+                  <tr><th>{{ kt.t.birthDateF }}</th><td>{{ kt.report.basicDetails.birthDate }}</td><th>{{ kt.t.birthTimeF }}</th><td>{{ kt.report.basicDetails.birthTime }}</td></tr>
+                  <tr><th>{{ kt.t.birthPlaceF }}</th><td>{{ kt.report.basicDetails.birthPlace }}</td><th>{{ kt.t.ascendantF }}</th><td>{{ kt.report.basicDetails.ascendant }}</td></tr>
+                  <tr><th>{{ kt.t.rashiF }}</th><td>{{ kt.report.basicDetails.rashi }}</td><th>{{ kt.t.nakshatraF }}</th><td>{{ kt.report.basicDetails.nakshatra }}</td></tr>
+                </tbody></table></div>
               </div>
 
-              <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
+              <div data-kcard="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
                 <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.kundliDetailsH }}</h3>
-                <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))">
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.nakshatraLordF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.nakshatraLord }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.charanF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.charan }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.yogF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.yog }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.karanF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.karan }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.tithiF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.tithi }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.tattvaF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.tattva }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.yunjaF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.yunja }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.payaF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.paya }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.nameAlphabetF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.nameAlphabet }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.varnaF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.varna }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.ganF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.gan }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.nadiF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.nadi }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.signLordF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.signLord }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.vashyaF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.vashya }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.yoniF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.yoni }}</p></div>
-                  <div><p style="margin:0;font-size:11px;color:#96742A;text-transform:uppercase;letter-spacing:.06em">{{ kt.t.ascendantLordF }}</p><p style="margin:4px 0 0;font-size:14.5px;color:#15162B">{{ kt.report.kundliDetails.ascendantLord }}</p></div>
-                </div>
+                <div style="overflow-x:auto"><table data-kdetail-table="1" aria-label="Kundli details"><tbody>
+                  <tr><th>{{ kt.t.nakshatraLordF }}</th><td>{{ kt.report.kundliDetails.nakshatraLord }}</td><th>{{ kt.t.charanF }}</th><td>{{ kt.report.kundliDetails.charan }}</td></tr>
+                  <tr><th>{{ kt.t.yogF }}</th><td>{{ kt.report.kundliDetails.yog }}</td><th>{{ kt.t.karanF }}</th><td>{{ kt.report.kundliDetails.karan }}</td></tr>
+                  <tr><th>{{ kt.t.tithiF }}</th><td>{{ kt.report.kundliDetails.tithi }}</td><th>{{ kt.t.tattvaF }}</th><td>{{ kt.report.kundliDetails.tattva }}</td></tr>
+                  <tr><th>{{ kt.t.yunjaF }}</th><td>{{ kt.report.kundliDetails.yunja }}</td><th>{{ kt.t.payaF }}</th><td>{{ kt.report.kundliDetails.paya }}</td></tr>
+                  <tr><th>{{ kt.t.nameAlphabetF }}</th><td>{{ kt.report.kundliDetails.nameAlphabet }}</td><th>{{ kt.t.varnaF }}</th><td>{{ kt.report.kundliDetails.varna }}</td></tr>
+                  <tr><th>{{ kt.t.ganF }}</th><td>{{ kt.report.kundliDetails.gan }}</td><th>{{ kt.t.nadiF }}</th><td>{{ kt.report.kundliDetails.nadi }}</td></tr>
+                  <tr><th>{{ kt.t.signLordF }}</th><td>{{ kt.report.kundliDetails.signLord }}</td><th>{{ kt.t.vashyaF }}</th><td>{{ kt.report.kundliDetails.vashya }}</td></tr>
+                  <tr><th>{{ kt.t.yoniF }}</th><td>{{ kt.report.kundliDetails.yoni }}</td><th>{{ kt.t.ascendantLordF }}</th><td>{{ kt.report.kundliDetails.ascendantLord }}</td></tr>
+                </tbody></table></div>
               </div>
 
-              <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:16px;padding:20px 24px">
-                <h3 style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:17px;color:#4A3312">{{ kt.t.favourableH }}</h3>
-                <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.favourableBody }} <a onClick="{{ kt.openConsult }}" href="javascript:void(0)" style="color:#8A6A12;text-decoration:underline">{{ kt.t.requestReading }}</a></p>
+              <div data-kcard="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
+                <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.favourableH }}</h3>
+                <sc-if value="{{ kt.numerology.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:20px;height:20px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgnumspin 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13.5px;color:#6B5230">{{ kt.t.numerologyLoading }}</p>
+                  </div>
+                  <style>@keyframes kgnumspin{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.numerology.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.numerologyError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.numerology.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <div style="overflow-x:auto"><table data-kdetail-table="1" aria-label="Favourable numerology"><tbody>
+                    <sc-for list="{{ kt.numerology.rows }}" as="nr" hint-placeholder-count="6">
+                      <tr><th>{{ nr.label }}</th><td colspan="3">{{ nr.value }}</td></tr>
+                    </sc-for>
+                  </tbody></table></div>
+                </sc-if>
               </div>
+
             </div>
           </sc-if>
 
           <sc-if value="{{ kt.showPredictions }}" hint-placeholder-val="{{ false }}">
-            <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:16px;padding:24px">
-              <h3 style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#4A3312">{{ kt.t.predictionsH }}</h3>
-              <p style="margin:0;font-size:14px;color:#6B5230;line-height:1.75">{{ kt.t.predictionsBody }} <a onClick="{{ kt.openConsult }}" href="javascript:void(0)" style="color:#8A6A12;text-decoration:underline">{{ kt.t.requestReading }}</a></p>
+            <div style="display:grid;gap:16px">
+              <div data-kcard="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
+                <h3 style="margin:0 0 16px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.predictionsH }}</h3>
+                <sc-if value="{{ kt.nakshatraPrediction.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:20px;height:20px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgnpspin2 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13.5px;color:#6B5230">{{ kt.t.nakshatraPredictionLoading }}</p>
+                  </div>
+                  <style>@keyframes kgnpspin2{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.nakshatraPrediction.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.nakshatraPredictionError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.nakshatraPrediction.isEmpty }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.nakshatraPredictionEmpty }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.nakshatraPrediction.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:grid;gap:18px">
+                    <sc-for list="{{ kt.nakshatraPrediction.categories }}" as="npc" hint-placeholder-count="6">
+                      <div style="display:flex;gap:14px;align-items:flex-start">
+                        <div style="flex-shrink:0;width:32px;height:32px;border-radius:9px;background:#D4AF37;display:flex;align-items:center;justify-content:center">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A1633" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V6l-8-4Z"/><path d="M9.5 11.5 11 13l3.5-3.5"/></svg>
+                        </div>
+                        <div>
+                          <h4 style="margin:0 0 4px;font-size:15.5px;font-weight:700;color:#15162B">{{ npc.label }}</h4>
+                          <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ npc.text }}</p>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+
+              <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:16px;padding:20px 24px">
+                <p style="margin:0;font-size:14px;color:#6B5230;line-height:1.75">{{ kt.t.predictionsBody }} <a onClick="{{ kt.openConsult }}" href="javascript:void(0)" style="color:#8A6A12;text-decoration:underline">{{ kt.t.requestReading }}</a></p>
+              </div>
             </div>
           </sc-if>
 
@@ -245,7 +303,7 @@
                 <table style="width:100%;border-collapse:collapse;min-width:760px;font-size:13.5px">
                   <thead>
                     <tr style="background:#F6EFE2;text-align:left">
-                      <th style="padding:12px 14px;font-weight:600;color:#4A3312">{{ kt.t.colPlanet }}</th>
+                      <th data-kfirstcol="1" style="padding:12px 14px;font-weight:600;color:#4A3312">{{ kt.t.colPlanet }}</th>
                       <th style="padding:12px 14px;font-weight:600;color:#4A3312">{{ kt.t.colSign }}</th>
                       <th style="padding:12px 14px;font-weight:600;color:#4A3312">{{ kt.t.colSignLord }}</th>
                       <th style="padding:12px 14px;font-weight:600;color:#4A3312">{{ kt.t.colDegree }}</th>
@@ -257,7 +315,7 @@
                   <tbody>
                     <sc-for list="{{ kt.planetRows }}" as="pr" hint-placeholder-count="9">
                       <tr style="border-top:1px solid #EAE2CE">
-                        <td style="padding:11px 14px;font-weight:500;color:#0A1633;white-space:nowrap">{{ pr.symbol }} {{ pr.nameLine }}</td>
+                        <td data-kfirstcol="1" style="padding:11px 14px;font-weight:500;color:#0A1633;white-space:nowrap">{{ pr.symbol }} {{ pr.nameLine }}</td>
                         <td style="padding:11px 14px">{{ pr.sign }}</td>
                         <td style="padding:11px 14px">{{ pr.signLord }}</td>
                         <td style="padding:11px 14px">{{ pr.degree }}</td>
@@ -275,9 +333,9 @@
           <sc-if value="{{ kt.showChart }}" hint-placeholder-val="{{ false }}">
             <div>
               <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.chartH }}</h3>
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px">
                 <sc-for list="{{ kt.chartTypes }}" as="ct" hint-placeholder-count="4">
-                  <div style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:14px">
+                  <div data-kcard="1" data-khouse-card="1" data-kchart="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:18px;padding:22px">
                     <div style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:15.5px;font-weight:600;color:#0A1633;margin-bottom:10px">{{ ct.label }}</div>
                     <div style="position:relative;width:100%;aspect-ratio:1/1">
                       <svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
@@ -287,7 +345,7 @@
                         <polygon points="50,0 100,50 50,100 0,50" fill="none" stroke="#D4AF37" stroke-width="0.6"/>
                       </svg>
                       <sc-for list="{{ ct.houses }}" as="h" hint-placeholder-count="12">
-                        <div style="{{ h.posStyle }}"><div style="font-size:8px;color:#96742A">{{ h.sign }}</div><div style="font-size:10.5px;font-weight:600;color:#0A1633">{{ h.planets }}</div></div>
+                        <div style="{{ h.posStyle }}"><div style="font-size:11px;color:#96742A">{{ h.sign }}</div><div style="font-size:14px;font-weight:600;color:#0A1633">{{ h.planets }}</div></div>
                       </sc-for>
                     </div>
                   </div>
@@ -300,32 +358,91 @@
 
           <sc-if value="{{ kt.showDosha }}" hint-placeholder-val="{{ false }}">
             <div style="display:grid;gap:16px">
-              <div style="{{ kt.manglik.cardStyle }}">
+              <div data-kcard="1" style="{{ kt.manglik.cardStyle }}">
                 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
                   <h4 style="margin:0;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ kt.t.manglikH }}</h4>
-                  <span style="{{ kt.manglik.badgeStyle }}">{{ kt.manglik.verdict }}</span>
+                  <sc-if value="{{ kt.manglik.isSuccess }}" hint-placeholder-val="{{ false }}">
+                    <span style="{{ kt.manglik.badgeStyle }}">{{ kt.manglik.verdict }}</span>
+                  </sc-if>
                 </div>
-                <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.manglik.detail }}</p>
+                <sc-if value="{{ kt.manglik.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:18px;height:18px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgmanglikspin 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13px;color:#6B5230">{{ kt.t.manglikLoading }}</p>
+                  </div>
+                  <style>@keyframes kgmanglikspin{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.manglik.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.t.manglikError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.manglik.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.manglik.detail }}</p>
+                </sc-if>
               </div>
-              <div style="{{ kt.kaalSarp.cardStyle }}">
+              <div data-kcard="1" style="{{ kt.kaalSarp.cardStyle }}">
                 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
                   <h4 style="margin:0;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ kt.t.kaalSarpH }}</h4>
-                  <span style="{{ kt.kaalSarp.badgeStyle }}">{{ kt.kaalSarp.verdict }}</span>
+                  <sc-if value="{{ kt.kaalSarp.isSuccess }}" hint-placeholder-val="{{ false }}">
+                    <span style="{{ kt.kaalSarp.badgeStyle }}">{{ kt.kaalSarp.verdict }}</span>
+                  </sc-if>
                 </div>
-                <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.kaalSarp.detail }}</p>
+                <sc-if value="{{ kt.kaalSarp.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:18px;height:18px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgkaalsarpspin 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13px;color:#6B5230">{{ kt.t.kaalSarpLoading }}</p>
+                  </div>
+                  <style>@keyframes kgkaalsarpspin{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.kaalSarp.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.t.kaalSarpError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.kaalSarp.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.kaalSarp.detail }}</p>
+                </sc-if>
               </div>
-              <div style="{{ kt.sadeSati.cardStyle }}">
+              <div data-kcard="1" style="{{ kt.sadeSati.cardStyle }}">
                 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
                   <h4 style="margin:0;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ kt.t.sadeSatiH }}</h4>
-                  <span style="{{ kt.sadeSati.badgeStyle }}">{{ kt.sadeSati.verdict }}</span>
+                  <sc-if value="{{ kt.sadeSati.isSuccess }}" hint-placeholder-val="{{ false }}">
+                    <span style="{{ kt.sadeSati.badgeStyle }}">{{ kt.sadeSati.verdict }}</span>
+                  </sc-if>
                 </div>
-                <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.sadeSati.detail }}</p>
+                <sc-if value="{{ kt.sadeSati.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:18px;height:18px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgsadesatispin 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13px;color:#6B5230">{{ kt.t.sadeSatiLoading }}</p>
+                  </div>
+                  <style>@keyframes kgsadesatispin{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.sadeSati.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.t.sadeSatiError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.sadeSati.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.sadeSati.detail }}</p>
+                </sc-if>
               </div>
-              <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:14px;padding:18px 20px">
-                <h4 style="margin:0 0 6px;font-family:'Cormorant Garamond',serif;font-size:16px;color:#4A3312">{{ kt.t.pitruH }}</h4>
-                <p style="margin:0;font-size:13px;color:#6B5230;line-height:1.6">{{ kt.t.pitruBody }}</p>
+              <div data-kcard="1" style="{{ kt.pitraDosh.cardStyle }}">
+                <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+                  <h4 style="margin:0;font-family:'Cormorant Garamond',serif;font-size:17px;color:#0A1633">{{ kt.t.pitruH }}</h4>
+                  <sc-if value="{{ kt.pitraDosh.isSuccess }}" hint-placeholder-val="{{ false }}">
+                    <span style="{{ kt.pitraDosh.badgeStyle }}">{{ kt.pitraDosh.verdict }}</span>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ kt.pitraDosh.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:18px;height:18px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgpitraspin 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13px;color:#6B5230">{{ kt.t.pitraDoshLoading }}</p>
+                  </div>
+                  <style>@keyframes kgpitraspin{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.pitraDosh.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.t.pitraDoshError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.pitraDosh.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.pitraDosh.detail }}</p>
+                </sc-if>
               </div>
-              <div style="background:#0A1633;border-radius:14px;padding:18px 20px;color:#F4F2EA">
+              <div data-kcard="1" style="background:#0A1633;border-radius:14px;padding:18px 20px;color:#F4F2EA">
                 <h4 style="margin:0 0 8px;font-family:'Cormorant Garamond',serif;font-size:16px;color:#F3E3B0">{{ kt.t.doshaSummaryH }}</h4>
                 <p style="margin:0;font-size:13.5px;line-height:1.7">{{ kt.doshaSummaryText }}</p>
               </div>
@@ -333,44 +450,56 @@
           </sc-if>
 
           <sc-if value="{{ kt.showDashaTab }}" hint-placeholder-val="{{ false }}">
-            <div style="display:grid;gap:20px">
-              <div style="background:linear-gradient(135deg,#0A1633,#16264F);border-radius:16px;padding:22px 24px;color:#F4F2EA">
-                <p style="margin:0 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#E8D391">{{ kt.t.currentDashaLabel }}</p>
-                <h3 style="margin:0 0 4px;font-family:'Cormorant Garamond',serif;font-size:24px;color:#FBF7EA">{{ kt.dasha.currentMahadashaPlanet }} {{ kt.t.mahadashaWord }}</h3>
-                <p style="margin:0 0 14px;font-size:13px;color:rgba(232,232,240,.75)">{{ kt.dasha.currentMahadashaRange }}</p>
-                <p style="margin:0;font-size:14.5px;color:#E8D391">{{ kt.dasha.currentAntardashaPlanet }} {{ kt.t.antardashaWord }} · {{ kt.dasha.currentAntardashaRange }}</p>
+            <sc-if value="{{ kt.dasha.isLoading }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:center;gap:12px;padding:22px 4px">
+                <div style="width:20px;height:20px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgdashaspin 0.8s linear infinite"></div>
+                <p style="margin:0;font-size:13.5px;color:#6B5230">{{ kt.t.dashaLoading }}</p>
               </div>
-              <div>
-                <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.mahadashaTableH }}</h3>
-                <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #EAE2CE;border-radius:14px">
-                  <table style="width:100%;border-collapse:collapse;min-width:420px;font-size:13.5px">
-                    <thead>
-                      <tr style="background:#F6EFE2;text-align:left">
-                        <th style="padding:11px 14px;font-weight:600;color:#4A3312">{{ kt.t.colPlanetDasha }}</th>
-                        <th style="padding:11px 14px;font-weight:600;color:#4A3312">{{ kt.t.colStart }}</th>
-                        <th style="padding:11px 14px;font-weight:600;color:#4A3312">{{ kt.t.colEnd }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <sc-for list="{{ kt.dasha.rows }}" as="dr" hint-placeholder-count="9">
-                        <tr style="{{ dr.rowStyle }}">
-                          <td style="padding:10px 14px;font-weight:500;color:#0A1633">{{ dr.planet }}</td>
-                          <td style="padding:10px 14px">{{ dr.start }}</td>
-                          <td style="padding:10px 14px">{{ dr.end }}</td>
-                        </tr>
-                      </sc-for>
-                    </tbody>
-                  </table>
+              <style>@keyframes kgdashaspin{to{transform:rotate(360deg)}}</style>
+            </sc-if>
+            <sc-if value="{{ kt.dasha.isError }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.dashaError }}</p>
+            </sc-if>
+            <sc-if value="{{ kt.dasha.isSuccess }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;gap:20px">
+                <div data-kcard="1" style="background:linear-gradient(135deg,#0A1633,#16264F);border-radius:16px;padding:22px 24px;color:#F4F2EA">
+                  <p style="margin:0 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#E8D391">{{ kt.t.currentDashaLabel }}</p>
+                  <h3 style="margin:0 0 4px;font-family:'Cormorant Garamond',serif;font-size:24px;color:#FBF7EA">{{ kt.dasha.currentMahadashaPlanet }} {{ kt.t.mahadashaWord }}</h3>
+                  <p style="margin:0 0 14px;font-size:13px;color:rgba(232,232,240,.75)">{{ kt.dasha.currentMahadashaRange }}</p>
+                  <p style="margin:0;font-size:14.5px;color:#E8D391">{{ kt.dasha.currentAntardashaPlanet }} {{ kt.t.antardashaWord }} · {{ kt.dasha.currentAntardashaRange }}</p>
                 </div>
-                <p style="margin:12px 0 0;font-size:12.5px;color:#8A8C9A">{{ kt.t.dashaNote }}</p>
+                <div>
+                  <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.mahadashaTableH }}</h3>
+                  <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #EAE2CE;border-radius:14px">
+                    <table style="width:100%;border-collapse:collapse;min-width:420px;font-size:13.5px">
+                      <thead>
+                        <tr style="background:#F6EFE2;text-align:left">
+                          <th data-kfirstcol="1" style="padding:11px 14px;font-weight:600;color:#4A3312">{{ kt.t.colPlanetDasha }}</th>
+                          <th style="padding:11px 14px;font-weight:600;color:#4A3312">{{ kt.t.colStart }}</th>
+                          <th style="padding:11px 14px;font-weight:600;color:#4A3312">{{ kt.t.colEnd }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <sc-for list="{{ kt.dasha.rows }}" as="dr" hint-placeholder-count="9">
+                          <tr style="{{ dr.rowStyle }}">
+                            <td data-kfirstcol="1" style="padding:10px 14px;font-weight:500;color:#0A1633">{{ dr.planet }}</td>
+                            <td style="padding:10px 14px">{{ dr.start }}</td>
+                            <td style="padding:10px 14px">{{ dr.end }}</td>
+                          </tr>
+                        </sc-for>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p style="margin:12px 0 0;font-size:12.5px;color:#8A8C9A">{{ kt.t.dashaNote }}</p>
+                </div>
               </div>
-            </div>
+            </sc-if>
           </sc-if>
 
           <sc-if value="{{ kt.showRemedies }}" hint-placeholder-val="{{ false }}">
             <div style="display:grid;gap:16px">
               <sc-for list="{{ kt.remedyCards }}" as="rc" hint-placeholder-count="1">
-                <div style="background:#fff;border:1px solid #EAE2CE;border-left:3px solid #D4AF37;border-radius:14px;padding:18px 20px">
+                <div data-kcard="1" style="background:#fff;border:1px solid #EAE2CE;border-left:3px solid #D4AF37;border-radius:14px;padding:18px 20px">
                   <h4 style="margin:0 0 6px;font-family:'Cormorant Garamond',serif;font-size:16px;color:#0A1633">{{ rc.title }}</h4>
                   <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ rc.body }}</p>
                 </div>
@@ -380,6 +509,66 @@
                   <p style="margin:0;font-size:14px;color:#6B5230;line-height:1.7">{{ kt.t.remediesNoneText }}</p>
                 </div>
               </sc-if>
+
+              <div data-kcard="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
+                <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.gemstoneH }}</h3>
+                <sc-if value="{{ kt.gemstone.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:20px;height:20px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kggemspin 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13.5px;color:#6B5230">{{ kt.t.gemstoneLoading }}</p>
+                  </div>
+                  <style>@keyframes kggemspin{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.gemstone.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.gemstoneError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.gemstone.isEmpty }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.gemstoneEmpty }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.gemstone.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+                    <sc-for list="{{ kt.gemstone.categories }}" as="gc" hint-placeholder-count="3">
+                      <div data-kcard="1" style="border:1px solid #EAE2CE;border-radius:14px;padding:16px;background:#fff">
+                        <sc-if value="{{ gc.image }}" hint-placeholder-val="{{ true }}">
+                          <img src="{{ gc.image }}" alt="{{ gc.label }}" loading="lazy" style="width:100%;height:220px;object-fit:cover;border-radius:10px;margin:0 0 10px;display:block">
+                        </sc-if>
+                        <p style="margin:0 0 10px;font-size:14px;font-weight:600;color:#4A3312">{{ gc.label }}</p>
+                        <sc-for list="{{ gc.rows }}" as="gr" hint-placeholder-count="7">
+                          <div style="display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:1px solid #F2ECDD">
+                            <span style="font-size:12.5px;color:#8A8C9A">{{ gr.label }}</span>
+                            <span style="font-size:12.5px;color:#15162B;font-weight:500;text-align:right">{{ gr.value }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+
+              <div data-kcard="1" style="background:#fff;border:1px solid #EAE2CE;border-radius:16px;padding:22px 24px">
+                <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond',serif;font-size:19px;color:#0A1633">{{ kt.t.rudrakshaH }}</h3>
+                <sc-if value="{{ kt.rudraksha.isLoading }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:20px;height:20px;flex-shrink:0;border-radius:50%;border:2.5px solid #EAE2CE;border-top-color:#D4AF37;animation:kgrudrspin 0.8s linear infinite"></div>
+                    <p style="margin:0;font-size:13.5px;color:#6B5230">{{ kt.t.rudrakshaLoading }}</p>
+                  </div>
+                  <style>@keyframes kgrudrspin{to{transform:rotate(360deg)}}</style>
+                </sc-if>
+                <sc-if value="{{ kt.rudraksha.isError }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.rudrakshaError }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.rudraksha.isEmpty }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font-size:13.5px;color:#6B5230;line-height:1.7">{{ kt.t.rudrakshaEmpty }}</p>
+                </sc-if>
+                <sc-if value="{{ kt.rudraksha.isSuccess }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:grid;gap:8px">
+                    <p style="margin:0;font-size:15px;font-weight:600;color:#0A1633">{{ kt.rudraksha.name }}</p>
+                    <p style="margin:0;font-size:13.5px;color:#4A3312">{{ kt.rudraksha.recommend }}</p>
+                    <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.65">{{ kt.rudraksha.detail }}</p>
+                  </div>
+                </sc-if>
+              </div>
+
               <div style="background:#F6EFE2;border:1px solid #E4D8C2;border-radius:14px;padding:16px 20px">
                 <p style="margin:0;font-size:12.5px;color:#6B5230;line-height:1.6">{{ kt.t.remediesFooter }} <a onClick="{{ kt.openConsult }}" href="javascript:void(0)" style="color:#8A6A12;text-decoration:underline">{{ kt.t.requestReading }}</a></p>
               </div>
@@ -410,7 +599,7 @@
       <p style="margin:0 0 22px;font-size:15px;color:#6B6D7C;max-width:60ch">{{ p.subLede }}</p>
       <div style="display:grid;gap:13px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))">
         <sc-for list="{{ p.subs }}" as="s" hint-placeholder-count="9">
-          <a href="{{ s.href }}" style="display:block;padding:19px 20px;background:#fff;border:1px solid #EAE2CE;border-radius:14px;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:#D4AF37;transform:translateY(-3px)">
+          <a data-ksub-card="1" href="{{ s.href }}" style="display:block;padding:19px 20px;background:#fff;border:1px solid #EAE2CE;border-radius:14px;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease" style-hover="border-color:#D4AF37;transform:translateY(-3px)">
             <p style="margin:0 0 5px;font-size:16px;font-weight:500;color:#0A1633">{{ s.name }}</p>
             <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.6">{{ s.desc }}</p>
           </a>
@@ -855,7 +1044,19 @@ class Component extends DCLogic {
     kundli: {
       view: "form",
       form: { name: "", gender: "Male", dob: "", tob: "", placeQuery: "", place: null },
-      citySuggestions: [], citySearchDone: false, error: "", activeTab: "basic", report: null
+      citySuggestions: [], citySearchDone: false, error: "", activeTab: "basic", report: null,
+      numerology: { status: "idle", data: null },
+      nakshatraPrediction: { status: "idle", data: null },
+      nakshatraPredictionHi: { status: "idle", categories: null },
+      manglik: { status: "idle", data: null },
+      kalsarp: { status: "idle", data: null },
+      pitraDosh: { status: "idle", data: null },
+      sadeSatiStatus: { status: "idle", data: null },
+      sadeSatiRemedies: { status: "idle", data: null },
+      majorDasha: { status: "idle", data: null },
+      currentDasha: { status: "idle", data: null },
+      gemstone: { status: "idle", data: null },
+      rudraksha: { status: "idle", data: null }
     } };
 
   _kUpdate(patch) {
@@ -914,14 +1115,83 @@ class Component extends DCLogic {
         lat: loc.lat, lon: loc.lon, tzone: tzone, city: loc.city
       };
       const report = await window.KundliEngine.fetchKundli(person);
-      this._kUpdate({ view: "report", report: report, activeTab: "basic" });
+      this._kUpdate({
+        view: "report", report: report, activeTab: "basic",
+        ...this._idleSectionStates()
+      });
+      this._fetchNumerology(person);
+      this._fetchNakshatraPrediction(person);
+      this._fetchSection("manglik", window.KundliEngine.fetchManglik, person);
+      this._fetchSection("kalsarp", window.KundliEngine.fetchKalsarpa, person);
+      this._fetchSection("pitraDosh", window.KundliEngine.fetchPitraDosh, person);
+      this._fetchSection("sadeSatiStatus", window.KundliEngine.fetchSadeSatiStatus, person);
+      this._fetchSection("sadeSatiRemedies", window.KundliEngine.fetchSadeSatiRemedies, person);
+      this._fetchSection("majorDasha", window.KundliEngine.fetchMajorDasha, person);
+      this._fetchSection("currentDasha", window.KundliEngine.fetchCurrentDasha, person);
+      this._fetchSection("gemstone", window.KundliEngine.fetchGemstoneSuggestion, person);
+      this._fetchSection("rudraksha", window.KundliEngine.fetchRudrakshaSuggestion, person);
     } catch (e) {
       console.error("Kundli generation failed:", e);
       this._kUpdate({ view: "form", error: this._kt().errorGeneric });
     }
   }
+  _idleSectionStates() {
+    return {
+      numerology: { status: "idle", data: null },
+      nakshatraPrediction: { status: "idle", data: null },
+      nakshatraPredictionHi: { status: "idle", categories: null },
+      manglik: { status: "idle", data: null },
+      kalsarp: { status: "idle", data: null },
+      pitraDosh: { status: "idle", data: null },
+      sadeSatiStatus: { status: "idle", data: null },
+      sadeSatiRemedies: { status: "idle", data: null },
+      majorDasha: { status: "idle", data: null },
+      currentDasha: { status: "idle", data: null },
+      gemstone: { status: "idle", data: null },
+      rudraksha: { status: "idle", data: null }
+    };
+  }
+  async _fetchSection(key, fetcher, person) {
+    this._kUpdate({ [key]: { status: "loading", data: null } });
+    try {
+      const data = await fetcher(person);
+      this._kUpdate({ [key]: { status: "success", data: data } });
+    } catch (e) {
+      console.error(key + " fetch failed:", e);
+      this._kUpdate({ [key]: { status: "error", data: null } });
+    }
+  }
+  async _fetchNumerology(person) { return this._fetchSection("numerology", window.KundliEngine.fetchNumerology, person); }
+  async _fetchNakshatraPrediction(person) {
+    this._kUpdate({ nakshatraPrediction: { status: "loading", data: null }, nakshatraPredictionHi: { status: "idle", categories: null } });
+    try {
+      const data = await window.KundliEngine.fetchNakshatraPrediction(person);
+      this._kUpdate({ nakshatraPrediction: { status: "success", data: data } });
+      this._maybeTranslateNakshatraPrediction(data);
+    } catch (e) {
+      console.error("nakshatraPrediction fetch failed:", e);
+      this._kUpdate({ nakshatraPrediction: { status: "error", data: null } });
+    }
+  }
+  // The prediction API has no language switch and always answers in English;
+  // for the Hindi UI the text is translated client-side (see
+  // KundliEngine.translateCategoriesToHindi) rather than invented here.
+  _maybeTranslateNakshatraPrediction(data, langOverride) {
+    const lang = langOverride || this.state.lang;
+    if (lang !== "hi" || !data) return;
+    const existing = this.state.kundli.nakshatraPredictionHi;
+    if (existing && (existing.status === "loading" || existing.status === "done")) return;
+    const categories = window.KundliEngine.buildNakshatraPredictionCategories(data, window.KundliEngine.KT_STRINGS.hi);
+    if (!categories.length) return;
+    this._kUpdate({ nakshatraPredictionHi: { status: "loading", categories: null } });
+    window.KundliEngine.translateCategoriesToHindi(categories).then(translated => {
+      this._kUpdate({ nakshatraPredictionHi: { status: "done", categories: translated } });
+    });
+  }
   _setKTab(key) { return () => this._kUpdate({ activeTab: key }); }
-  _backToKundliForm() { this._kUpdate({ view: "form" }); }
+  _backToKundliForm() {
+    this._kUpdate({ view: "form", ...this._idleSectionStates() });
+  }
 
   componentDidMount() {
     this._onScroll = () => {
@@ -1005,15 +1275,138 @@ class Component extends DCLogic {
       { key: "navamsa", label: T.chartNavamsa }
     ];
     const dateFmt = new Intl.DateTimeFormat(hi ? "hi-IN" : "en-IN", { day: "2-digit", month: "short", year: "numeric" });
-    const fillTemplate = (str, vals) => Object.keys(vals).reduce((s, k) => s.split("{" + k + "}").join(vals[k]), str);
     const badgeStyle = ok => "font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:" + (ok ? "#E7F3E9;color:#1F6B34" : "#F2ECDD;color:#6B6D7C");
     const cardStyle = ok => "background:#fff;border:1px solid #EAE2CE;border-left:3px solid " + (ok ? "#C0392B" : "#8FAE8F") + ";border-radius:14px;padding:18px 20px";
-    let kManglik = { verdict: "", detail: "", cardStyle: cardStyle(false), badgeStyle: badgeStyle(false) };
-    let kKaalSarp = { verdict: "", detail: "", cardStyle: cardStyle(false), badgeStyle: badgeStyle(false) };
-    let kSadeSati = { verdict: "", detail: "", cardStyle: cardStyle(false), badgeStyle: badgeStyle(false) };
-    let kDoshaSummary = "";
-    let kDasha = { currentMahadashaPlanet: NA, currentMahadashaRange: "", currentAntardashaPlanet: NA, currentAntardashaRange: "", rows: [] };
+    const statusOf = key => (K[key] && K[key].status) || "idle";
+    const emptyVerdictCard = () => ({ isLoading: false, isError: false, isSuccess: false, verdict: "", detail: "", cardStyle: cardStyle(false), badgeStyle: badgeStyle(false) });
+
+    const kManglikStatus = statusOf("manglik");
+    let kManglik = Object.assign(emptyVerdictCard(), { isLoading: kManglikStatus === "loading", isError: kManglikStatus === "error" });
+    if (kManglikStatus === "success" && K.manglik.data) {
+      const m = K.manglik.data;
+      const isYes = !!m.is_present;
+      kManglik = Object.assign(kManglik, {
+        isSuccess: true, verdict: isYes ? T.verdictPresent : T.verdictNotPresent,
+        detail: m.manglik_report || (isYes ? T.verdictPresent : T.verdictNotPresent),
+        cardStyle: cardStyle(isYes), badgeStyle: badgeStyle(isYes)
+      });
+    }
+
+    const kKaalSarpStatus = statusOf("kalsarp");
+    let kKaalSarp = Object.assign(emptyVerdictCard(), { isLoading: kKaalSarpStatus === "loading", isError: kKaalSarpStatus === "error" });
+    if (kKaalSarpStatus === "success" && K.kalsarp.data) {
+      const ks = K.kalsarp.data;
+      const isYes = !!ks.present;
+      kKaalSarp = Object.assign(kKaalSarp, {
+        isSuccess: true, verdict: isYes ? T.verdictPresent : T.verdictNotPresent,
+        detail: ks.report || ks.one_line || (isYes ? T.verdictPresent : T.verdictNotPresent),
+        cardStyle: cardStyle(isYes), badgeStyle: badgeStyle(isYes)
+      });
+    }
+
+    const kSadeSatiStatusApi = statusOf("sadeSatiStatus");
+    let kSadeSati = Object.assign(emptyVerdictCard(), { isLoading: kSadeSatiStatusApi === "loading", isError: kSadeSatiStatusApi === "error" });
+    if (kSadeSatiStatusApi === "success" && K.sadeSatiStatus.data) {
+      const ss = K.sadeSatiStatus.data;
+      const isActive = !!ss.sadhesati_status;
+      kSadeSati = Object.assign(kSadeSati, {
+        isSuccess: true, verdict: isActive ? T.verdictActive : T.verdictNotActive,
+        detail: ss.is_undergoing_sadhesati || (isActive ? T.verdictActive : T.verdictNotActive),
+        cardStyle: cardStyle(isActive), badgeStyle: badgeStyle(isActive)
+      });
+    }
+
+    const kPitraDoshStatus = statusOf("pitraDosh");
+    let kPitraDosh = Object.assign(emptyVerdictCard(), { isLoading: kPitraDoshStatus === "loading", isError: kPitraDoshStatus === "error" });
+    if (kPitraDoshStatus === "success" && K.pitraDosh.data) {
+      const pd = K.pitraDosh.data;
+      const isYes = !!pd.is_pitri_dosha_present;
+      kPitraDosh = Object.assign(kPitraDosh, {
+        isSuccess: true, verdict: isYes ? T.verdictPresent : T.verdictNotPresent,
+        detail: pd.conclusion || (isYes ? T.verdictPresent : T.verdictNotPresent),
+        cardStyle: cardStyle(isYes), badgeStyle: badgeStyle(isYes)
+      });
+    }
+
+    const kDoshaSummary = [
+      T.manglikH + ": " + (kManglik.isSuccess ? kManglik.verdict : NA),
+      T.kaalSarpH + ": " + (kKaalSarp.isSuccess ? kKaalSarp.verdict : NA),
+      T.sadeSatiH + ": " + (kSadeSati.isSuccess ? kSadeSati.verdict : NA),
+      T.pitruH + ": " + (kPitraDosh.isSuccess ? kPitraDosh.verdict : NA)
+    ].join("  ·  ");
+
     let kRemedyCards = [];
+    if (kManglik.isSuccess && kManglik.verdict === T.verdictPresent) kRemedyCards.push({ title: T.manglikH, body: T.remediesManglik });
+    if (kKaalSarp.isSuccess && kKaalSarp.verdict === T.verdictPresent) kRemedyCards.push({ title: T.kaalSarpH, body: T.remediesKaalSarp });
+    if (kPitraDosh.isSuccess && kPitraDosh.verdict === T.verdictPresent && K.pitraDosh.data && Array.isArray(K.pitraDosh.data.remedies) && K.pitraDosh.data.remedies.length) {
+      kRemedyCards.push({ title: T.pitruH, body: T.remediesPitraDosh + " " + K.pitraDosh.data.remedies.join(" ") });
+    }
+    if (kSadeSati.isSuccess && kSadeSati.verdict === T.verdictActive && statusOf("sadeSatiRemedies") === "success" && K.sadeSatiRemedies.data && Array.isArray(K.sadeSatiRemedies.data.remedies) && K.sadeSatiRemedies.data.remedies.length) {
+      kRemedyCards.push({ title: T.sadeSatiH, body: T.remediesSadeSatiListIntro + " " + K.sadeSatiRemedies.data.remedies.join(" ") });
+    }
+
+    const kMajorDashaStatus = statusOf("majorDasha");
+    const kCurrentDashaStatus = statusOf("currentDasha");
+    const kDashaLoading = kMajorDashaStatus === "loading" || kCurrentDashaStatus === "loading";
+    const kDashaError = !kDashaLoading && (kMajorDashaStatus === "error" || kCurrentDashaStatus === "error");
+    let kDasha = { isLoading: kDashaLoading, isError: kDashaError, isSuccess: false, currentMahadashaPlanet: NA, currentMahadashaRange: "", currentAntardashaPlanet: NA, currentAntardashaRange: "", rows: [] };
+    if (kMajorDashaStatus === "success" && kCurrentDashaStatus === "success") {
+      const levels = window.KundliEngine.buildCurrentDashaLevels(K.currentDasha.data) || {};
+      const rows = window.KundliEngine.buildMajorDashaRows(K.majorDasha.data);
+      const majorLevel = levels.major, minorLevel = levels.minor;
+      kDasha = {
+        isLoading: false, isError: false, isSuccess: true,
+        currentMahadashaPlanet: majorLevel ? majorLevel.planet : NA,
+        currentMahadashaRange: majorLevel && majorLevel.start && majorLevel.end ? (dateFmt.format(majorLevel.start) + " – " + dateFmt.format(majorLevel.end)) : "",
+        currentAntardashaPlanet: minorLevel ? minorLevel.planet : NA,
+        currentAntardashaRange: minorLevel && minorLevel.start && minorLevel.end ? (dateFmt.format(minorLevel.start) + " – " + dateFmt.format(minorLevel.end)) : "",
+        rows: rows.filter(m => m.start && m.end).map(m => ({
+          planet: m.planet, start: dateFmt.format(m.start), end: dateFmt.format(m.end),
+          rowStyle: "border-top:1px solid #EAE2CE" + (majorLevel && m.planet === majorLevel.planet && m.start.getTime() === majorLevel.start.getTime() ? ";background:#F6EFE2" : "")
+        }))
+      };
+    }
+
+    const kGemstoneStatus = statusOf("gemstone");
+    const kGemstoneCategories = kGemstoneStatus === "success" ? window.KundliEngine.buildGemstoneCategories(K.gemstone.data, T) : [];
+    const kGemstone = {
+      isLoading: kGemstoneStatus === "loading", isError: kGemstoneStatus === "error",
+      isSuccess: kGemstoneStatus === "success" && kGemstoneCategories.length > 0,
+      isEmpty: kGemstoneStatus === "success" && kGemstoneCategories.length === 0,
+      categories: kGemstoneCategories
+    };
+
+    const kRudrakshaStatus = statusOf("rudraksha");
+    const kRudrakshaData = K.rudraksha && K.rudraksha.data;
+    const kRudrakshaHasContent = !!(kRudrakshaData && (kRudrakshaData.name || kRudrakshaData.recommend || kRudrakshaData.detail));
+    const kRudraksha = {
+      isLoading: kRudrakshaStatus === "loading", isError: kRudrakshaStatus === "error",
+      isSuccess: kRudrakshaStatus === "success" && kRudrakshaHasContent,
+      isEmpty: kRudrakshaStatus === "success" && !kRudrakshaHasContent,
+      name: kRudrakshaData ? orNA(kRudrakshaData.name) : NA,
+      recommend: kRudrakshaData ? orNA(kRudrakshaData.recommend) : NA,
+      detail: kRudrakshaData ? orNA(kRudrakshaData.detail) : NA
+    };
+
+    const kNumerologyStatus = (K.numerology && K.numerology.status) || "idle";
+    const kNumerology = {
+      isLoading: kNumerologyStatus === "loading",
+      isError: kNumerologyStatus === "error",
+      isSuccess: kNumerologyStatus === "success",
+      rows: kNumerologyStatus === "success" ? window.KundliEngine.buildNumerologyRows(K.numerology.data, T) : []
+    };
+    const kNPStatus = (K.nakshatraPrediction && K.nakshatraPrediction.status) || "idle";
+    const kNPCategoriesRaw = kNPStatus === "success" ? window.KundliEngine.buildNakshatraPredictionCategories(K.nakshatraPrediction.data, T) : [];
+    const kNPHi = K.nakshatraPredictionHi || { status: "idle", categories: null };
+    const kNPTranslating = hi && kNPStatus === "success" && kNPCategoriesRaw.length > 0 && kNPHi.status !== "done";
+    const kNPCategories = hi && kNPHi.status === "done" && kNPHi.categories ? kNPHi.categories : kNPCategoriesRaw;
+    const kNakshatraPrediction = {
+      isLoading: kNPStatus === "loading" || kNPTranslating,
+      isError: kNPStatus === "error",
+      isSuccess: kNPStatus === "success" && !kNPTranslating,
+      isEmpty: kNPStatus === "success" && kNPCategoriesRaw.length === 0,
+      categories: kNPCategories
+    };
     if (K.report) {
       const r = K.report;
       kReport = {
@@ -1037,56 +1430,6 @@ class Component extends DCLogic {
         sign: orNA(pl.sign), signLord: orNA(pl.signLord), degree: orNA(pl.degree),
         nakshatra: orNA(pl.nakshatra), nakshatraLord: orNA(pl.nakshatraLord), house: orNA(pl.house)
       }));
-      const dosh = r.doshas || {};
-      if (dosh.manglik) {
-        const m = dosh.manglik;
-        const isYes = m.isManglikFromLagna;
-        kManglik = {
-          verdict: isYes ? T.verdictPresent : T.verdictNotPresent,
-          detail: fillTemplate(isYes ? T.manglikYes : T.manglikNo, { h: m.fromLagnaHouse != null ? m.fromLagnaHouse : "?" }),
-          cardStyle: cardStyle(isYes), badgeStyle: badgeStyle(isYes)
-        };
-      }
-      if (dosh.kaalSarp && dosh.kaalSarp.checked) {
-        const ks = dosh.kaalSarp;
-        kKaalSarp = {
-          verdict: ks.present ? T.verdictPresent : T.verdictNotPresent,
-          detail: ks.present ? fillTemplate(T.kaalSarpYes, { h: ks.rahuHouse, type: ks.typeName }) : T.kaalSarpNo,
-          cardStyle: cardStyle(ks.present), badgeStyle: badgeStyle(ks.present)
-        };
-      }
-      if (dosh.sadeSati && dosh.sadeSati.checked) {
-        const ss = dosh.sadeSati;
-        kSadeSati = {
-          verdict: ss.active ? T.verdictActive : T.verdictNotActive,
-          detail: ss.active ? fillTemplate(T.sadeSatiYes, { phase: ss.phaseKey === "rising" ? T.sadeSatiPhaseRising : ss.phaseKey === "peak" ? T.sadeSatiPhasePeak : T.sadeSatiPhaseSetting }) : T.sadeSatiNo,
-          cardStyle: cardStyle(ss.active), badgeStyle: badgeStyle(ss.active)
-        };
-      }
-      kDoshaSummary = [
-        T.manglikH + ": " + (kManglik.verdict || NA),
-        T.kaalSarpH + ": " + (kKaalSarp.verdict || NA),
-        T.sadeSatiH + ": " + (kSadeSati.verdict || NA),
-        T.pitruH + ": " + NA
-      ].join("  ·  ");
-
-      if (dosh.manglik && dosh.manglik.isManglikFromLagna) kRemedyCards.push({ title: T.manglikH, body: T.remediesManglik });
-      if (dosh.kaalSarp && dosh.kaalSarp.present) kRemedyCards.push({ title: T.kaalSarpH, body: T.remediesKaalSarp });
-      if (dosh.sadeSati && dosh.sadeSati.active) kRemedyCards.push({ title: T.sadeSatiH, body: T.remediesSadeSati });
-
-      if (r.dasha && r.dasha.currentMahadasha) {
-        const d = r.dasha;
-        kDasha = {
-          currentMahadashaPlanet: d.currentMahadasha.planet,
-          currentMahadashaRange: dateFmt.format(d.currentMahadasha.start) + " – " + dateFmt.format(d.currentMahadasha.end),
-          currentAntardashaPlanet: d.currentAntardasha ? d.currentAntardasha.planet : NA,
-          currentAntardashaRange: d.currentAntardasha ? (dateFmt.format(d.currentAntardasha.start) + " – " + dateFmt.format(d.currentAntardasha.end)) : "",
-          rows: d.mahadashas.map(m => ({
-            planet: m.planet, start: dateFmt.format(m.start), end: dateFmt.format(m.end),
-            rowStyle: "border-top:1px solid #EAE2CE" + (m.planet === d.currentMahadasha.planet && m.start.getTime() === d.currentMahadasha.start.getTime() ? ";background:#F6EFE2" : "")
-          }))
-        };
-      }
     }
     const kt = Object.assign({
       t: T,
@@ -1114,15 +1457,23 @@ class Component extends DCLogic {
         key: ct.key, label: ct.label,
         houses: K.report ? buildChartHouses(K.report.charts[ct.key]) : blankHouses()
       })),
-      manglik: kManglik, kaalSarp: kKaalSarp, sadeSati: kSadeSati, doshaSummaryText: kDoshaSummary,
-      dasha: kDasha, remedyCards: kRemedyCards, noRemedies: kRemedyCards.length === 0
+      manglik: kManglik, kaalSarp: kKaalSarp, sadeSati: kSadeSati, pitraDosh: kPitraDosh, doshaSummaryText: kDoshaSummary,
+      dasha: kDasha, remedyCards: kRemedyCards, noRemedies: kRemedyCards.length === 0,
+      gemstone: kGemstone, rudraksha: kRudraksha,
+      numerology: kNumerology,
+      nakshatraPrediction: Object.assign({}, kNakshatraPrediction, { nakshatra: kReport.basicDetails.nakshatra })
     });
     return {
       photoAlt: kgAlt(p.photo),
       ui, p, meta, kt, photoUrl: _pu, noPhoto: !_pu,
       allLinks: [ui.moreLinks[ui.moreLinks.length - 1]].concat(ui.nav, ui.moreLinks.slice(0, -1)),
       langLabel: hi ? "हिंदी / EN" : "EN / हिंदी",
-      toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false })),
+      toggleLang: () => {
+        const newLang = this.state.lang === "en" ? "hi" : "en";
+        this.setState({ lang: newLang, menuOpen: false });
+        const npData = K.nakshatraPrediction && K.nakshatraPrediction.data;
+        if (npData) this._maybeTranslateNakshatraPrediction(npData, newLang);
+      },
       menuOpen: this.state.menuOpen, menuOpenStr: this.state.menuOpen ? "true" : "false",
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
       showTop: this.state.showTop,

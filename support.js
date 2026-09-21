@@ -61,6 +61,64 @@ window.__kgPhotos = {
  * resolve to their matching local files when it is opened or served locally.
  */
 (() => {
+  // Site-wide visual refresh. Keeping this in the shared runtime means every
+  // exported page receives the same header, footer, typography and surface
+  // treatment without changing its content or route-specific layout.
+  const visualRefresh = document.createElement("style");
+  visualRefresh.id = "kg-visual-refresh";
+  visualRefresh.textContent = `
+    :root{--kg-ink:#0a1633;--kg-ink-soft:#162b57;--kg-gold:#d4af37;--kg-gold-light:#f3e3b0;--kg-paper:#fffdf8;--kg-warm:#faf7f0;--kg-line:#e8dcc1;--kg-shadow:0 16px 40px rgba(10,22,51,.09)}
+    body{background:linear-gradient(135deg,#fcfaf5 0%,#f7f2e8 100%) !important;color:#17223c !important}
+    header{box-shadow:0 5px 18px rgba(4,12,30,.2)}
+    header [data-headinner]{min-height:76px}
+    header [data-desknav] > a{font-size:13.5px !important;font-weight:400;letter-spacing:.01em;transition:background .2s ease,color .2s ease,transform .2s ease}
+    header [data-desknav] > a:hover{transform:translateY(-1px)}
+    header a[href$="/kundli"],header a[href$="/kundli-milan"]{font-weight:700 !important;color:#f3e3b0 !important}
+    [data-brandname]{letter-spacing:.025em !important}
+    main{position:relative}
+    main p{font-size:16px !important;line-height:1.78 !important}
+    main h2{font-size:clamp(27px,3.2vw,38px) !important;line-height:1.16 !important;letter-spacing:.005em}
+    main h3{font-size:22px !important;line-height:1.2 !important}
+    main h4{font-size:18px !important;line-height:1.25 !important}
+    main button,main input,main select,main textarea{font-size:15px !important}
+    main input,main select,main textarea{min-height:48px}
+    main section > div[style*="background:#fff"],main [data-kcard]{box-shadow:0 6px 18px rgba(10,22,51,.045)}
+    main [data-kcard]{border-color:var(--kg-line) !important}
+    main [data-kcard]:hover{box-shadow:var(--kg-shadow)}
+    footer{margin-top:72px;box-shadow:0 -10px 30px rgba(7,16,38,.1)}
+    footer a{transition:color .2s ease,transform .2s ease}
+    footer a:hover{transform:translateX(2px)}
+    [data-kinput]{border-width:1.5px !important;border-color:#d9c99e !important;background:#fffefb !important}
+    [data-ktab-btn]{font-size:14.5px !important;padding:11px 20px !important}
+    [data-kreport-head]{padding:20px 22px !important;background:linear-gradient(120deg,#fffaf0,#f5ead3) !important;border:1px solid var(--kg-line);border-radius:18px}
+    [data-kchart]{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 46%,#fffdf7 0 26%,#fbf1da 27% 28%,#fffdf8 29% 100%) !important;border:1px solid #d9bc61 !important;box-shadow:0 13px 28px rgba(104,74,12,.12),inset 0 0 0 7px rgba(212,175,55,.07) !important}
+    [data-kchart] > div:first-child{font-size:18px !important;letter-spacing:.02em;color:#33230c !important}
+    [data-kchart] svg polygon,[data-kchart] svg line{stroke:#9b7018 !important;stroke-width:.85 !important}
+    [data-kchart] svg{filter:drop-shadow(0 1px 0 rgba(255,255,255,.9))}
+    [data-kchart] [style*="font-size:8px"]{font-size:10px !important;font-weight:600;letter-spacing:.04em;color:#80601c !important}
+    [data-kchart] [style*="font-size:10.5px"]{font-size:12px !important;line-height:1.22;color:#122246 !important;text-shadow:0 1px 0 #fff}
+    [data-kchart]::after{content:"✦";position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#10234a;color:#f3df9a;border:2px solid #d4af37;font-size:15px;box-shadow:0 3px 10px rgba(10,22,51,.22);pointer-events:none}
+    [data-kdetail-table]{width:100%;min-width:640px;border-collapse:separate;border-spacing:0;border:1px solid var(--kg-line);border-radius:12px;overflow:hidden;background:#fffdf9}
+    [data-kdetail-table th,[data-kdetail-table td]{padding:13px 16px;text-align:left;border-bottom:1px solid #eee3cc;vertical-align:middle}
+    [data-kdetail-table tr:last-child th,[data-kdetail-table tr:last-child td]{border-bottom:0}
+    [data-kdetail-table th{width:19%;background:#fcf7ea;color:#8c6821;font-size:11.5px !important;font-weight:600;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+    [data-kdetail-table td{width:31%;color:#13203d;font-size:15px !important;font-weight:500}
+    [data-kdetail-table th:nth-child(3){border-left:1px solid #eee3cc}
+    table{font-size:14.5px !important;background:#fffdf9}
+    table th{font-size:13.5px !important;letter-spacing:.025em}
+    table td{font-size:14.5px !important}
+    @media (max-width:700px){
+      header [data-headinner]{min-height:62px}
+      main p{font-size:15.5px !important}
+      main h2{font-size:28px !important}
+      main h3{font-size:21px !important}
+      [data-kreport-head]{padding:16px !important}
+      [data-kchart] [style*="font-size:10.5px"]{font-size:10.5px !important}
+      [data-kdetail-table]{min-width:560px}
+    }
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto !important;transition-duration:.01ms !important;animation-duration:.01ms !important}}
+  `;
+  document.head.appendChild(visualRefresh);
   const navbarCss = document.createElement("style");
   navbarCss.textContent = `
     @media (min-width:1120px){

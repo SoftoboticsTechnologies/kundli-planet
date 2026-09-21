@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./astro-apis.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="./uploads/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./uploads/favicon_io/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./uploads/favicon_io/apple-touch-icon.png">
@@ -101,6 +102,35 @@
             <span style="font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:#8A7550;text-align:center;padding:0 16px">{{ p.photo }}</span>
           </sc-if>
         </div>
+      </div>
+    </section>
+
+    <section style="max-width:1100px;margin:0 auto;padding:clamp(30px,4.5vw,50px) 20px 0">
+      <div style="background:#0A1633;border:1px solid rgba(212,175,55,.3);border-radius:20px;padding:clamp(24px,4vw,36px);color:#F4F2EA">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2.6vw,28px);font-weight:600;margin:0;color:#F3E3B0">{{ ui.liveTitle }}</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input type="date" value="{{ liveDate }}" onChange="{{ setLiveDate }}" style="padding:9px 12px;border-radius:8px;border:1px solid rgba(212,175,55,.34);background:rgba(255,255,255,.06);color:#F4F2EA;font-family:inherit;font-size:13px">
+            <button type="button" onClick="{{ refreshLive }}" style="padding:9px 16px;border-radius:8px;border:0;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">{{ ui.liveRefresh }}</button>
+          </div>
+        </div>
+        <sc-if value="{{ liveLoading }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:14px;color:rgba(244,242,234,.75)">{{ ui.liveLoading }}</p>
+        </sc-if>
+        <sc-if value="{{ liveError }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:14px;color:#E8A38A">{{ ui.liveError }}</p>
+        </sc-if>
+        <sc-if value="{{ liveReady }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))">
+            <sc-for list="{{ liveRows }}" as="lr" hint-placeholder-count="6">
+              <div style="padding:14px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(212,175,55,.18);border-radius:12px">
+                <p style="margin:0 0 4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(232,211,145,.75)">{{ lr.label }}</p>
+                <p style="margin:0;font-size:15px;color:#F4F2EA">{{ lr.value }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <p style="margin:14px 0 0;font-size:11.5px;color:rgba(244,242,234,.5)">{{ ui.liveNote }}</p>
       </div>
     </section>
 
@@ -257,6 +287,11 @@ const UI_EN = {
   homeHref: "/en/", crumbHome: "Home",
   consultCta: "Consult Us", chatCta: "Chat Us", menuLabel: "Open menu", topLabel: "Go to top",
   faqTitle: "Common questions", gbp: "Google Profile", footerMsgCta: "Message Us",
+  liveTitle: "Today's Live Panchang", liveRefresh: "Refresh",
+  liveLoading: "Fetching today's panchang...",
+  liveError: "Live panchang is temporarily unavailable. Please try again later.",
+  liveNote: "Live data for Bhagalpur, Bihar, pulled from a third-party panchang service. Figures shown elsewhere on this page remain static reference content.",
+  liveTithi: "Tithi", liveNakshatra: "Nakshatra", liveYoga: "Yoga", liveKarana: "Karana", liveVar: "Vara", liveMonth: "Month",
   consultTitle: "Request a Consultation",
   consultSub: "Fill this in and we will continue the conversation on WhatsApp or email. Nothing is stored on this site.",
   formName: "Name", formPhone: "Phone", formEmail: "Email", formSubject: "Subject", formMessage: "Message",
@@ -288,6 +323,11 @@ const UI_HI = {
   homeHref: "/hi/", crumbHome: "होम",
   consultCta: "परामर्श लें", chatCta: "चैट करें", menuLabel: "मेन्यू खोलें", topLabel: "ऊपर जाएँ",
   faqTitle: "सामान्य प्रश्न", gbp: "गूगल प्रोफ़ाइल", footerMsgCta: "संदेश भेजें",
+  liveTitle: "आज का लाइव पंचांग", liveRefresh: "ताज़ा करें",
+  liveLoading: "आज का पंचांग लाया जा रहा है...",
+  liveError: "लाइव पंचांग फ़िलहाल उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें।",
+  liveNote: "भागलपुर, बिहार के लिए लाइव डेटा, एक तृतीय-पक्ष पंचांग सेवा से। इस पृष्ठ पर अन्यत्र दिखाए गए मान स्थिर संदर्भ सामग्री हैं।",
+  liveTithi: "तिथि", liveNakshatra: "नक्षत्र", liveYoga: "योग", liveKarana: "करण", liveVar: "वार", liveMonth: "मास",
   consultTitle: "परामर्श के लिए अनुरोध",
   consultSub: "यह भरें, बातचीत आगे संदेश या ईमेल पर जारी रहेगी। इस साइट पर कोई जानकारी संग्रहीत नहीं होती।",
   formName: "नाम", formPhone: "फ़ोन", formEmail: "ईमेल", formSubject: "विषय", formMessage: "संदेश",
@@ -564,9 +604,12 @@ const KG_PHOTOS = {
 function kgPhoto(label){ return window.__kgPhotos?.[label] || KG_PHOTOS[label] || ""; }
 function kgAlt(label){ return String(label || "").replace(/^PHOTO:\s*/, ""); }
 
+const KP_LAT = 25.2445, KP_LNG = 86.9718;
+
 class Component extends DCLogic {
   state = { lang: "hi", menuOpen: false, openFaq: 0, showTop: false, consultOpen: false,
-    form: { name: "", phone: "", email: "", subject: "", message: "" } };
+    form: { name: "", phone: "", email: "", subject: "", message: "" },
+    liveDate: new Date().toISOString().slice(0, 10), liveLoading: false, liveError: false, liveData: null };
 
   componentDidMount() {
     this._onScroll = () => {
@@ -575,6 +618,15 @@ class Component extends DCLogic {
     };
     window.addEventListener("scroll", this._onScroll, { passive: true });
     this._syncMeta();
+    this._loadLivePanchang();
+  }
+
+  _loadLivePanchang() {
+    if (!window.AstroAPIs) return;
+    this.setState({ liveLoading: true, liveError: false });
+    window.AstroAPIs.fetchPanchang(this.state.liveDate, KP_LAT, KP_LNG)
+      .then(data => this.setState({ liveLoading: false, liveData: data }))
+      .catch(() => this.setState({ liveLoading: false, liveError: true, liveData: null }));
   }
   componentDidUpdate() { this._syncMeta(); }
   _syncMeta() {
@@ -605,9 +657,25 @@ class Component extends DCLogic {
       ui.formMessage + ": " + (f.message || "-")
     ].join("\n");
     const _pu = kgPhoto(p.photo);
+    const ld = this.state.liveData;
+    const dGet = (obj, keys) => { for (const k of keys) { if (obj && obj[k] != null && obj[k] !== "") return obj[k]; } return ""; };
+    const liveRows = ld ? [
+      { label: ui.liveTithi, value: dGet(ld, ["tithi", "Tithi"]) || "–" },
+      { label: ui.liveNakshatra, value: dGet(ld, ["nakshatra", "Nakshatra"]) || "–" },
+      { label: ui.liveYoga, value: dGet(ld, ["yoga", "Yoga"]) || "–" },
+      { label: ui.liveKarana, value: dGet(ld, ["karana", "Karana"]) || "–" },
+      { label: ui.liveVar, value: dGet(ld, ["vara", "var", "Var", "day"]) || "–" },
+      { label: ui.liveMonth, value: dGet(ld, ["month", "Month", "maasa"]) || "–" }
+    ] : [];
     return {
       photoAlt: kgAlt(p.photo),
       ui, p, meta, photoUrl: _pu, noPhoto: !_pu,
+      liveDate: this.state.liveDate,
+      setLiveDate: e => this.setState({ liveDate: e.target.value }),
+      refreshLive: () => this._loadLivePanchang(),
+      liveLoading: this.state.liveLoading, liveError: this.state.liveError,
+      liveReady: !this.state.liveLoading && !this.state.liveError && !!ld,
+      liveRows,
       allLinks: [ui.moreLinks[ui.moreLinks.length - 1]].concat(ui.nav, ui.moreLinks.slice(0, -1)),
       langLabel: hi ? "हिंदी / EN" : "EN / हिंदी",
       toggleLang: () => this.setState(s => ({ lang: s.lang === "en" ? "hi" : "en", menuOpen: false })),

@@ -224,7 +224,7 @@
           <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px">
             <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,30px);font-weight:600;margin:0;color:#0A1633">{{ mt.t.summaryH }}</h2>
             <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <!-- <button type="button" onClick="{{ mt.downloadPdf }}" disabled="{{ mt.pdfBusy }}" style="display:none;padding:10px 18px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;opacity:{{ mt.pdfBusyOpacity }}">{{ mt.pdfButtonLabel }}</button> -->
+              <button type="button" onClick="{{ mt.downloadPdf }}" disabled="{{ mt.pdfBusy }}" style="padding:10px 18px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;opacity:{{ mt.pdfBusyOpacity }}">{{ mt.pdfButtonLabel }}</button>
               <button type="button" onClick="{{ mt.backToForm }}" style="padding:10px 18px;background:#0A1633;color:#F3E3B0;border:0;border-radius:999px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer">{{ mt.t.matchAnother }}</button>
             </div>
           </div>

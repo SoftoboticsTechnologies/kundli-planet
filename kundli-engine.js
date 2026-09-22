@@ -328,6 +328,9 @@
       nameF: "Name", birthDateTimeF: "Birth Date & Time", birthPlaceF: "Birth Place",
       janamRashiF: "Janam Rashi", rashiLordF: "Rashi Lord",
       matchRecommended: "Match is recommended", matchNotRecommended: "Match is not recommended",
+      matchRecommendedBody: "Marriage between the prospective bride and groom is recommended. The couple would have a long-lasting relationship, which would be filled with happiness and affluence.",
+      matchNotRecommendedBody: "Marriage between the prospective bride and groom is not recommended based on this dosha analysis. Consulting an astrologer for remedies is advised before proceeding.",
+      gunaMatchedBody: "{received} out of {outOf} gunas matched.",
       loadingReport: "Loading match report...",
 
       coupleBasicH: "Couple's basic details",
@@ -375,6 +378,9 @@
       nameF: "नाम", birthDateTimeF: "जन्म तिथि एवं समय", birthPlaceF: "जन्म स्थान",
       janamRashiF: "जन्म राशि", rashiLordF: "राशि स्वामी",
       matchRecommended: "विवाह की सलाह दी जाती है", matchNotRecommended: "विवाह की सलाह नहीं दी जाती",
+      matchRecommendedBody: "वर-वधू के बीच विवाह की सलाह दी जाती है। यह जोड़ा एक स्थायी संबंध का आनंद लेगा, जो खुशियों और समृद्धि से भरा होगा।",
+      matchNotRecommendedBody: "इस दोष विश्लेषण के आधार पर वर-वधू के बीच विवाह की सलाह नहीं दी जाती। आगे बढ़ने से पहले किसी ज्योतिषी से उपाय हेतु परामर्श करने की सलाह दी जाती है।",
+      gunaMatchedBody: "{outOf} में से {received} गुण मिले।",
       loadingReport: "मिलान रिपोर्ट लोड हो रही है...",
 
       coupleBasicH: "जोड़े का मूल विवरण",

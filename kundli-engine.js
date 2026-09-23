@@ -135,7 +135,7 @@
   var KT_STRINGS = {
     en: {
       naText: "Data not available",
-      kicker: "Free Kundli Generator", title: "Generate Your Kundli",
+      kicker: "Kundli Generator", title: "Generate Your Kundli",
       subtitle: "Enter exact birth details. Location, timezone and the chart are calculated automatically from what you provide.",
       nameLabel: "Full Name", namePlaceholder: "e.g. Aarav Sharma",
       genderLabel: "Gender", genderMale: "Male", genderFemale: "Female",
@@ -216,7 +216,7 @@
     },
     hi: {
       naText: "जानकारी उपलब्ध नहीं है",
-      kicker: "मुफ़्त कुंडली जनरेटर", title: "अपनी कुंडली बनाएं",
+      kicker: "कुंडली जनरेटर", title: "अपनी कुंडली बनाएं",
       subtitle: "सटीक जन्म विवरण दर्ज करें। स्थान, समय क्षेत्र और कुंडली आपके द्वारा दी गई जानकारी से स्वतः गणना की जाती है।",
       nameLabel: "पूरा नाम", namePlaceholder: "उदाहरण: आरव शर्मा",
       genderLabel: "लिंग", genderMale: "पुरुष", genderFemale: "महिला",
@@ -299,7 +299,7 @@
 
   var MT_STRINGS = {
     en: {
-      kicker: "Free Kundli Milan", title: "Enter Both Birth Details",
+      kicker: "Kundli Milan", title: "Enter Both Birth Details",
       subtitle: "Location, timezone and each chart are calculated automatically from what you enter below.",
       person1: "Person 1", person2: "Person 2",
       nameLabel: "Full Name", namePlaceholder: "",
@@ -349,7 +349,7 @@
       manglikDoshaIs: "Manglik dosha is"
     },
     hi: {
-      kicker: "मुफ़्त कुंडली मिलान", title: "दोनों के जन्म विवरण दर्ज करें",
+      kicker: "कुंडली मिलान", title: "दोनों के जन्म विवरण दर्ज करें",
       subtitle: "नीचे दी गई जानकारी से स्थान, समय क्षेत्र और प्रत्येक कुंडली स्वतः गणना की जाती है।",
       person1: "व्यक्ति 1", person2: "व्यक्ति 2",
       nameLabel: "पूरा नाम", namePlaceholder: "",

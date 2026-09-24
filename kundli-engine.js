@@ -618,7 +618,9 @@
         nakshatra: val(p.nakshatra),
         nakshatraLord: val(p.nakshatraLord),
         nakshatraPada: val(p.nakshatra_pad),
-        house: val(p.house)
+        house: val(p.house),
+        awastha: val(p.planet_awastha),
+        isSet: String(p.is_planet_set) === "true"
       });
     });
 
@@ -670,6 +672,15 @@
       predictions: [],
       planets: planets,
       ascendantSign: ascendantSign,
+      // The API's own Ascendant row, passed through unchanged for display.
+      ascendant: ascendantEntry ? {
+        sign: val(ascendantEntry.sign),
+        signLord: val(ascendantEntry.signLord),
+        degree: degToDM(ascendantEntry.normDegree),
+        nakshatra: val(ascendantEntry.nakshatra),
+        nakshatraLord: val(ascendantEntry.nakshatraLord),
+        nakshatraPada: val(ascendantEntry.nakshatra_pad)
+      } : null,
       charts: {
         lagna: { houses: lagnaHouses },
         moon: { houses: moonHouses },
@@ -915,6 +926,7 @@
         sign: val(p.sign), signLord: val(p.signLord),
         degree: degToDM(p.normDegree),
         nakshatra: val(p.nakshatra), nakshatraLord: val(p.nakshatraLord),
+        nakshatraPada: val(p.nakshatra_pad), isSet: String(p.is_planet_set) === "true",
         house: val(p.house), awastha: val(p.planet_awastha)
       };
     });
@@ -931,7 +943,8 @@
         key: k,
         attribute: k.charAt(0).toUpperCase() + k.slice(1),
         male: val(d.male_koot_attribute), female: val(d.female_koot_attribute),
-        outOf: d.total_points, received: d.received_points, area: val(d.description)
+        outOf: d.total_points, received: d.received_points, area: val(d.description),
+        observation: val(d.Extra_Description)
       };
     });
     var total = data.total ? {
@@ -1084,6 +1097,7 @@
     fetchGemstoneSuggestion: fetchGemstoneSuggestion,
     fetchRudrakshaSuggestion: fetchRudrakshaSuggestion,
     buildMajorDashaRows: buildMajorDashaRows,
+    parseApiDashaDate: parseApiDashaDate,
     buildCurrentDashaLevels: buildCurrentDashaLevels,
     buildGemstoneCategories: buildGemstoneCategories,
     normalizeKundliResponse: normalizeKundliResponse

@@ -259,7 +259,9 @@
               </div>
               <sc-if value="{{ mt.result.basicBanner.show }}" hint-placeholder-val="{{ false }}">
                 <div style="{{ mt.result.basicBanner.style }}">
-                  <p style="margin:0 0 6px;font-size:15px;font-weight:700">{{ mt.result.basicBanner.title }}</p>
+                  <sc-if value="{{ mt.result.basicBanner.showTitle }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin:0 0 6px;font-size:15px;font-weight:700">{{ mt.result.basicBanner.title }}</p>
+                  </sc-if>
                   <p style="margin:0;font-size:13.5px;line-height:1.7">{{ mt.result.basicBanner.body }}</p>
                 </div>
               </sc-if>
@@ -1033,7 +1035,7 @@ class Component extends DCLogic {
     this._mUpdate({ pdfStatus: "busy" });
     try {
       const vals = this.renderVals();
-      await window.KundliPDF.generateMilanPdf(vals.mt, this.state.lang);
+      await window.KundliPDF.generateMilanPdf(vals.mt, this.state.lang, this.state.milan.result);
       this._mUpdate({ pdfStatus: "idle" });
     } catch (e) {
       console.error("Kundli Milan PDF generation failed:", e);
@@ -1162,6 +1164,8 @@ class Component extends DCLogic {
         p1Manglik: manglikDetail(res.person1.manglik), p2Manglik: manglikDetail(res.person2.manglik),
         basicBanner: res.manglikConclusion ? {
           show: true, style: bannerStyle(!!res.manglikConclusion.match),
+          // The "not recommended" heading is not shown in this section.
+          showTitle: !!res.manglikConclusion.match,
           title: res.manglikConclusion.match ? T.matchRecommended : T.matchNotRecommended,
           body: res.manglikConclusion.match ? T.matchRecommendedBody : T.matchNotRecommendedBody
         } : { show: false, style: "", title: "", body: "" },

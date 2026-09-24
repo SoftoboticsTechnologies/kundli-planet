@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&family=Mukta:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./kp-vedic.css?v=9">
-<script src="./kp-vedic.js?v=5" defer></script>
+<script src="./kp-vedic.js?v=6" defer></script>
 <link rel="icon" type="image/png" sizes="32x32" href="./Kundli%20planet%20assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./Kundli%20planet%20assets/favicon_io/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./Kundli%20planet%20assets/favicon_io/apple-touch-icon.png">
@@ -328,6 +328,44 @@
       </div>
     </section>
 
+    <!-- 12. Gemstones -->
+    <section class="kp-sec kp-dark-plum" id="gemstones" aria-labelledby="gem-h">
+      <div class="kp-stars" aria-hidden="true"></div>
+      <div class="kp-wrap" style="position:relative">
+        <div class="kp-head kp-reveal">
+          <div>
+            <p class="kp-eyebrow">{{ t.gmEyebrow }}</p>
+            <h2 id="gem-h" class="kp-h2">{{ t.gmTitleA }} <em>{{ t.gmTitleB }}</em></h2>
+            <p class="kp-lede">{{ t.gmLede }}</p>
+          </div>
+          <a class="kp-link" href="{{ r.gems }}">{{ t.gmAll }} →</a>
+        </div>
+        <div class="kp-gem-grid">
+          <sc-for list="{{ gems }}" as="gm" hint-placeholder-count="9">
+            <a class="kp-card-dark kp-gem kp-reveal" href="{{ gm.href }}">
+              <span class="kp-gem-img"><img src="{{ gm.img }}" alt="{{ gm.alt }}" loading="lazy" width="120" height="200"><span class="kp-glyph" aria-hidden="true">{{ gm.sym }}</span></span>
+              <span class="kp-gem-body">
+                <b>{{ gm.name }}</b>
+                <span class="kp-gem-hn">{{ gm.alt2 }}</span>
+                <dl>
+                  <dt>{{ t.gPlanet }}</dt><dd>{{ gm.planet }}</dd>
+                  <dt>{{ t.gDay }}</dt><dd>{{ gm.day }}</dd>
+                  <dt>{{ t.gMetal }}</dt><dd>{{ gm.metal }}</dd>
+                  <dt>{{ t.gFinger }}</dt><dd>{{ gm.finger }}</dd>
+                </dl>
+                <p>{{ gm.benefit }}</p>
+                <span class="kp-gem-mantra">{{ gm.mantra }}</span>
+              </span>
+            </a>
+          </sc-for>
+        </div>
+        <div class="kp-hero-ctas kp-reveal" style="margin-top:30px;justify-content:center">
+          <a class="kp-btn kp-btn-primary" href="{{ r.kundliTool }}"><span data-kp-icon="gem"></span>{{ t.gmCta }}</a>
+        </div>
+        <p class="kp-note" style="text-align:center;margin-top:12px">{{ t.gmNote }}</p>
+      </div>
+    </section>
+
     <!-- 9. Nakshatra -->
     <section class="kp-sec kp-dark" id="nakshatra" aria-labelledby="nak-h">
       <div class="kp-nak-band" data-kp-art="band" aria-hidden="true"></div>
@@ -435,44 +473,6 @@
           </div>
         </div>
         <p class="kp-note" style="margin-top:18px">{{ t.doDisclaimer }}</p>
-      </div>
-    </section>
-
-    <!-- 12. Gemstones -->
-    <section class="kp-sec kp-dark" id="gemstones" aria-labelledby="gem-h">
-      <div class="kp-stars" aria-hidden="true"></div>
-      <div class="kp-wrap" style="position:relative">
-        <div class="kp-head kp-reveal">
-          <div>
-            <p class="kp-eyebrow">{{ t.gmEyebrow }}</p>
-            <h2 id="gem-h" class="kp-h2">{{ t.gmTitleA }} <em>{{ t.gmTitleB }}</em></h2>
-            <p class="kp-lede">{{ t.gmLede }}</p>
-          </div>
-          <a class="kp-link" href="{{ r.gems }}">{{ t.gmAll }} →</a>
-        </div>
-        <div class="kp-gem-grid">
-          <sc-for list="{{ gems }}" as="gm" hint-placeholder-count="9">
-            <a class="kp-card-dark kp-gem kp-reveal" href="{{ gm.href }}">
-              <span class="kp-gem-img"><img src="{{ gm.img }}" alt="{{ gm.alt }}" loading="lazy" width="120" height="200"><span class="kp-glyph" aria-hidden="true">{{ gm.sym }}</span></span>
-              <span class="kp-gem-body">
-                <b>{{ gm.name }}</b>
-                <span class="kp-gem-hn">{{ gm.alt2 }}</span>
-                <dl>
-                  <dt>{{ t.gPlanet }}</dt><dd>{{ gm.planet }}</dd>
-                  <dt>{{ t.gDay }}</dt><dd>{{ gm.day }}</dd>
-                  <dt>{{ t.gMetal }}</dt><dd>{{ gm.metal }}</dd>
-                  <dt>{{ t.gFinger }}</dt><dd>{{ gm.finger }}</dd>
-                </dl>
-                <p>{{ gm.benefit }}</p>
-                <span class="kp-gem-mantra">{{ gm.mantra }}</span>
-              </span>
-            </a>
-          </sc-for>
-        </div>
-        <div class="kp-hero-ctas kp-reveal" style="margin-top:30px;justify-content:center">
-          <a class="kp-btn kp-btn-primary" href="{{ r.kundliTool }}"><span data-kp-icon="gem"></span>{{ t.gmCta }}</a>
-        </div>
-        <p class="kp-note" style="text-align:center;margin-top:12px">{{ t.gmNote }}</p>
       </div>
     </section>
 

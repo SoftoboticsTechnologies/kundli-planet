@@ -123,23 +123,23 @@
   var GANA = [{ en: "Deva", hi: "देव" }, { en: "Manushya", hi: "मनुष्य" }, { en: "Rakshasa", hi: "राक्षस" }];
   var DASHA = [["ketu", 7], ["venus", 20], ["sun", 6], ["moon", 10], ["mars", 7], ["rahu", 18], ["jupiter", 16], ["saturn", 19], ["mercury", 17]];
   var GEMS = [
-    { k: "sun", en: "Ruby", hi: "माणिक्य", tr: "Manikya", img: "Kundli%20planet%20assets/ruby.jpg", finger: "Ring finger", fingerHi: "अनामिका", en_s: "ruby", hi_s: "manikya",
+    { k: "sun", en: "Ruby", hi: "माणिक्य", tr: "Manikya", img: "Kundli%20planet%20assets/gems/ruby.jpg", finger: "Ring finger", fingerHi: "अनामिका", en_s: "ruby", hi_s: "manikya",
       mantra: "Om Hraam Hreem Hraum Sah Suryaya Namah", mantraHi: "ॐ ह्रां ह्रीं ह्रौं सः सूर्याय नमः", b: "Traditionally associated with confidence, clarity and standing.", bh: "परंपरा में आत्मविश्वास, स्पष्टता और प्रतिष्ठा से जोड़ा जाता है।" },
-    { k: "moon", en: "Pearl", hi: "मोती", tr: "Moti", img: "Kundli%20planet%20assets/pearl.jpg", finger: "Little finger", fingerHi: "कनिष्ठा", en_s: "pearl", hi_s: "moti",
+    { k: "moon", en: "Pearl", hi: "मोती", tr: "Moti", img: "Kundli%20planet%20assets/gems/pearl.jpg", finger: "Little finger", fingerHi: "कनिष्ठा", en_s: "pearl", hi_s: "moti",
       mantra: "Om Shraam Shreem Shraum Sah Chandramase Namah", mantraHi: "ॐ श्रां श्रीं श्रौं सः चन्द्रमसे नमः", b: "Traditionally associated with calm, emotional steadiness and care.", bh: "परंपरा में मन की शांति और भावनात्मक स्थिरता से जोड़ा जाता है।" },
-    { k: "mars", en: "Red Coral", hi: "मूंगा", tr: "Moonga", img: "Kundli%20planet%20assets/red-coral.jpg", finger: "Ring finger", fingerHi: "अनामिका", en_s: "red-coral", hi_s: "moonga",
+    { k: "mars", en: "Red Coral", hi: "मूंगा", tr: "Moonga", img: "Kundli%20planet%20assets/gems/red-coral.jpg", finger: "Ring finger", fingerHi: "अनामिका", en_s: "red-coral", hi_s: "moonga",
       mantra: "Om Kraam Kreem Kraum Sah Bhaumaya Namah", mantraHi: "ॐ क्रां क्रीं क्रौं सः भौमाय नमः", b: "Traditionally associated with courage, drive and resolve.", bh: "परंपरा में साहस, ऊर्जा और दृढ़ता से जोड़ा जाता है।" },
-    { k: "mercury", en: "Emerald", hi: "पन्ना", tr: "Panna", img: "Kundli%20planet%20assets/emerald.svg", finger: "Little finger", fingerHi: "कनिष्ठा", en_s: "emerald", hi_s: "panna",
+    { k: "mercury", en: "Emerald", hi: "पन्ना", tr: "Panna", img: "Kundli%20planet%20assets/gems/emerald.jpg", finger: "Little finger", fingerHi: "कनिष्ठा", en_s: "emerald", hi_s: "panna",
       mantra: "Om Braam Breem Braum Sah Budhaya Namah", mantraHi: "ॐ ब्रां ब्रीं ब्रौं सः बुधाय नमः", b: "Traditionally associated with expression, learning and trade.", bh: "परंपरा में वाणी, अध्ययन और व्यापार से जोड़ा जाता है।" },
-    { k: "jupiter", en: "Yellow Sapphire", hi: "पुखराज", tr: "Pukhraj", img: "Kundli%20planet%20assets/yellow-sapphire.svg", finger: "Index finger", fingerHi: "तर्जनी", en_s: "yellow-sapphire", hi_s: "pukhraj",
+    { k: "jupiter", en: "Yellow Sapphire", hi: "पुखराज", tr: "Pukhraj", img: "Kundli%20planet%20assets/gems/yelow%20sappahire.jpg", finger: "Index finger", fingerHi: "तर्जनी", en_s: "yellow-sapphire", hi_s: "pukhraj",
       mantra: "Om Graam Greem Graum Sah Gurave Namah", mantraHi: "ॐ ग्रां ग्रीं ग्रौं सः गुरवे नमः", b: "Traditionally associated with guidance, wisdom and growth.", bh: "परंपरा में मार्गदर्शन, ज्ञान और उन्नति से जोड़ा जाता है।" },
-    { k: "venus", en: "Diamond", hi: "हीरा", tr: "Heera", img: "Kundli%20planet%20assets/diamond.svg", finger: "Middle or ring finger", fingerHi: "मध्यमा या अनामिका", en_s: "diamond", hi_s: "heera",
+    { k: "venus", en: "Diamond", hi: "हीरा", tr: "Heera", img: "Kundli%20planet%20assets/gems/diamond.jpg", finger: "Middle or ring finger", fingerHi: "मध्यमा या अनामिका", en_s: "diamond", hi_s: "heera",
       mantra: "Om Draam Dreem Draum Sah Shukraya Namah", mantraHi: "ॐ द्रां द्रीं द्रौं सः शुक्राय नमः", b: "Traditionally associated with grace, comfort and relationships.", bh: "परंपरा में सौम्यता, सुख और संबंधों से जोड़ा जाता है।" },
-    { k: "saturn", en: "Blue Sapphire", hi: "नीलम", tr: "Neelam", img: "Kundli%20planet%20assets/blue-sapphire.jpg", finger: "Middle finger", fingerHi: "मध्यमा", en_s: "blue-sapphire", hi_s: "neelam",
+    { k: "saturn", en: "Blue Sapphire", hi: "नीलम", tr: "Neelam", img: "Kundli%20planet%20assets/gems/blue-sapphire.jpg", finger: "Middle finger", fingerHi: "मध्यमा", en_s: "blue-sapphire", hi_s: "neelam",
       mantra: "Om Praam Preem Praum Sah Shanaischaraya Namah", mantraHi: "ॐ प्रां प्रीं प्रौं सः शनैश्चराय नमः", b: "Worn only after careful chart study; linked with discipline and focus.", bh: "केवल कुंडली के सावधान अध्ययन के बाद; अनुशासन और एकाग्रता से जुड़ा।" },
-    { k: "rahu", en: "Hessonite", hi: "गोमेद", tr: "Gomed", img: "Kundli%20planet%20assets/hessonite.jpg", finger: "Middle finger", fingerHi: "मध्यमा", en_s: "hessonite", hi_s: "gomed",
+    { k: "rahu", en: "Hessonite", hi: "गोमेद", tr: "Gomed", img: "Kundli%20planet%20assets/gems/hessonite.jpg", finger: "Middle finger", fingerHi: "मध्यमा", en_s: "hessonite", hi_s: "gomed",
       mantra: "Om Bhraam Bhreem Bhraum Sah Rahave Namah", mantraHi: "ॐ भ्रां भ्रीं भ्रौं सः राहवे नमः", b: "Traditionally associated with focus and steadiness of effort.", bh: "परंपरा में एकाग्रता और प्रयास की स्थिरता से जोड़ा जाता है।" },
-    { k: "ketu", en: "Cat's Eye", hi: "लहसुनिया", tr: "Lehsunia", img: "Kundli%20planet%20assets/cats-eye.jpg", finger: "Middle or little finger", fingerHi: "मध्यमा या कनिष्ठा", en_s: "cats-eye", hi_s: "lehsunia",
+    { k: "ketu", en: "Cat's Eye", hi: "लहसुनिया", tr: "Lehsunia", img: "Kundli%20planet%20assets/gems/cats-eye.jpg", finger: "Middle or little finger", fingerHi: "मध्यमा या कनिष्ठा", en_s: "cats-eye", hi_s: "lehsunia",
       mantra: "Om Sraam Sreem Sraum Sah Ketave Namah", mantraHi: "ॐ स्रां स्रीं स्रौं सः केतवे नमः", b: "Traditionally read for intuition, caution and inner steadiness.", bh: "परंपरा में अंतर्ज्ञान, सावधानी और आंतरिक स्थिरता से जोड़ा जाता है।" }
   ];
   var ABBR = { Su: "sun", Mo: "moon", Ma: "mars", Me: "mercury", Ju: "jupiter", Ve: "venus", Sa: "saturn", Ra: "rahu", Ke: "ketu" };

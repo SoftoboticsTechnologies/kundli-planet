@@ -32,8 +32,8 @@ window.__kgPhotos = {
   "PHOTO: red coral": "https://cdn.shopaccino.com/jewellery/products/red-coral---15-carat-348882_m.jpg?v=556",
   "PHOTO: polished red coral": "https://cdn.shopaccino.com/jewellery/products/red-coral---15-carat-348882_m.jpg?v=556",
   "PHOTO: brilliant cut diamond": "https://blog.brilliance.com/wp-content/uploads/2017/06/perfect-diamond-isolated-on-shiny-background.jpg",
-  "PHOTO: chrysoberyl cat's eye cabochon": "Kundli%20planet%20assets/cats-eye.jpg",
-  "PHOTO: hessonite garnet, oval cut": "Kundli%20planet%20assets/hessonite.jpg",
+  "PHOTO: chrysoberyl cat's eye cabochon": "Kundli%20planet%20assets/gems/cats-eye.jpg",
+  "PHOTO: hessonite garnet, oval cut": "Kundli%20planet%20assets/gems/hessonite.jpg",
   "PHOTO: rudraksha beads": "https://i.etsystatic.com/25463899/r/il/fe7c55/6000232363/il_fullxfull.6000232363_l879.jpg",
   "PHOTO: rudraksha beads of different mukhi counts": "https://i.etsystatic.com/25463899/r/il/fe7c55/6000232363/il_fullxfull.6000232363_l879.jpg",
   "PHOTO: assorted rudraksha beads on cloth": "https://i.etsystatic.com/25463899/r/il/fe7c55/6000232363/il_fullxfull.6000232363_l879.jpg",
@@ -53,6 +53,28 @@ window.__kgPhotos = {
   "PHOTO: shop front signage in Bhagalpur": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80",
   "PHOTO: shop interior with gemstone display": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80"
 };
+// Gemstone photos are served from Kundli planet assets/gems so every page
+// (gem pages, gemstone list, homepage, kundli report) uses the same local images.
+Object.assign(window.__kgPhotos, {
+ "PHOTO: ruby": "Kundli%20planet%20assets/gems/ruby.jpg",
+ "PHOTO: natural ruby, faceted": "Kundli%20planet%20assets/gems/ruby.jpg",
+ "PHOTO: pearl": "Kundli%20planet%20assets/gems/pearl.jpg",
+ "PHOTO: natural pearl": "Kundli%20planet%20assets/gems/pearl.jpg",
+ "PHOTO: red coral": "Kundli%20planet%20assets/gems/red-coral.jpg",
+ "PHOTO: polished red coral": "Kundli%20planet%20assets/gems/red-coral.jpg",
+ "PHOTO: emerald": "Kundli%20planet%20assets/gems/emerald.jpg",
+ "PHOTO: emerald, step cut": "Kundli%20planet%20assets/gems/emerald.jpg",
+ "PHOTO: yellow sapphire": "Kundli%20planet%20assets/gems/yelow%20sappahire.jpg",
+ "PHOTO: yellow sapphire, oval cut": "Kundli%20planet%20assets/gems/yelow%20sappahire.jpg",
+ "PHOTO: diamond": "Kundli%20planet%20assets/gems/diamond.jpg",
+ "PHOTO: brilliant cut diamond": "Kundli%20planet%20assets/gems/diamond.jpg",
+ "PHOTO: blue sapphire": "Kundli%20planet%20assets/gems/blue-sapphire.jpg",
+ "PHOTO: blue sapphire, cushion cut": "Kundli%20planet%20assets/gems/blue-sapphire.jpg",
+ "PHOTO: hessonite": "Kundli%20planet%20assets/gems/hessonite.jpg",
+ "PHOTO: hessonite garnet, oval cut": "Kundli%20planet%20assets/gems/hessonite.jpg",
+ "PHOTO: cats eye": "Kundli%20planet%20assets/gems/cats-eye.jpg",
+ "PHOTO: chrysoberyl cat's eye cabochon": "Kundli%20planet%20assets/gems/cats-eye.jpg"
+});
 /*
  * Static-export navigation bridge
  *

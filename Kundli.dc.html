@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<link rel="stylesheet" href="./kp-vedic.css?v=9">
+<script src="./kp-vedic.js?v=5" defer></script>
 <script src="./kundli-engine.js"></script>
 <script src="./pdf-generator.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="./Kundli%20planet%20assets/favicon_io/favicon-32x32.png">
@@ -1138,6 +1140,7 @@ class Component extends DCLogic {
         lat: loc.lat, lon: loc.lon, tzone: tzone, city: loc.city
       };
       const report = await window.KundliEngine.fetchKundli(person);
+      this._kpSaveGlance(report);
       this._kUpdate({
         view: "report", report: report, activeTab: "basic",
         ...this._idleSectionStates()
@@ -1179,6 +1182,7 @@ class Component extends DCLogic {
     try {
       const data = await fetcher(person);
       this._kUpdate({ [key]: { status: "success", data: data } });
+      this._kpSaveGlanceSection(key, data);
     } catch (e) {
       console.error(key + " fetch failed:", e);
       this._kUpdate({ [key]: { status: "error", data: null } });
@@ -1210,6 +1214,37 @@ class Component extends DCLogic {
     window.KundliEngine.translateCategoriesToHindi(categories).then(translated => {
       this._kUpdate({ nakshatraPredictionHi: { status: "done", categories: translated } });
     });
+  }
+  // Remembers a short summary of the last generated kundli in this browser
+  // (kp-vedic.js, localStorage) for the homepage "At a glance" dashboard.
+  _kpSaveGlance(report) {
+    const KP = window.KP;
+    if (!KP || !report) return;
+    const find = n => (report.planets || []).filter(p => p.name === n)[0];
+    const sun = find("Sun"), moon = find("Moon");
+    const lagna = KP.signIndexOf(report.ascendantSign) + 1;
+    KP.saveGlance({
+      name: String(report.basicDetails.name || "").trim().split(/\s+/)[0] || null,
+      asc: report.ascendantSign || report.basicDetails.ascendant || null,
+      moon: report.moonSign || report.basicDetails.rashi || null,
+      sun: sun ? sun.sign : null,
+      nak: report.basicDetails.nakshatra || null,
+      pada: moon && moon.nakshatraPada ? moon.nakshatraPada : null,
+      lagna: lagna > 0 ? lagna : null,
+      houses: lagna > 0 && report.charts && report.charts.lagna ? report.charts.lagna.houses.map(h => h.planets) : null,
+      maha: null, mahaEnd: null, antar: null, antarEnd: null, manglik: null
+    });
+  }
+  _kpSaveGlanceSection(key, data) {
+    const KP = window.KP;
+    if (!KP || !data) return;
+    if (key === "manglik") KP.saveGlance({ manglik: !!data.is_present });
+    if (key === "currentDasha") {
+      const lv = window.KundliEngine.buildCurrentDashaLevels(data) || {};
+      const iso = d => (d instanceof Date && !isNaN(d) ? d.toISOString() : null);
+      KP.saveGlance({ maha: lv.major ? lv.major.planet : null, mahaEnd: lv.major ? iso(lv.major.end) : null,
+        antar: lv.minor ? lv.minor.planet : null, antarEnd: lv.minor ? iso(lv.minor.end) : null });
+    }
   }
   _setKTab(key) { return () => this._kUpdate({ activeTab: key }); }
   _backToKundliForm() {

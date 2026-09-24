@@ -76,16 +76,16 @@ window.__kgPhotos = {
     header a[href$="/kundli"],header a[href$="/kundli-milan"]{font-weight:700 !important;color:#f3e3b0 !important}
     [data-brandname]{letter-spacing:.025em !important}
     main{position:relative}
-    main p{font-size:16px !important;line-height:1.78 !important}
-    main h2{font-size:clamp(27px,3.2vw,38px) !important;line-height:1.16 !important;letter-spacing:.005em}
-    main h3{font-size:22px !important;line-height:1.2 !important}
-    main h4{font-size:18px !important;line-height:1.25 !important}
-    main button,main input,main select,main textarea{font-size:15px !important}
-    main input,main select,main textarea{min-height:48px}
+    main:not(.kp-home) p{font-size:16px !important;line-height:1.78 !important}
+    main:not(.kp-home) h2{font-size:clamp(27px,3.2vw,38px) !important;line-height:1.16 !important;letter-spacing:.005em}
+    main:not(.kp-home) h3{font-size:22px !important;line-height:1.2 !important}
+    main:not(.kp-home) h4{font-size:18px !important;line-height:1.25 !important}
+    main:not(.kp-home) button,main:not(.kp-home) input,main:not(.kp-home) select,main:not(.kp-home) textarea{font-size:15px !important}
+    main:not(.kp-home) input,main:not(.kp-home) select,main:not(.kp-home) textarea{min-height:48px}
     main section > div[style*="background:#fff"],main [data-kcard]{box-shadow:0 6px 18px rgba(10,22,51,.045)}
     main [data-kcard]{border-color:var(--kg-line) !important}
     main [data-kcard]:hover{box-shadow:var(--kg-shadow)}
-    footer{margin-top:72px;box-shadow:0 -10px 30px rgba(7,16,38,.1)}
+    footer:not(.kp-footer){margin-top:72px;box-shadow:0 -10px 30px rgba(7,16,38,.1)}
     footer a{transition:color .2s ease,transform .2s ease}
     footer a:hover{transform:translateX(2px)}
     [data-kinput]{border-width:1.5px !important;border-color:#d9c99e !important;background:#fffefb !important}
@@ -109,9 +109,9 @@ window.__kgPhotos = {
     table td{font-size:14.5px !important}
     @media (max-width:700px){
       header [data-headinner]{min-height:62px}
-      main p{font-size:15.5px !important}
-      main h2{font-size:28px !important}
-      main h3{font-size:21px !important}
+      main:not(.kp-home) p{font-size:15.5px !important}
+      main:not(.kp-home) h2{font-size:28px !important}
+      main:not(.kp-home) h3{font-size:21px !important}
       [data-kreport-head]{padding:16px !important}
       [data-kchart] [style*="font-size:10.5px"]{font-size:10.5px !important}
       [data-kdetail-table]{min-width:560px}
@@ -133,8 +133,8 @@ window.__kgPhotos = {
   const exact = {
     "/en": "Kundli Planet Home.dc.html", "/hi": "index.html",
     "/en/consultation": "Career Consultation.dc.html", "/hi/paramarsh": "Career Consultation HI.dc.html",
-    "/en/faq": "index.html#faq", "/hi/prashn": "index.html#faq",
-    "/en/search": "index.html", "/hi/khoj": "index.html",
+    "/en/faq": "Kundli Planet Home.dc.html#faq", "/hi/prashn": "index.html#faq",
+    "/en/search": "Kundli Planet Home.dc.html", "/hi/khoj": "index.html",
     "/en/privacy-policy": "About Us.dc.html", "/en/terms": "About Us.dc.html",
     "/en/disclaimer": "About Us.dc.html", "/en/cookie-policy": "About Us.dc.html",
     "/hi/gopniyata-niti": "About Us HI.dc.html", "/hi/niyam-sharten": "About Us HI.dc.html",
@@ -277,7 +277,9 @@ window.__kgPhotos = {
       const url = new URL(href, location.href);
       if (url.origin !== location.origin || !/^\/(en|hi)(?:\/|$)/.test(url.pathname)) return null;
       const target = resolveRoute(url.pathname);
-      return target ? new URL(target, location.href).href : null;
+      if (!target) return null;
+      // Keep in-page anchors such as /en/kundli#kundli-tool.
+      return new URL(target, location.href).href + (url.hash && !target.includes("#") ? url.hash : "");
     } catch { return null; }
   }
   function rewriteLink(link) {
@@ -304,6 +306,7 @@ window.__kgPhotos = {
     heading.dataset.kgHindiTypeFixed = "true";
   }
   function fixHindiTypography(root = document) {
+    if (!root) return;
     if (root instanceof HTMLElement && root.matches("h1,h2,h3")) fixHindiHeading(root);
     root.querySelectorAll?.("h1,h2,h3").forEach(fixHindiHeading);
   }
@@ -312,6 +315,7 @@ window.__kgPhotos = {
     if (/^(home|होम)$/i.test((link.textContent || "").trim())) link.remove();
   }
   function removeHomeNavigation(root = document) {
+    if (!root) return;
     if (root instanceof HTMLAnchorElement) removeHomeLink(root);
     root.querySelectorAll?.("header a").forEach(removeHomeLink);
   }

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<link rel="stylesheet" href="./kp-vedic.css?v=9">
+<script src="./kp-vedic.js?v=5" defer></script>
 <script src="./astro-apis.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="./Kundli%20planet%20assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./Kundli%20planet%20assets/favicon_io/favicon-16x16.png">
@@ -596,7 +598,10 @@ class Component extends DCLogic {
     ].join("\n");
     const _pu = kgPhoto(p.photo);
     const zd = this.state.liveData;
-    const liveText = zd ? (zd.content || zd.text || zd.horoscope || zd.description || JSON.stringify(zd)) : "";
+    // The feed returns every sign under horoscopes[Sign].content; never fall back to dumping raw JSON.
+    const liveSignKey = String(this.state.liveSign || "").replace(/^./, c => c.toUpperCase());
+    const liveEntry = zd && zd.horoscopes ? zd.horoscopes[liveSignKey] : null;
+    const liveText = zd ? String((liveEntry && liveEntry.content) || zd.content || zd.text || "").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}️]/gu, "").trim() : "";
     return {
       photoAlt: kgAlt(p.photo),
       ui, p, meta, photoUrl: _pu, noPhoto: !_pu,

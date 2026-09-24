@@ -239,18 +239,18 @@
     var page = doc.addPage("cover");
     var L = c.L;
     doc.coverFrame(page);
-    doc.logo(page, W / 2 - 56, 48, 112);
-    var y = 180;
+    // Auspicious opening: Lord Ganesha, the invocation, then the logo.
+    var y = 42;
     if (ganesh) {
-      // Auspicious opening: Lord Ganesha above the invocation.
-      doc.imageFit(page, ganesh, W / 2 - 62, y, 124, 118);
-      y += 138;
-    } else {
-      y += 18;
+      doc.imageFit(page, ganesh, W / 2 - 64, y, 128, 122);
+      y += 122;
     }
-    doc.text(page, L.invocation, W / 2, y + 6, { size: 12, weight: 600, color: HEX.orangeDeep, align: "center", abs: true });
-    doc.ornamentRule(page, W / 2, y + 22, 120);
-    var bandY = y + 38, bandH = 96;
+    doc.text(page, L.invocation, W / 2, y + 26, { size: 15, weight: 700, color: HEX.orangeDeep, align: "center", abs: true });
+    y += 38;
+    doc.logo(page, W / 2 - 66, y, 132);
+    y += 132;
+    doc.ornamentRule(page, W / 2, y + 12, 120);
+    var bandY = y + 26, bandH = 96;
     doc.rect(page, 26, bandY, W - 52, bandH, { fill: HEX.orange });
     doc.line(page, 26, bandY + 6, W - 26, bandY + 6, { color: "#F6D59A", lw: 0.6 });
     doc.line(page, 26, bandY + bandH - 6, W - 26, bandY + bandH - 6, { color: "#F6D59A", lw: 0.6 });

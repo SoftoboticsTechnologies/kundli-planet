@@ -25,7 +25,7 @@
     ["https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js",
       "https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"]
   ];
-  var VERSION = "4";
+  var VERSION = "6";
   var MODULES = {
     core: "pdf/kp-pdf-core.js",
     i18n: "pdf/kp-pdf-i18n.js",

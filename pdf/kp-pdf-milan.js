@@ -173,20 +173,28 @@
   // ------------------------------------------------------------------
   // Pages
   // ------------------------------------------------------------------
-  function pageCover(doc, R, c) {
+  function pageCover(doc, R, c, ganesh) {
     var L = c.L;
     var page = doc.addPage("cover");
     doc.coverFrame(page);
-    doc.logo(page, W / 2 - 70, 56, 140);
-    doc.text(page, L.invocation, W / 2, 228, { size: 12, weight: 600, color: HEX.orangeDeep, align: "center" });
-    doc.ornamentRule(page, W / 2, 244, 120);
-    var bandY = 266, bandH = 104;
+    // Auspicious opening: Lord Ganesha, the invocation, then the logo.
+    var top = 42;
+    if (ganesh) {
+      doc.imageFit(page, ganesh, W / 2 - 64, top, 128, 122);
+      top += 122;
+    }
+    doc.text(page, L.invocation, W / 2, top + 26, { size: 15, weight: 700, color: HEX.orangeDeep, align: "center" });
+    top += 38;
+    doc.logo(page, W / 2 - 62, top, 124);
+    top += 124;
+    doc.ornamentRule(page, W / 2, top + 12, 120);
+    var bandY = top + 26, bandH = 100;
     doc.rect(page, 26, bandY, W - 52, bandH, { fill: HEX.orange });
     doc.line(page, 26, bandY + 6, W - 26, bandY + 6, { color: "#F6D59A", lw: 0.6 });
     doc.line(page, 26, bandY + bandH - 6, W - 26, bandY + bandH - 6, { color: "#F6D59A", lw: 0.6 });
-    doc.text(page, L.milanTitle, W / 2, bandY + 48, { size: 30, weight: 700, family: "serif", color: HEX.white, align: "center" });
-    doc.text(page, L.milanSubtitle, W / 2, bandY + 76, { size: 11.5, color: "#FFF4DE", align: "center" });
-    var y = 440, gap = 34, w = (W - 104 - gap) / 2;
+    doc.text(page, L.milanTitle, W / 2, bandY + 46, { size: 30, weight: 700, family: "serif", color: HEX.white, align: "center" });
+    doc.text(page, L.milanSubtitle, W / 2, bandY + 74, { size: 11.5, color: "#FFF4DE", align: "center" });
+    var y = bandY + bandH + 36, gap = 34, w = (W - 104 - gap) / 2;
     [["groom", R.groom], ["bride", R.bride]].forEach(function (pair, i) {
       var x = 52 + i * (w + gap), p = pair[1];
       var label = pair[0] === "groom" ? c.M.groomLabel : c.M.brideLabel;
@@ -543,11 +551,15 @@
   // Entry
   // ------------------------------------------------------------------
   KP.renderMilan = function (R) {
-    return KP.createDoc(R.lang).then(function (doc) {
+    var doc;
+    return KP.createDoc(R.lang).then(function (d) {
+      doc = d;
+      return KP.fetchImageScaled("Kundli%20planet%20assets/ganesh.png", 720, "image/png").then(function (s) { return doc.embedImage(s); }).catch(function () { return null; });
+    }).then(function (ganesh) {
       var c = ctx(R), M = c.M;
       doc.pageOf = c.L.pageOf;
       doc.footerCenter = [R.groom.name, R.bride.name].filter(has).join(" & ") + "  ·  " + c.L.milanFooter;
-      pageCover(doc, R, c);
+      pageCover(doc, R, c, ganesh);
       pageBirth(doc, R, c);
       pageOverview(doc, R, c);
       pageAshtakoot(doc, R, c);

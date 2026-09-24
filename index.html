@@ -19,8 +19,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@300;400;500;600&family=Tiro+Devanagari+Hindi&family=Mukta:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./kp-vedic.css?v=9">
-<script src="./kp-vedic.js?v=6" defer></script>
+<link rel="stylesheet" href="./kp-vedic.css?v=10">
+<script src="./kp-vedic.js?v=7" defer></script>
 <link rel="icon" type="image/png" sizes="32x32" href="./Kundli%20planet%20assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./Kundli%20planet%20assets/favicon_io/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./Kundli%20planet%20assets/favicon_io/apple-touch-icon.png">
@@ -153,7 +153,7 @@
               </div>
             </sc-for>
           </div>
-          <p class="kp-note" style="margin:-8px 0 22px"><span class="kp-badge kp-badge-soon">{{ t.soon }}</span> {{ t.kSoon }}</p>
+          <!-- <p class="kp-note" style="margin:-8px 0 22px"><span class="kp-badge kp-badge-soon">{{ t.soon }}</span> {{ t.kSoon }}</p> -->
           <div class="kp-hero-ctas">
             <a class="kp-btn kp-btn-navy" href="{{ r.kundliTool }}"><span data-kp-icon="kundli"></span>{{ t.kCta }}</a>
             <a class="kp-btn kp-btn-line" href="{{ r.kundliTool }}"><span data-kp-icon="download"></span>{{ t.kPdf }}</a>
@@ -244,7 +244,7 @@
             <div class="kp-chog">
               <sc-for list="{{ pan.chog }}" as="ch" hint-placeholder-count="8"><span class="{{ ch.cls }}"><b>{{ ch.name }}</b>{{ ch.time }}</span></sc-for>
             </div>
-            <p class="kp-note" style="margin:14px 0 0">{{ t.pNote }}</p>
+            <!-- <p class="kp-note" style="margin:14px 0 0">{{ t.pNote }}</p> -->
           </div>
         </div>
       </div>

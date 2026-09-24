@@ -562,9 +562,20 @@
     s += "</svg>";
     return s;
   };
+  // Real photographs for the six articles (Wikimedia Commons, see
+  // "Kundli planet assets/articles/CREDITS.txt"); other kinds keep the drawn art.
+  var ARTICLE_IMG = {
+    kundli: "Kundli%20planet%20assets/articles/lagna-kundli.jpg",
+    gem: "Kundli%20planet%20assets/articles/navaratna-gemstones.jpg",
+    horoscope: "Kundli%20planet%20assets/articles/rashi-mesh-jantar-mantar.jpg",
+    numerology: "Kundli%20planet%20assets/articles/khajuraho-number-square.jpg",
+    vastu: "Kundli%20planet%20assets/articles/haveli-main-door.jpg",
+    remedy: "Kundli%20planet%20assets/articles/rudraksha-mala.jpg"
+  };
   art.thumb = function (o) {
     o = o || {};
     var kind = o.kind || "kundli";
+    if (ARTICLE_IMG[kind]) return '<img class="kp-art-photo" src="' + ARTICLE_IMG[kind] + '" alt="' + esc(o.label || "") + '" loading="lazy" decoding="async">';
     var gid = nextId("th");
     var s = svgOpen("0 0 400 225", o.label || null, ' preserveAspectRatio="xMidYMid slice"');
     s += '<defs><radialGradient id="' + gid + '" cx="75%" cy="30%" r="90%"><stop offset="0" stop-color="#26357A"/><stop offset=".55" stop-color="#101A48"/><stop offset="1" stop-color="#070D26"/></radialGradient></defs>';

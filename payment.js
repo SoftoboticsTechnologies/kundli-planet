@@ -3,7 +3,7 @@
    Exposes window.KPPayment.
 
    Uses the Razorpay Orders flow with server-side verification
-   (server/payment-server.js):
+   (functions/api/payments/ - Cloudflare Pages Functions):
      1. server creates the Order (amount is set on the server, not here)
      2. Checkout opens with that order_id
      3. server verifies the signature and the Payment entity
@@ -13,11 +13,11 @@
 (function (global) {
   "use strict";
 
-  var host = global.location.hostname;
   var CONFIG = {
-    // Where server/payment-server.js is reachable. Locally it runs on :8787;
-    // in production serve it on the same domain under /api (or change this).
-    apiBase: (host === "127.0.0.1" || host === "localhost") ? "http://localhost:8787" : "",
+    // Payment API is served by Cloudflare Pages Functions under /api on the
+    // same origin as this site (see functions/api/payments/). Run
+    // `wrangler pages dev .` locally so /api works there too.
+    apiBase: "",
     businessName: "Kundli Planet",
     themeColor: "#C79A20",
     logo: new URL("./Kundli%20planet%20assets/favicon_io/android-chrome-192x192.png", global.location.href).href,

@@ -1,0 +1,10 @@
+name = "kundli-planet"
+pages_build_output_dir = "."
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Secrets (never stored here) - set once per environment with:
+#   npx wrangler pages secret put RAZORPAY_KEY_ID
+#   npx wrangler pages secret put RAZORPAY_KEY_SECRET
+# Local dev only: copy .dev.vars.example to .dev.vars (gitignored) and fill
+# in test keys - `wrangler pages dev .` reads it automatically.

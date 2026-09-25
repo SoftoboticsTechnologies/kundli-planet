@@ -874,6 +874,7 @@ main label{min-width:0}
 /* Homepage sections on phones */
 @media (max-width:420px){
   .kp-wrap{padding:0 16px}
+  .kp-scroller{margin:0 -16px;padding-left:16px;padding-right:16px;scroll-padding:0 16px}
   .kp-sec{padding:52px 0}
   .kp-glance-main,.kp-glance-side{padding:22px 18px}
   .kp-pan-day,.kp-pan-body{padding:22px 18px}

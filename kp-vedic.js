@@ -686,7 +686,7 @@
   var FEST_MOTIF = { "Diwali": "diya", "Holi": "colors", "Navratri": "lotus", "Mahashivratri": "trishul", "Ganesh Chaturthi": "lotus", "Makar Sankranti": "kite", "Festivals": "diya" };
   var ARTICLE_KIND = { "Article Gemstone Kundli": "gem", "Article Lagna First": "kundli", "Article Daily Horoscope": "horoscope", "Article Life Path Number": "numerology", "Article Main Door Vastu": "vastu", "Article Rudraksha Mukhi": "remedy" };
   var NAV_OF_CAT = { kundli: "kundli", nakshatra: "kundli", graha: "kundli", dosha: "kundli", "dosha-ks": "kundli", milan: "milan", panchang: "panchang", festival: "panchang",
-    numerology: "numerology", gem: "gems", gemstone: "gems", remedy: "remedies", horoscope: "horoscope", sign: "horoscope", blog: "articles", article: "articles",
+    numerology: "numerology", gem: "gems", gemstone: "gems", remedy: "remedies", horoscope: "horoscope", sign: "horoscope", blog: "more", article: "more",
     tarot: "more", palm: "more", vastu: "more", about: "more", consult: "more" };
 
   function lang() {
@@ -759,10 +759,9 @@
         groups: [{ t: "Traditional remedies", th: "पारंपरिक उपाय", items: [
           it("Mantra", "मंत्र", R.mantra, "mantra"), it("Yantra", "यंत्र", R.yantra, "yantra"), it("Rudraksha", "रुद्राक्ष", R.rudraksha, "rudraksha"),
           it("Puja", "पूजा", R.puja, "kalash"), it("Vrat", "व्रत", R.vrat, "fast"), it("Gemstones", "रत्न", R.gems, "gem"), it("All remedies", "सभी उपाय", R.remedies, "om") ], compact: true }] },
-      { key: "articles", en: "Articles", hi: "लेख", r: R.blog, ic: "book" },
       { key: "more", en: "More", hi: "और", r: null, ic: "dots", cols: 1, small: true, right: true,
         groups: [{ t: "Explore", th: "और देखें", items: [
-          it("Vastu", "वास्तु", R.vastu, "compass"), it("Tarot", "टैरो", R.tarot, "cards"), it("Palmistry", "हस्तरेखा", R.palmistry, "hand"),
+          it("Articles", "लेख", R.blog, "book"), it("Vastu", "वास्तु", R.vastu, "compass"), it("Tarot", "टैरो", R.tarot, "cards"), it("Palmistry", "हस्तरेखा", R.palmistry, "hand"),
           it("Baby Names", "शिशु नाम", R.baby, "baby"), it("About Us", "हमारे बारे में", R.about, "om"), it("Contact Us", "संपर्क करें", R.contact, "phone") ], compact: true }] }
     ];
   }

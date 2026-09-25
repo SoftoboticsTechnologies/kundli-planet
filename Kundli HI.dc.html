@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./contact-form.js"></script>
 <link rel="stylesheet" href="./kp-vedic.css?v=10">
 <script src="./kp-vedic.js?v=7" defer></script>
 <script src="./kundli-engine.js"></script>
 <script src="./pdf-generator.js"></script>
+<script src="./payment.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="./Kundli%20planet%20assets/favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="./Kundli%20planet%20assets/favicon_io/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./Kundli%20planet%20assets/favicon_io/apple-touch-icon.png">
@@ -727,9 +729,26 @@
           </label>
           <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));margin-top:4px">
             <a href="{{ waHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;justify-content:center;padding:13px;background:#25D366;color:#06210F;border-radius:11px;font-size:14.5px;font-weight:500">{{ ui.formSendWa }}</a>
-            <a href="{{ mailHref }}" style="display:inline-flex;align-items:center;justify-content:center;padding:13px;background:#0A1633;color:#F3E3B0;border-radius:11px;font-size:14.5px;font-weight:500">{{ ui.formSendMail }}</a>
+            <button type="button" onClick="{{ sendEmail }}" disabled="{{ sendBusy }}" style="display:inline-flex;align-items:center;justify-content:center;padding:13px;background:#0A1633;color:#F3E3B0;border:0;border-radius:11px;font-family:inherit;font-size:14.5px;font-weight:500;cursor:pointer;opacity:{{ sendOpacity }}">{{ sendLabel }}</button>
           </div>
+          <sc-if value="{{ sendHasMsg }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin:0;padding:10px 13px;border-radius:10px;font-size:13.5px;line-height:1.55;background:{{ sendMsgBg }};color:{{ sendMsgColor }};border:1px solid {{ sendMsgBorder }}">{{ sendMsg }}</p></sc-if>
           <p style="margin:2px 0 0;font-size:12px;color:#8A8C9A;line-height:1.6">{{ ui.formNote }}</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ kt.pay.open }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ kt.pay.title }}" style="position:fixed;inset:0;z-index:95;background:rgba(6,14,32,.72);display:grid;place-items:center;padding:18px;overflow-y:auto">
+      <div style="width:min(100%,440px);background:#FFFDF8;border:1px solid #E4D8C2;border-radius:20px;box-shadow:0 30px 80px rgba(4,10,26,.45);padding:32px 26px 26px;text-align:center;position:relative">
+        <button type="button" onClick="{{ kt.pay.close }}" aria-label="{{ kt.pay.closeLabel }}" style="position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid #E4D8C2;background:#fff;color:#6B6D7C;font-size:17px;cursor:pointer;line-height:1">×</button>
+        <div style="width:64px;height:64px;margin:0 auto 18px;border-radius:50%;background:linear-gradient(135deg,#E9C75C,#C79A20);display:grid;place-items:center;color:#1A1304;font-size:30px;font-weight:700;box-shadow:0 10px 26px rgba(199,154,32,.35)">✓</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin:0 0 10px;color:#0A1633">{{ kt.pay.title }}</h2>
+        <p style="margin:0 auto 14px;font-size:14.5px;color:#4A4C5C;line-height:1.65;max-width:36ch">{{ kt.pay.body }}</p>
+        <p style="margin:0 0 22px;font-size:12px;color:#8A8C9A;word-break:break-all">{{ kt.pay.paymentIdText }}</p>
+        <div style="display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr))">
+          <button type="button" onClick="{{ kt.pay.redownload }}" disabled="{{ kt.pdfBusy }}" style="padding:13px;background:linear-gradient(135deg,#E9C75C,#C79A20);color:#1A1304;border:0;border-radius:11px;font-family:inherit;font-size:14.5px;font-weight:600;cursor:pointer;opacity:{{ kt.pdfBusyOpacity }}">{{ kt.pay.redownloadLabel }}</button>
+          <button type="button" onClick="{{ kt.pay.close }}" style="padding:13px;background:#0A1633;color:#F3E3B0;border:0;border-radius:11px;font-family:inherit;font-size:14.5px;font-weight:500;cursor:pointer">{{ kt.pay.closeLabel }}</button>
         </div>
       </div>
     </div>
@@ -754,7 +773,7 @@ const UI_EN = {
   formName: "Name", formPhone: "Phone", formEmail: "Email", formSubject: "Subject", formMessage: "Message",
   formTopics: ["Horoscope", "Kundli", "Kundli Milan", "Gemstone advice", "Numerology", "Vastu", "Other"],
   formSendWa: "Send on WhatsApp", formSendMail: "Send by Email", formClose: "Close",
-  formNote: "This form has no backend. Choosing an option opens WhatsApp or your email app with the message ready.",
+  formNote: "Send by Email delivers your message straight to our team. You can also send it on WhatsApp.",
   copyright: "\u00A9 2026 Kundli Planet, Bhagalpur, Bihar. All rights reserved.",
   disclaimer: "Astrology content is traditional interpretation, not guaranteed fact.",
   nav: [
@@ -785,7 +804,7 @@ const UI_HI = {
   formName: "नाम", formPhone: "फ़ोन", formEmail: "ईमेल", formSubject: "विषय", formMessage: "संदेश",
   formTopics: ["राशिफल", "कुंडली", "कुंडली मिलान", "रत्न परामर्श", "अंक ज्योतिष", "वास्तु", "अन्य"],
   formSendWa: "संदेश भेजें", formSendMail: "ईमेल से भेजें", formClose: "बंद करें",
-  formNote: "इस फ़ॉर्म का कोई बैकएंड नहीं है। विकल्प चुनने पर संदेश तैयार होकर आपके ऐप में खुल जाएगा।",
+  formNote: "ईमेल से भेजें दबाने पर आपका संदेश सीधे हमारी टीम तक पहुँचता है। आप इसे व्हाट्सएप पर भी भेज सकते हैं।",
   copyright: "\u00A9 2026 कुंडली प्लैनेट, भागलपुर, बिहार। सर्वाधिकार सुरक्षित।",
   disclaimer: "ज्योतिष सामग्री पारंपरिक व्याख्या है, प्रमाणित तथ्य नहीं।",
   nav: [
@@ -808,8 +827,26 @@ const UI_HI = {
 };
 
 const PDF_LABELS = {
-  en: { download: "Download Kundli PDF", preparing: "Preparing PDF...", error: "Unable to generate PDF. Please try again." },
-  hi: { download: "कुंडली पीडीएफ डाउनलोड करें", preparing: "पीडीएफ तैयार हो रहा है...", error: "पीडीएफ बनाने में समस्या हुई। कृपया पुनः प्रयास करें।" }
+  en: { download: "Download Kundli PDF", preparing: "Preparing PDF...", error: "Unable to generate PDF. Please try again.",
+    paying: "Opening payment...", downloadAgain: "Download PDF Again", payDesc: "Kundli PDF Report",
+    cancelled: "Payment was not completed, so the PDF was not downloaded. You can try again.",
+    loadError: "Could not load the payment service. Please check your internet connection and try again.",
+    serverError: "Payment service is unavailable right now. Please try again in a few minutes.",
+    verifyError: "We could not confirm your payment. If money was deducted, please contact us with this Payment ID: ",
+    successTitle: "Payment Successful",
+    successBody: "Your transaction is complete. Your Kundli has been created and downloaded successfully.",
+    pdfFailedBody: "Your transaction is complete, but the PDF could not be generated. Please tap Re-download to try again. You will not be charged again.",
+    paymentId: "Payment ID", redownload: "Re-download PDF", close: "Close" },
+  hi: { download: "कुंडली पीडीएफ डाउनलोड करें", preparing: "पीडीएफ तैयार हो रहा है...", error: "पीडीएफ बनाने में समस्या हुई। कृपया पुनः प्रयास करें।",
+    paying: "भुगतान खुल रहा है...", downloadAgain: "पीडीएफ फिर से डाउनलोड करें", payDesc: "कुंडली पीडीएफ रिपोर्ट",
+    cancelled: "भुगतान पूरा नहीं हुआ, इसलिए पीडीएफ डाउनलोड नहीं हुई। आप फिर से प्रयास कर सकते हैं।",
+    loadError: "भुगतान सेवा लोड नहीं हो सकी। कृपया अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।",
+    serverError: "भुगतान सेवा अभी उपलब्ध नहीं है। कृपया कुछ मिनट बाद पुनः प्रयास करें।",
+    verifyError: "हम आपके भुगतान की पुष्टि नहीं कर सके। यदि राशि कट गई है, तो कृपया इस भुगतान आईडी के साथ हमसे संपर्क करें: ",
+    successTitle: "भुगतान सफल",
+    successBody: "आपका लेनदेन पूरा हो गया है। आपकी कुंडली बन गई है और सफलतापूर्वक डाउनलोड हो गई है।",
+    pdfFailedBody: "आपका लेनदेन पूरा हो गया है, लेकिन पीडीएफ नहीं बन सकी। कृपया \"फिर से डाउनलोड करें\" दबाएँ। आपसे दोबारा शुल्क नहीं लिया जाएगा।",
+    paymentId: "भुगतान आईडी", redownload: "फिर से डाउनलोड करें", close: "बंद करें" }
 };
 
 /*PAGE_START*/
@@ -1063,7 +1100,7 @@ function kgPhoto(label){ return window.__kgPhotos?.[label] || KG_PHOTOS[label] |
 function kgAlt(label){ return String(label || "").replace(/^PHOTO:\s*/, ""); }
 
 class Component extends DCLogic {
-  state = { lang: "hi", menuOpen: false, moreOpen: false, openFaq: 0, showTop: false, consultOpen: false,
+  state = { lang: "hi", menuOpen: false, moreOpen: false, openFaq: 0, showTop: false, consultOpen: false, sendStatus: "idle", sendError: "",
     form: { name: "", phone: "", email: "", subject: "", message: "" },
     kundli: {
       view: "form",
@@ -1081,7 +1118,7 @@ class Component extends DCLogic {
       currentDasha: { status: "idle", data: null },
       gemstone: { status: "idle", data: null },
       rudraksha: { status: "idle", data: null },
-      pdfStatus: "idle"
+      pdfStatus: "idle", pdfError: "", failedPaymentId: null, paidPaymentId: null, payModal: false, payModalPdfOk: true
     } };
 
   _kUpdate(patch) {
@@ -1174,7 +1211,8 @@ class Component extends DCLogic {
       majorDasha: { status: "idle", data: null },
       currentDasha: { status: "idle", data: null },
       gemstone: { status: "idle", data: null },
-      rudraksha: { status: "idle", data: null }
+      rudraksha: { status: "idle", data: null },
+      pdfStatus: "idle", pdfError: "", failedPaymentId: null, paidPaymentId: null, payModal: false, payModalPdfOk: true
     };
   }
   async _fetchSection(key, fetcher, person) {
@@ -1250,16 +1288,46 @@ class Component extends DCLogic {
   _backToKundliForm() {
     this._kUpdate({ view: "form", ...this._idleSectionStates() });
   }
+  // Paid download: Razorpay checkout first, then generate the PDF. Once paid,
+  // the same report can be downloaded again without paying (paidPaymentId).
   async _downloadKundliPdf() {
-    if (this.state.kundli.pdfStatus === "busy") return;
-    this._kUpdate({ pdfStatus: "busy" });
+    const K = this.state.kundli;
+    if (K.pdfStatus === "busy" || K.pdfStatus === "paying") return;
+    if (K.paidPaymentId) { await this._generateKundliPdf(); return; }
+    this._kUpdate({ pdfStatus: "paying", pdfError: "" });
+    let payment;
+    try {
+      const PL = this.state.lang === "hi" ? PDF_LABELS.hi : PDF_LABELS.en;
+      const b = this.renderVals().kt.report.basicDetails || {};
+      payment = await window.KPPayment.pay("kundliPdf", {
+        description: PL.payDesc + (b.name ? " - " + b.name : ""),
+        notes: { product: "kundli_pdf", name: b.name || "", birth_date: b.birthDate || "", birth_place: b.birthPlace || "" }
+      });
+    } catch (e) {
+      const code = e && e.code;
+      if (code !== "dismissed") console.error("Kundli payment failed:", code, e);
+      this._kUpdate({
+        pdfStatus: "error",
+        pdfError: code === "load" || code === "server" || code === "verify" ? code : "cancelled",
+        failedPaymentId: (e && e.paymentId) || null
+      });
+      return;
+    }
+    this._kUpdate({ paidPaymentId: payment.paymentId });
+    const ok = await this._generateKundliPdf();
+    this._kUpdate({ payModal: true, payModalPdfOk: ok });
+  }
+  async _generateKundliPdf() {
+    this._kUpdate({ pdfStatus: "busy", pdfError: "" });
     try {
       const vals = this.renderVals();
       await window.KundliPDF.generateKundliPdf(vals.kt, this.state.lang, this.state.kundli);
-      this._kUpdate({ pdfStatus: "idle" });
+      this._kUpdate({ pdfStatus: "idle", payModalPdfOk: true });
+      return true;
     } catch (e) {
       console.error("Kundli PDF generation failed:", e);
-      this._kUpdate({ pdfStatus: "error" });
+      this._kUpdate({ pdfStatus: "error", pdfError: "generate", payModalPdfOk: false });
+      return false;
     }
   }
 
@@ -1286,6 +1354,20 @@ class Component extends DCLogic {
   componentWillUnmount() { window.removeEventListener("scroll", this._onScroll); }
 
   _set(k) { return e => { const v = e.target.value; this.setState(s => ({ form: Object.assign({}, s.form, { [k]: v }) })); }; }
+  async _sendConsult(subject) {
+    if (this.state.sendStatus === "sending") return;
+    const f = this.state.form;
+    const problem = window.KPContactForm ? window.KPContactForm.validate(f) : "failed";
+    if (problem) { this.setState({ sendStatus: "error", sendError: problem }); return; }
+    this.setState({ sendStatus: "sending", sendError: "" });
+    try {
+      await window.KPContactForm.send({ name: f.name, phone: f.phone, email: f.email, subject: subject, message: f.message, lang: this.state.lang });
+      this.setState({ sendStatus: "sent", form: { name: "", phone: "", email: "", subject: "", message: "" } });
+    } catch (e) {
+      console.error("Consultation form failed:", e);
+      this.setState({ sendStatus: "error", sendError: "failed" });
+    }
+  }
 
   renderVals() {
     const hi = this.state.lang === "hi";
@@ -1303,6 +1385,8 @@ class Component extends DCLogic {
     const K = this.state.kundli;
     const T = hi ? window.KundliEngine.KT_STRINGS.hi : window.KundliEngine.KT_STRINGS.en;
     const PL = hi ? PDF_LABELS.hi : PDF_LABELS.en;
+    const pdfWorking = K.pdfStatus === "busy" || K.pdfStatus === "paying";
+    const pdfPrice = window.KPPayment ? window.KPPayment.price("kundliPdf") : null;
     const NA = T.naText;
     const orNA = v => (v === null || v === undefined || v === "" ? NA : v);
     const TABS = [
@@ -1553,9 +1637,20 @@ class Component extends DCLogic {
       numerology: kNumerology,
       nakshatraPrediction: Object.assign({}, kNakshatraPrediction, { nakshatra: kReport.basicDetails.nakshatra }),
       downloadPdf: () => this._downloadKundliPdf(),
-      pdfBusy: K.pdfStatus === "busy", pdfBusyOpacity: K.pdfStatus === "busy" ? "0.7" : "1",
-      pdfButtonLabel: K.pdfStatus === "busy" ? PL.preparing : PL.download,
-      pdfHasError: K.pdfStatus === "error", pdfErrorText: PL.error
+      pdfBusy: pdfWorking, pdfBusyOpacity: pdfWorking ? "0.7" : "1",
+      pdfButtonLabel: K.pdfStatus === "paying" ? PL.paying : K.pdfStatus === "busy" ? PL.preparing
+        : K.paidPaymentId ? PL.downloadAgain : PL.download + (pdfPrice ? " · ₹" + pdfPrice : ""),
+      pdfHasError: K.pdfStatus === "error" && !K.payModal,
+      pdfErrorText: K.pdfError === "cancelled" ? PL.cancelled : K.pdfError === "load" ? PL.loadError
+        : K.pdfError === "server" ? PL.serverError : K.pdfError === "verify" ? PL.verifyError + (K.failedPaymentId || "-") : PL.error,
+      pay: {
+        open: !!K.payModal, title: PL.successTitle,
+        body: K.payModalPdfOk ? PL.successBody : PL.pdfFailedBody,
+        paymentIdText: PL.paymentId + ": " + (K.paidPaymentId || ""),
+        redownloadLabel: K.pdfStatus === "busy" ? PL.preparing : PL.redownload, closeLabel: PL.close,
+        redownload: () => this._generateKundliPdf(),
+        close: () => this._kUpdate({ payModal: false })
+      }
     });
     return {
       photoAlt: kgAlt(p.photo),
@@ -1582,9 +1677,10 @@ class Component extends DCLogic {
       setName: this._set("name"), setPhone: this._set("phone"), setEmail: this._set("email"),
       setSubject: this._set("subject"), setMessage: this._set("message"),
       waHref: "https://wa.me/919097190900?text=" + encodeURIComponent(body),
-      mailHref: "mailto:rashiring24@gmail.com?subject=" + encodeURIComponent("Kundli Planet: " + subject) + "&body=" + encodeURIComponent(body),
+      ...(window.KPContactForm ? window.KPContactForm.view(this.state.lang, this.state.sendStatus, this.state.sendError) : {}),
+      sendEmail: () => this._sendConsult(subject),
       openConsult: () => this.setState({ consultOpen: true, menuOpen: false, moreOpen: false }),
-      closeConsult: () => this.setState({ consultOpen: false })
+      closeConsult: () => this.setState({ consultOpen: false, sendStatus: "idle", sendError: "" })
     };
   }
 }

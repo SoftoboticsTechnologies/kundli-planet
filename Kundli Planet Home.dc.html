@@ -15,6 +15,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0A1633">
 <script src="./support.js"></script>
+<script src="./contact-form.js"></script>
 <script src="./astro-apis.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -741,8 +742,9 @@
           <label class="kp-field">{{ t.formMessage }}<textarea rows="4" value="{{ form.message }}" onChange="{{ setMessage }}"></textarea></label>
           <div class="kp-modal-send">
             <a class="kp-btn kp-btn-wa2" href="{{ waHref }}" target="_blank" rel="noopener"><span data-kp-icon="wa"></span>{{ t.formSendWa }}</a>
-            <a class="kp-btn kp-btn-navy" href="{{ mailHref }}"><span data-kp-icon="mail"></span>{{ t.formSendMail }}</a>
+            <button type="button" class="kp-btn kp-btn-navy" onClick="{{ sendEmail }}" disabled="{{ sendBusy }}" style="border:0;font-family:inherit;cursor:pointer;opacity:{{ sendOpacity }}"><span data-kp-icon="mail"></span>{{ sendLabel }}</button>
           </div>
+          <sc-if value="{{ sendHasMsg }}" hint-placeholder-val="{{ false }}"><p role="status" style="margin:0;padding:10px 13px;border-radius:10px;font-size:13.5px;line-height:1.55;background:{{ sendMsgBg }};color:{{ sendMsgColor }};border:1px solid {{ sendMsgBorder }}">{{ sendMsg }}</p></sc-if>
           <p class="kp-note" style="margin:0">{{ t.formNote }}</p>
         </div>
       </div>
@@ -954,7 +956,7 @@ const EN = {
   formName: "Name", formPhone: "Phone", formEmail: "Email", formSubject: "Subject", formMessage: "Message (add birth date, time and place if you like)",
   formTopics: ["Kundli", "Kundli Milan", "Career", "Marriage", "Horoscope", "Gemstone advice", "Numerology", "Muhurat", "Vastu", "Other"],
   formSendWa: "Send on WhatsApp", formSendMail: "Send by Email", formClose: "Close",
-  formNote: "This form has no backend. Choosing an option opens WhatsApp or your email app with the message ready.",
+  formNote: "Send by Email delivers your message straight to our team. You can also send it on WhatsApp.",
   topLabel: "Go to top", waFloat: "Chat with Kundli Planet on WhatsApp"
 };
 
@@ -1151,7 +1153,7 @@ const HI = {
   formName: "नाम", formPhone: "फ़ोन", formEmail: "ईमेल", formSubject: "विषय", formMessage: "संदेश (चाहें तो जन्म तिथि, समय और स्थान लिखें)",
   formTopics: ["कुंडली", "कुंडली मिलान", "करियर", "विवाह", "राशिफल", "रत्न परामर्श", "अंक ज्योतिष", "मुहूर्त", "वास्तु", "अन्य"],
   formSendWa: "व्हाट्सएप पर भेजें", formSendMail: "ईमेल से भेजें", formClose: "बंद करें",
-  formNote: "इस फ़ॉर्म का कोई बैकएंड नहीं है। विकल्प चुनने पर संदेश तैयार होकर व्हाट्सएप या ईमेल ऐप में खुल जाएगा।",
+  formNote: "ईमेल से भेजें दबाने पर आपका संदेश सीधे हमारी टीम तक पहुँचता है। आप इसे व्हाट्सएप पर भी भेज सकते हैं।",
   topLabel: "ऊपर जाएँ", waFloat: "व्हाट्सएप पर कुंडली प्लैनेट से बात करें"
 };
 
@@ -1291,7 +1293,7 @@ function horoExcerpt(content) {
 }
 
 class Component extends DCLogic {
-  state = { lang: "en", openFaq: 0, showTop: false, consultOpen: false,
+  state = { lang: "en", openFaq: 0, showTop: false, consultOpen: false, sendStatus: "idle", sendError: "",
     form: { name: "", phone: "", email: "", subject: "", message: "" },
     glance: null,
     pan: { status: "idle", data: null }, horo: { status: "idle", data: null }, fest: { status: "idle", data: null },
@@ -1351,6 +1353,20 @@ class Component extends DCLogic {
       .catch(() => this.setState({ fest: { status: "error", data: null } }));
   }
   _set(k) { return e => { const v = e.target.value; this.setState(s => ({ form: Object.assign({}, s.form, { [k]: v }) })); }; }
+  async _sendConsult(subject) {
+    if (this.state.sendStatus === "sending") return;
+    const f = this.state.form;
+    const problem = window.KPContactForm ? window.KPContactForm.validate(f) : "failed";
+    if (problem) { this.setState({ sendStatus: "error", sendError: problem }); return; }
+    this.setState({ sendStatus: "sending", sendError: "" });
+    try {
+      await window.KPContactForm.send({ name: f.name, phone: f.phone, email: f.email, subject: subject, message: f.message, lang: this.state.lang });
+      this.setState({ sendStatus: "sent", form: { name: "", phone: "", email: "", subject: "", message: "" } });
+    } catch (e) {
+      console.error("Consultation form failed:", e);
+      this.setState({ sendStatus: "error", sendError: "failed" });
+    }
+  }
   _setIn(group, k) { return e => { const v = e.target.value; this.setState(s => ({ [group]: Object.assign({}, s[group], { [k]: v }) })); }; }
 
   renderVals() {
@@ -1627,9 +1643,10 @@ class Component extends DCLogic {
       consultOpen: this.state.consultOpen, form: f,
       setName: this._set("name"), setPhone: this._set("phone"), setEmail: this._set("email"), setSubject: this._set("subject"), setMessage: this._set("message"),
       waHref: "https://wa.me/" + WA_NO + "?text=" + encodeURIComponent(body),
-      mailHref: "mailto:rashiring24@gmail.com?subject=" + encodeURIComponent("Kundli Planet: " + subject) + "&body=" + encodeURIComponent(body),
+      ...(window.KPContactForm ? window.KPContactForm.view(this.state.lang, this.state.sendStatus, this.state.sendError) : {}),
+      sendEmail: () => this._sendConsult(subject),
       openConsult: () => this.setState({ consultOpen: true }),
-      closeConsult: () => this.setState({ consultOpen: false }),
+      closeConsult: () => this.setState({ consultOpen: false, sendStatus: "idle", sendError: "" }),
       backdropClose: e => { if (e.target === e.currentTarget) this.setState({ consultOpen: false }); },
       showTop: this.state.showTop,
       scrollTop: () => window.scrollTo({ top: 0, behavior: "smooth" })

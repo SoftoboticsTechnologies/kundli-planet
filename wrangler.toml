@@ -4,10 +4,11 @@ compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 # RAZORPAY_KEY_ID is public (sent to the browser by /api/payments/order),
-# so it's fine to track here. RAZORPAY_KEY_SECRET must never go in this file -
-# set it per environment with:
+# so it's fine to track here, but Pages projects don't support a
+# [previews.vars]/[vars] table in wrangler.toml (that's Workers-only config -
+# `wrangler pages deploy` rejects it). Env vars for Pages are set per
+# environment (Production/Preview) in the Cloudflare dashboard instead.
+# RAZORPAY_KEY_SECRET must never go in this file - set it with:
 #   npx wrangler pages secret put RAZORPAY_KEY_SECRET
 # Local dev only: copy .dev.vars.example to .dev.vars (gitignored) and fill
 # in test keys - `wrangler pages dev .` reads it automatically.
-[previews.vars]
-RAZORPAY_KEY_ID = "rzp_test_TgBUcoblOuQ434"

@@ -1,5 +1,5 @@
 /* Kundli Planet - Razorpay helpers shared by the Pages Functions under
-   functions/api/payments/. Ported from server/payment-server.js.
+   functions/api/payments/.
    requires compatibility_flags = ["nodejs_compat"] in wrangler.toml so
    Node's crypto module (HMAC) works unchanged on Workers. */
 import crypto from "node:crypto";

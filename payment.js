@@ -22,7 +22,7 @@
     themeColor: "#C79A20",
     logo: new URL("./Kundli%20planet%20assets/favicon_io/android-chrome-192x192.png", global.location.href).href,
     // Display prices in rupees (button label only). The amount actually
-    // charged comes from PRICES in server/payment-server.js - keep in sync.
+    // charged comes from PRICES in functions/_lib/razorpay.js - keep in sync.
     prices: {
       kundliPdf: 249
     }

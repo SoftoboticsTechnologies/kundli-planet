@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 <script src="./contact-form.js"></script>
-<link rel="stylesheet" href="./kp-vedic.css?v=10">
+<link rel="stylesheet" href="./kp-vedic.css?v=11">
 <script src="./kp-vedic.js?v=7" defer></script>
 <script src="./kundli-engine.js"></script>
 <script src="./pdf-generator.js"></script>
@@ -148,12 +148,12 @@
                     <sc-for list="{{ mt.genderOptions }}" as="g" hint-placeholder-count="2"><option value="{{ g.value }}">{{ g.label }}</option></sc-for>
                   </select>
                 </label>
-                <div style="display:grid;gap:12px;grid-template-columns:1fr 1fr">
+                <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))">
                   <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ mt.t.dobLabel }}
-                    <input type="date" value="{{ mt.p1.dob }}" onChange="{{ mt.setP1Dob }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+                    <input type="date" value="{{ mt.p1.dob }}" onChange="{{ mt.setP1Dob }}" style="width:100%;min-width:0;padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
                   </label>
                   <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ mt.t.tobLabel }}
-                    <input type="time" value="{{ mt.p1.tob }}" onChange="{{ mt.setP1Tob }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+                    <input type="time" value="{{ mt.p1.tob }}" onChange="{{ mt.setP1Tob }}" style="width:100%;min-width:0;padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
                   </label>
                 </div>
                 <div style="position:relative">
@@ -182,12 +182,12 @@
                     <sc-for list="{{ mt.genderOptions }}" as="g" hint-placeholder-count="2"><option value="{{ g.value }}">{{ g.label }}</option></sc-for>
                   </select>
                 </label>
-                <div style="display:grid;gap:12px;grid-template-columns:1fr 1fr">
+                <div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))">
                   <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ mt.t.dobLabel }}
-                    <input type="date" value="{{ mt.p2.dob }}" onChange="{{ mt.setP2Dob }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+                    <input type="date" value="{{ mt.p2.dob }}" onChange="{{ mt.setP2Dob }}" style="width:100%;min-width:0;padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
                   </label>
                   <label style="display:grid;gap:6px;font-size:12.5px;color:#4A4C5C">{{ mt.t.tobLabel }}
-                    <input type="time" value="{{ mt.p2.tob }}" onChange="{{ mt.setP2Tob }}" style="padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
+                    <input type="time" value="{{ mt.p2.tob }}" onChange="{{ mt.setP2Tob }}" style="width:100%;min-width:0;padding:11px 13px;border:1px solid #E0D6C2;border-radius:10px;font-family:inherit;font-size:14.5px;background:#fff;color:#15162B">
                   </label>
                 </div>
                 <div style="position:relative">

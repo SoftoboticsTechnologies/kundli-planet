@@ -897,6 +897,7 @@
     h += "</div>";
     h += '<div class="kp-footer-bottom"><span>© ' + new Date().getFullYear() + (hi ? " कुंडली प्लैनेट, भागलपुर, बिहार। सर्वाधिकार सुरक्षित।" : " Kundli Planet, Bhagalpur, Bihar. All rights reserved.") + "</span><span>" +
       (hi ? "ज्योतिष सामग्री पारंपरिक व्याख्या है, प्रमाणित तथ्य या गारंटी नहीं।" : "Astrology content is traditional interpretation, not guaranteed fact or prediction.") + "</span></div>";
+    h += '<div class="kp-footer-powered"><div class="kp-footer-powered-in"><span>' + (hi ? "द्वारा संचालित" : "Powered By") + '</span><a href="https://www.dripfunnel.com/in/" target="_blank" rel="noopener" aria-label="DripFunnel"><img src="Kundli%20planet%20assets/dripfunnel/DRIPFUNNEL%20white%20logo.png" alt="DripFunnel" width="124" height="22" loading="lazy"></a></div></div>';
     return h;
   }
 

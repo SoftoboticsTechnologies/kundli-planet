@@ -1288,7 +1288,7 @@ class Component extends DCLogic {
   _backToKundliForm() {
     this._kUpdate({ view: "form", ...this._idleSectionStates() });
   }
-  // Paid download: Razorpay checkout first, then generate the PDF. Once paid,
+  // Paid download: PayU checkout first, then generate the PDF. Once paid,
   // the same report can be downloaded again without paying (paidPaymentId).
   async _downloadKundliPdf() {
     const K = this.state.kundli;
@@ -1301,7 +1301,9 @@ class Component extends DCLogic {
       const b = this.renderVals().kt.report.basicDetails || {};
       payment = await window.KPPayment.pay("kundliPdf", {
         description: PL.payDesc + (b.name ? " - " + b.name : ""),
-        notes: { product: "kundli_pdf", name: b.name || "", birth_date: b.birthDate || "", birth_place: b.birthPlace || "" }
+        notes: { product: "kundli_pdf", name: b.name || "", birth_date: b.birthDate || "", birth_place: b.birthPlace || "" },
+        prefill: { name: b.name || "" },
+        lang: this.state.lang
       });
     } catch (e) {
       const code = e && e.code;

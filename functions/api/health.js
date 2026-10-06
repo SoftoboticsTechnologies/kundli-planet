@@ -1,11 +1,11 @@
-/* GET /api/health - reports whether Razorpay keys are configured. */
-import { json } from "../_lib/razorpay.js";
+/* GET /api/health - reports whether PayU keys are configured. */
+import { json, payuMode } from "../_lib/payu.js";
 
 export async function onRequestGet({ env }) {
-  const keyConfigured = Boolean(env.RAZORPAY_KEY_ID && env.RAZORPAY_KEY_SECRET);
+  const keyConfigured = Boolean(env.PAYU_KEY && env.PAYU_SALT);
   return json(200, {
     ok: true,
     keyConfigured,
-    mode: keyConfigured && env.RAZORPAY_KEY_ID.startsWith("rzp_live_") ? "live" : "test"
+    mode: payuMode(env)
   });
 }

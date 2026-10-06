@@ -1,15 +1,18 @@
-/* Kundli Planet - Razorpay payment wrapper for paid downloads.
+/* Kundli Planet - PayU payment wrapper for paid downloads.
    Plain global-scope script (no bundler on this site - see support.js).
    Exposes window.KPPayment.
 
-   Uses the Razorpay Orders flow with server-side verification
+   Uses PayU Bolt (checkout popup, customer stays on this page) with
+   server-side hashing and verification
    (functions/api/payments/ - Cloudflare Pages Functions):
-     1. server creates the Order (amount is set on the server, not here)
-     2. Checkout opens with that order_id
-     3. server verifies the signature and the Payment entity
-        (status "captured", matching order_id / amount) before we resolve.
-   No Razorpay key or secret lives in this file - the server returns the
-   public key_id along with the order. */
+     1. ask for email + mobile (PayU requires them)
+     2. server creates the txnid and request hash (amount is set on the
+        server, not here)
+     3. Bolt opens with that transaction
+     4. server checks the response hash and asks PayU (verify_payment) that
+        the status is "success" for the right amount before we resolve.
+   No PayU salt lives in this file - the server returns the public merchant
+   key and the Bolt script URL (test or live) along with the transaction. */
 (function (global) {
   "use strict";
 
@@ -18,35 +21,43 @@
     // same origin as this site (see functions/api/payments/). Run
     // `wrangler pages dev .` locally so /api works there too.
     apiBase: "",
-    businessName: "Kundli Planet",
     themeColor: "#C79A20",
-    logo: new URL("./Kundli%20planet%20assets/favicon_io/android-chrome-192x192.png", global.location.href).href,
     // Display prices in rupees (button label only). The amount actually
-    // charged comes from PRICES in functions/_lib/razorpay.js - keep in sync.
+    // charged comes from PRICES in functions/_lib/payu.js - keep in sync.
     prices: {
       kundliPdf: 249
     }
   };
 
-  var CHECKOUT_SRC = "https://checkout.razorpay.com/v1/checkout.js";
-  var checkoutPromise = null;
+  var LABELS = {
+    en: { title: "Your contact details", note: "PayU sends the payment receipt here.", email: "Email",
+      phone: "Mobile number", pay: "Continue to pay", cancel: "Cancel",
+      badEmail: "Please enter a valid email.", badPhone: "Please enter a valid 10-digit mobile number." },
+    hi: { title: "आपकी संपर्क जानकारी", note: "PayU भुगतान की रसीद यहाँ भेजेगा।", email: "ईमेल",
+      phone: "मोबाइल नंबर", pay: "भुगतान जारी रखें", cancel: "रद्द करें",
+      badEmail: "कृपया सही ईमेल दर्ज करें।", badPhone: "कृपया सही 10 अंकों का मोबाइल नंबर दर्ज करें।" }
+  };
+  var CONTACT_KEY = "kp.payContact.v1";
 
-  function loadCheckout() {
-    if (global.Razorpay) return Promise.resolve();
-    if (checkoutPromise) return checkoutPromise;
-    checkoutPromise = new Promise(function (resolve, reject) {
+  var boltPromise = null;
+
+  function loadBolt(src) {
+    if (global.bolt) return Promise.resolve();
+    if (boltPromise) return boltPromise;
+    boltPromise = new Promise(function (resolve, reject) {
       var s = document.createElement("script");
-      s.src = CHECKOUT_SRC;
+      s.src = src;
       s.async = true;
+      s.id = "bolt";
       s.onload = function () { resolve(); };
       s.onerror = function () {
-        checkoutPromise = null;
+        boltPromise = null;
         s.remove();
-        reject(new Error("Could not load Razorpay checkout"));
+        reject(new Error("Could not load PayU checkout"));
       };
       document.head.appendChild(s);
     });
-    return checkoutPromise;
+    return boltPromise;
   }
 
   function withCode(err, code) { return Object.assign(err instanceof Error ? err : new Error(String(err)), { code: code }); }
@@ -68,55 +79,124 @@
     });
   }
 
+  function readContact() {
+    try { return JSON.parse(localStorage.getItem(CONTACT_KEY) || "null") || {}; } catch (e) { return {}; }
+  }
+  function saveContact(c) {
+    try { localStorage.setItem(CONTACT_KEY, JSON.stringify(c)); } catch (e) { /* ignore */ }
+  }
+
+  // Small self-contained popup asking for email + mobile.
+  // Resolves { email, phone }; rejects with code "dismissed" on cancel.
+  function askContact(lang, prefill) {
+    var L = LABELS[lang] || LABELS.en;
+    var saved = readContact();
+    return new Promise(function (resolve, reject) {
+      var wrap = document.createElement("div");
+      wrap.setAttribute("role", "dialog");
+      wrap.setAttribute("aria-modal", "true");
+      wrap.style.cssText = "position:fixed;inset:0;z-index:2147483000;background:rgba(20,14,4,.55);display:flex;align-items:center;justify-content:center;padding:16px;font-family:inherit";
+      var input = "width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #D9CBA6;border-radius:10px;font-size:15px;margin:6px 0 12px;font-family:inherit";
+      wrap.innerHTML =
+        '<form novalidate style="background:#fff;color:#2A2113;width:100%;max-width:380px;border-radius:16px;padding:22px 20px;box-shadow:0 18px 50px rgba(0,0,0,.25)">' +
+        '<h3 style="margin:0 0 4px;font-size:19px"></h3><p data-k="note" style="margin:0 0 14px;font-size:13px;color:#6B5E45"></p>' +
+        '<label style="font-size:13px;font-weight:600"><span data-k="email"></span><input name="email" type="email" autocomplete="email" inputmode="email" style="' + input + '"></label>' +
+        '<label style="font-size:13px;font-weight:600"><span data-k="phone"></span><input name="phone" type="tel" autocomplete="tel" inputmode="numeric" maxlength="14" style="' + input + '"></label>' +
+        '<p data-k="err" style="display:none;margin:0 0 12px;font-size:13px;color:#8A2A24"></p>' +
+        '<div style="display:flex;gap:10px;justify-content:flex-end">' +
+        '<button type="button" data-k="cancel" style="padding:10px 16px;border-radius:10px;border:1px solid #D9CBA6;background:#fff;font-size:14px;cursor:pointer;font-family:inherit"></button>' +
+        '<button type="submit" data-k="pay" style="padding:10px 16px;border-radius:10px;border:0;background:' + CONFIG.themeColor + ';color:#fff;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit"></button>' +
+        "</div></form>";
+      var form = wrap.querySelector("form");
+      var q = function (k) { return wrap.querySelector('[data-k="' + k + '"]'); };
+      wrap.querySelector("h3").textContent = L.title;
+      q("note").textContent = L.note;
+      q("email").textContent = L.email;
+      q("phone").textContent = L.phone;
+      q("cancel").textContent = L.cancel;
+      q("pay").textContent = L.pay;
+      form.email.value = (prefill && prefill.email) || saved.email || "";
+      form.phone.value = (prefill && prefill.contact) || saved.phone || "";
+
+      function close() { document.removeEventListener("keydown", onKey); wrap.remove(); }
+      function cancel() { close(); reject(withCode(new Error("Payment cancelled"), "dismissed")); }
+      function onKey(e) { if (e.key === "Escape") cancel(); }
+
+      q("cancel").addEventListener("click", cancel);
+      wrap.addEventListener("click", function (e) { if (e.target === wrap) cancel(); });
+      document.addEventListener("keydown", onKey);
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var email = form.email.value.trim();
+        var phone = form.phone.value.replace(/\D/g, "").slice(-10);
+        var err = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? L.badEmail : phone.length !== 10 ? L.badPhone : "";
+        if (err) { q("err").textContent = err; q("err").style.display = "block"; return; }
+        saveContact({ email: email, phone: phone });
+        close();
+        resolve({ email: email, phone: phone });
+      });
+      document.body.appendChild(wrap);
+      (form.email.value ? form.phone : form.email).focus();
+    });
+  }
+
   // Runs the full paid flow for a product.
+  // opts: { description, notes, prefill: { name, email, contact }, lang: "en" | "hi" }
   // Resolves with the verified payment { paymentId, orderId, amount, currency, method, status }.
   // Rejects with an Error whose .code is:
   //   "load"      checkout script or payment server unreachable
-  //   "server"    server could not create the order (e.g. bad API keys)
+  //   "server"    server could not create the transaction (e.g. bad API keys)
   //   "dismissed" user closed checkout without paying
+  //   "failed"    PayU reported the payment as failed
   //   "verify"    payment made but could not be verified (.paymentId is set)
   function pay(product, opts) {
     opts = opts || {};
-    return Promise.all([
-      loadCheckout().catch(function (e) { throw withCode(e, "load"); }),
-      api("/api/payments/order", { product: product, notes: opts.notes || {} }, "server")
-    ]).then(function (r) {
-      var order = r[1];
+    var prefill = opts.prefill || {};
+    var notes = opts.notes || {};
+    return askContact(opts.lang, prefill).then(function (contact) {
+      return api("/api/payments/order", {
+        product: product,
+        notes: notes,
+        returnUrl: global.location.href.split("#")[0],
+        customer: { name: prefill.name || notes.name || "", email: contact.email, phone: contact.phone }
+      }, "server");
+    }).then(function (txn) {
+      return loadBolt(txn.boltSrc).catch(function (e) { throw withCode(e, "load"); }).then(function () { return txn; });
+    }).then(function (txn) {
       return new Promise(function (resolve, reject) {
         var settled = false;
-        var rzp = new global.Razorpay({
-          key: order.keyId,
-          order_id: order.orderId,
-          amount: order.amount,
-          currency: order.currency,
-          name: CONFIG.businessName,
-          description: opts.description || order.label || "",
-          image: CONFIG.logo,
-          prefill: opts.prefill || {},
-          notes: opts.notes || {},
-          theme: { color: CONFIG.themeColor },
-          handler: function (resp) {
+        function done(fn, v) { if (settled) return; settled = true; fn(v); }
+        global.bolt.launch({
+          key: txn.key,
+          txnid: txn.txnid,
+          hash: txn.hash,
+          amount: txn.amount,
+          firstname: txn.firstname,
+          email: txn.email,
+          phone: txn.phone,
+          productinfo: txn.productinfo,
+          udf1: txn.udf1, udf2: txn.udf2, udf3: txn.udf3, udf4: txn.udf4, udf5: txn.udf5,
+          surl: txn.surl,
+          furl: txn.furl
+        }, {
+          responseHandler: function (BOLT) {
+            var r = (BOLT && BOLT.response) || {};
+            if (r.txnStatus === "CANCEL") return done(reject, withCode(new Error("Payment cancelled"), "dismissed"));
+            if (r.txnStatus !== "SUCCESS") {
+              console.warn("PayU payment failed:", r.txnStatus, r.error, r.error_Message || r.field9);
+              return done(reject, withCode(new Error(r.error_Message || "Payment failed"), "failed"));
+            }
             settled = true;
-            api("/api/payments/verify", resp, "verify").then(resolve, function (e) {
-              e.paymentId = resp.razorpay_payment_id;
+            api("/api/payments/verify", r, "verify").then(resolve, function (e) {
+              e.paymentId = r.mihpayid || r.txnid;
               reject(e);
             });
           },
-          modal: {
-            ondismiss: function () {
-              if (settled) return;
-              settled = true;
-              reject(withCode(new Error("Payment cancelled"), "dismissed"));
-            }
+          catchException: function (BOLT) {
+            console.error("PayU checkout error:", BOLT && BOLT.message);
+            done(reject, withCode(new Error((BOLT && BOLT.message) || "PayU checkout error"), "server"));
           }
         });
-        // Razorpay lets the user retry inside the same modal after a failure
-        // (payment.failed carries the Payment entity's error_* fields), so a
-        // failure is only final once they close it (ondismiss above).
-        rzp.on("payment.failed", function (resp) {
-          if (resp && resp.error) console.warn("Razorpay payment failed:", resp.error.code, resp.error.description, resp.error.reason);
-        });
-        rzp.open();
       });
     });
   }

@@ -683,6 +683,15 @@
   if (!cat && /^Article /.test(baseName)) cat = "article";
   var GEM_PAGES = { "Ruby": 1, "Pearl": 1, "Red Coral": 1, "Emerald": 1, "Yellow Sapphire": 1, "Diamond": 1, "Blue Sapphire": 1, "Hessonite": 1, "Cats Eye": 1 };
   if (!cat && GEM_PAGES[baseName]) cat = "gemstone";
+  var MORE_FESTIVALS = { "Dussehra": 1, "Janmashtami": 1, "Raksha Bandhan": 1, "Karwa Chauth": 1, "Ram Navami": 1, "Hanuman Jayanti": 1, "Akshaya Tritiya": 1, "Guru Purnima": 1 };
+  if (!cat && MORE_FESTIVALS[baseName]) cat = "festival";
+  // Topic pages such as "Vastu Kitchen" or "Kundli Milan Guna Milan" take the
+  // category of the longest section name they start with.
+  if (!cat) {
+    var best = "";
+    Object.keys(CAT_OF).forEach(function (k) { if (baseName.indexOf(k + " ") === 0 && k.length > best.length) best = k; });
+    if (best) cat = CAT_OF[best];
+  }
   var FEST_MOTIF = { "Diwali": "diya", "Holi": "colors", "Navratri": "lotus", "Mahashivratri": "trishul", "Ganesh Chaturthi": "lotus", "Makar Sankranti": "kite", "Festivals": "diya" };
   var ARTICLE_KIND = { "Article Gemstone Kundli": "gem", "Article Lagna First": "kundli", "Article Daily Horoscope": "horoscope", "Article Life Path Number": "numerology", "Article Main Door Vastu": "vastu", "Article Rudraksha Mukhi": "remedy" };
   var NAV_OF_CAT = { kundli: "kundli", nakshatra: "kundli", graha: "kundli", dosha: "kundli", "dosha-ks": "kundli", milan: "milan", panchang: "panchang", festival: "panchang",

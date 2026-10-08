@@ -141,6 +141,25 @@ Object.assign(window.__kgPhotos, {
     @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto !important;transition-duration:.01ms !important;animation-duration:.01ms !important}}
   `;
   document.head.appendChild(visualRefresh);
+  // Sub-topic cards ([data-ksub-card]) on every section page. Kept in its own
+  // sheet so a parse error elsewhere in the refresh styles cannot drop it.
+  const subCardCss = document.createElement("style");
+  subCardCss.id = "kg-sub-cards";
+  subCardCss.textContent = `
+    main [data-ksub-card]{position:relative;overflow:hidden;padding:20px 54px 20px 22px !important;background:linear-gradient(155deg,#fffefa 0%,#fdf7ea 100%) !important;border:1px solid #ecdfc1 !important;border-radius:16px !important;box-shadow:0 4px 14px rgba(10,22,51,.05);transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease !important}
+    main [data-ksub-card]::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#e9c75c,#c79a20);transform:scaleY(0);transform-origin:top;transition:transform .3s ease}
+    main [data-ksub-card]::after{content:"→";position:absolute;right:16px;top:19px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(212,175,55,.13);color:#9b7018;font-size:14px;line-height:1;transition:background .25s ease,color .25s ease,transform .25s ease}
+    main [data-ksub-card]:hover{border-color:#d4af37 !important;box-shadow:0 16px 32px rgba(104,74,12,.13)}
+    main [data-ksub-card]:hover::before{transform:scaleY(1)}
+    main [data-ksub-card]:hover::after{background:linear-gradient(135deg,#e9c75c,#c79a20);color:#1a1304;transform:translateX(3px)}
+    main [data-ksub-card]:focus-visible{outline:2px solid #d4af37;outline-offset:3px}
+    main [data-ksub-card] > p:first-child{margin:0 0 6px !important;font-size:17px !important;line-height:1.35 !important;font-weight:600 !important;color:#0a1633 !important;letter-spacing:.005em}
+    main [data-ksub-card] > p:last-child{margin:0 !important;font-size:14.5px !important;line-height:1.6 !important;color:#5a5c6e !important}
+    main [data-ksub-card][data-kg-soon]{cursor:default;padding-right:22px !important}
+    main [data-ksub-card][data-kg-soon]::after{content:none}
+    a[data-kg-soon]{cursor:default}
+  `;
+  document.head.appendChild(subCardCss);
   const navbarCss = document.createElement("style");
   navbarCss.textContent = `
     @media (min-width:1120px){
@@ -151,7 +170,9 @@ Object.assign(window.__kgPhotos, {
   `;
   document.head.appendChild(navbarCss);
   const title = (value) => value.split("-").map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(" ");
-  const page = (name, hindi = false) => `${name}${hindi ? " HI" : ""}.dc.html`;
+  // Returns null for an unknown name, so routes without a local page are
+  // treated as "not built yet" instead of becoming `undefined.dc.html`.
+  const page = (name, hindi = false) => name ? `${name}${hindi ? " HI" : ""}.dc.html` : null;
   const exact = {
     "/en": "Kundli Planet Home.dc.html", "/hi": "index.html",
     "/en/consultation": "Career Consultation.dc.html", "/hi/paramarsh": "Career Consultation HI.dc.html",
@@ -187,6 +208,7 @@ Object.assign(window.__kgPhotos, {
   const articlesEn = { "matching-gemstone-to-kundli": "Article Gemstone Kundli", "reading-lagna-first": "Article Lagna First", "daily-horoscope-limits": "Article Daily Horoscope", "life-path-number": "Article Life Path Number", "main-door-vastu": "Article Main Door Vastu", "rudraksha-mukhi-guide": "Article Rudraksha Mukhi" };
   const articlesHi = { "kundli-ke-anusar-ratna": "Article Gemstone Kundli", "lagna-pehle": "Article Lagna First", "dainik-rashifal-seema": "Article Daily Horoscope", "mulank-kaise-nikale": "Article Life Path Number", "mukhya-dwar-vastu": "Article Main Door Vastu", "rudraksha-mukhi-chayan": "Article Rudraksha Mukhi" };
   const remedies = { mantra: "Mantra", yantra: "Yantra", rudraksha: "Rudraksha", puja: "Puja", vrat: "Vrat" };
+  const festivals = { diwali: "Diwali", holi: "Holi", navratri: "Navratri", mahashivratri: "Mahashivratri", "ganesh-chaturthi": "Ganesh Chaturthi", "makar-sankranti": "Makar Sankranti" };
 
   function resolveRoute(pathname) {
     const route = (pathname.replace(/\/+$/, "") || "/").toLowerCase();
@@ -195,15 +217,15 @@ Object.assign(window.__kgPhotos, {
     const [lang, section, slug] = parts;
     const hindi = lang === "hi";
     if (!slug) return page((hindi ? simpleHi : simpleEn)[section], hindi);
-    if (section === "horoscope") return page(signsEn.has(slug) ? title(slug) : `Horoscope ${horoscopeEn[slug]}`, false);
-    if (section === "rashifal") return page(signsHi[slug] || `Horoscope ${horoscopeHi[slug]}`, true);
+    if (section === "horoscope") return page(signsEn.has(slug) ? title(slug) : horoscopeEn[slug] && `Horoscope ${horoscopeEn[slug]}`, false);
+    if (section === "rashifal") return page(signsHi[slug] || horoscopeHi[slug] && `Horoscope ${horoscopeHi[slug]}`, true);
     if (section === "kundli") return page((hindi ? kundliHi : kundliEn)[slug], hindi);
     if (section === "gemstones") return page(gemsEn[slug], false);
     if (section === "ratna") return page(gemsHi[slug], true);
     if (section === "blog") return page((hindi ? articlesHi : articlesEn)[slug], hindi);
     if (section === "astrology-remedies" || section === "jyotish-upay") return page(remedies[slug], hindi);
     if (section === "consultation" || section === "paramarsh") return page(slug === "career" ? "Career Consultation" : "Marriage Consultation", hindi);
-    if (section === "festivals" || section === "tyohar") return page(title(slug), hindi);
+    if (section === "festivals" || section === "tyohar") return page(festivals[slug], hindi);
     return null;
   }
   const searchPages = {
@@ -304,9 +326,29 @@ Object.assign(window.__kgPhotos, {
       return new URL(target, location.href).href + (url.hash && !target.includes("#") ? url.hash : "");
     } catch { return null; }
   }
+  // A site route (/en/... or /hi/...) that has no local page yet.
+  function isUnbuiltRoute(href) {
+    try {
+      const url = new URL(href, location.href);
+      return url.origin === location.origin && /^\/(en|hi)(?:\/|$)/.test(url.pathname) && !resolveRoute(url.pathname);
+    } catch { return false; }
+  }
+  // Links to pages that are not built yet keep their card and hover styling
+  // but lose the href, so they cannot be clicked or opened in a new tab (404).
+  function disableLink(link, rawHref) {
+    const hindi = /^\/hi(?:\/|$)/.test(new URL(rawHref, location.href).pathname);
+    link.dataset.kgHref = rawHref;
+    link.dataset.kgSoon = hindi ? "जल्द आ रहा है" : "Coming soon";
+    link.setAttribute("aria-disabled", "true");
+    link.removeAttribute("href");
+  }
   function rewriteLink(link) {
     if (!(link instanceof HTMLAnchorElement)) return;
     const rawHref = link.getAttribute("href") || "";
+    if (rawHref && isUnbuiltRoute(rawHref)) { disableLink(link, rawHref); return; }
+    if (rawHref && link.dataset.kgSoon) {
+      delete link.dataset.kgSoon; delete link.dataset.kgHref; link.removeAttribute("aria-disabled");
+    }
     const searchMatch = rawHref.match(/^\/(en\/search|hi\/khoj)\/?$/);
     if (searchMatch) {
       link.dataset.kgSearch = searchMatch[1].startsWith("hi/") ? "hi" : "en";
@@ -359,7 +401,13 @@ Object.assign(window.__kgPhotos, {
       openSiteSearch(link.dataset.kgSearch);
       return;
     }
-    const target = localTarget(link.getAttribute("href") || "");
+    const rawHref = link.getAttribute("href") || "";
+    if (isUnbuiltRoute(rawHref)) {
+      event.preventDefault();
+      disableLink(link, rawHref);
+      return;
+    }
+    const target = localTarget(rawHref);
     if (target) {
       event.preventDefault();
       location.assign(target);

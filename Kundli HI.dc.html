@@ -619,7 +619,7 @@
       <p style="margin:0 0 22px;font-size:15px;color:#6B6D7C;max-width:60ch">{{ p.subLede }}</p>
       <div style="display:grid;gap:13px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))">
         <sc-for list="{{ p.subs }}" as="s" hint-placeholder-count="9">
-          <a href="{{ s.href }}" style="display:block;padding:19px 20px;background:#fff;border:1px solid #EAE2CE;border-radius:14px;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:#D4AF37;transform:translateY(-3px)">
+          <a data-ksub-card="1" href="{{ s.href }}" style="display:block;padding:19px 20px;background:#fff;border:1px solid #EAE2CE;border-radius:14px;transition:border-color .2s ease,transform .2s ease" style-hover="border-color:#D4AF37;transform:translateY(-3px)">
             <p style="margin:0 0 5px;font-size:16px;font-weight:500;color:#0A1633">{{ s.name }}</p>
             <p style="margin:0;font-size:13.5px;color:#5A5C6E;line-height:1.6">{{ s.desc }}</p>
           </a>

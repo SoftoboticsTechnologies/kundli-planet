@@ -904,7 +904,9 @@
     h += col("Resources", "संसाधन", [[R.blog, "Articles", "लेख"], [R.vedic, "Astrology Guide", "ज्योतिष मार्गदर्शिका"], [R.remedies, "Remedies", "उपाय"], [R.festivals, "Festivals", "त्यौहार"], [R.faq, "FAQs", "सामान्य प्रश्न"], [R.baby, "Baby Names", "शिशु नाम"]]);
     h += col("Company", "कंपनी", [[R.about, "About", "हमारे बारे में"], [R.contact, "Contact", "संपर्क"], [R.career, "Consultation", "परामर्श"], [R.privacy, "Privacy Policy", "गोपनीयता नीति"], [R.terms, "Terms", "नियम एवं शर्तें"], [R.disclaimer, "Disclaimer", "अस्वीकरण"]]);
     h += "</div>";
-    h += '<div class="kp-footer-bottom"><span>© ' + new Date().getFullYear() + (hi ? " कुंडली प्लैनेट, भागलपुर, बिहार। सर्वाधिकार सुरक्षित।" : " Kundli Planet, Bhagalpur, Bihar. All rights reserved.") + '</span><span class="kp-footer-powered"><span>' + (hi ? "द्वारा संचालित" : "Powered By") + '</span><a href="https://www.dripfunnel.com/in/" target="_blank" rel="noopener" aria-label="DripFunnel"><img src="Kundli%20planet%20assets/dripfunnel/DRIPFUNNEL%20white%20logo.png" alt="DripFunnel" width="124" height="22" loading="lazy"></a></span></div>';
+    h += '<div class="kp-footer-bottom"><span>© ' + new Date().getFullYear() + (hi ? " कुंडली प्लैनेट, भागलपुर, बिहार। सर्वाधिकार सुरक्षित।" : " Kundli Planet, Bhagalpur, Bihar. All rights reserved.") + '</span>';
+    // h += '<span class="kp-footer-powered"><span>' + (hi ? "द्वारा संचालित" : "Powered By") + '</span><a href="https://www.dripfunnel.com/in/" target="_blank" rel="noopener" aria-label="DripFunnel"><img src="Kundli%20planet%20assets/dripfunnel/DRIPFUNNEL%20white%20logo.png" alt="DripFunnel" width="124" height="22" loading="lazy"></a></span>';
+    h += '</div>';
     return h;
   }
 
